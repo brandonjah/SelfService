@@ -1,0 +1,20 @@
+<section ng-controller="productCtrl" id="products">
+  <h3 class="ui-widget-header">Components</h3>
+  <div id="catalog">
+    <div data-drop="true">
+      <div>
+		<span ng-repeat='item in startcomponents' data-drag="true" ng-class="{{item.class}}" class="{{item.class}}" jqyoui-draggable="{index: {{$index}}}" data-jqyoui-options="{revert: 'invalid'}"></span>
+      </div>
+    </div>
+  </div>
+</section>
+<div ng-controller="layoutCtrl" id="layoutContainer">
+	<a ng-repeat="btn in buttons" ng-click="addContainer(btn.name)" href="javascript:void(0)" class="btn btn-success btn-small m5"><i class="icon-white icon-plus-sign"></i> Add {{btn.name}}</a>
+<section>
+	<div ng-repeat='item in drop.containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content'>{{item.id}}<br/>
+		<section class='h150' ng-controller="contentCtrl" data-drop='true' jqyoui-droppable="{onDrop: 'dropCallback'}">
+			<span ng-repeat='thing in content.components' class="{{thing.class}}"></span>
+		</section>
+	</div>
+</section>
+</div>

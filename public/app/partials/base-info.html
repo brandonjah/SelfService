@@ -1,0 +1,39 @@
+<div ng-controller="BaseInfoCtrl">
+  <form class="form-horizontal">
+    <fieldset>
+      <div id="legend" class="">
+        <legend class="">Base Site and Template Info</legend>
+      </div>
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">Site ID:</label>
+          <div class="controls">
+            <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId">
+          </div>
+        </div>
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">Template Name:</label>
+          <div class="controls">
+            <input type="text" placeholder="Ex: convis-1" class="input-xlarge" ng-model="templateName">
+            <p class="help-block">company name in 1 word, increment number after dash by 1</p>
+          </div>
+        </div>
+
+          <label class="control-label"></label>
+
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-success" ng-click="save()">Save</button>
+          </div>
+        </div>
+
+    </fieldset>
+  </form>
+<pre ng-model="result">
+{{result}}
+</pre>
+</div>
