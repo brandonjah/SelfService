@@ -3,15 +3,10 @@
 
 # Configuration notes
 * Must change java build path in project properties to prevent data binding error JSR-303
+* brew install play
+* brew install mongo
 
-## Features
-* Sign Up
-* Sign In
-* Reset password
-* Settings Page
-* Change email from Settings
-
-## Application details
+## Account details
 * No clear password stored in db
 * Secure workflow to reset password
 * Secure workflow to reset email

@@ -8,29 +8,36 @@ app.config(['$routeProvider', function($routeProvider) {
 
 app.controller('layoutCtrl', function($scope) {
 	var layoutCount = 0;
-	$scope.drop = {};
-	$scope.drop.containers = [];
+	$scope.containers = [];
 	$scope.newObj = {};
 	$scope.buttons = [{'name': 'Header'},{'name': 'Product'},{'name': 'Footer'}];
 	
 	$scope.addContainer = function(name) {
 		layoutCount++;
-		$scope.drop.containers.push({'id':(name+layoutCount)});
-		console.log('container:');
-		console.log($scope.drop.containers);
+		$scope.containers.push({'id':(name+layoutCount)});
 	};
-	
+
 });
 
 app.controller('contentCtrl', function($scope) {
 	var layoutCount = 0;
-	$scope.content = {};
-	$scope.content.components = [];
+	$scope.components = [];
+
+	$scope.delComponent = function(thing) {
+		for (var i = 0; i < $scope.components.length; i++) {
+			if(thing.container == $scope.components[i].container) {
+				console.log('before');
+				console.log($scope.components);
+				$scope.components.splice(i, 1);
+				console.log('after');
+				console.log($scope.components);
+			}
+		}
+		
+	};
 	
 	$scope.dropCallback = function(event, ui) {
-		$scope.content.components.push({'class' : ui.helper.context.className,'container':$scope.item.id});
-		console.log('component:');
-		console.log($scope.content.components);
+		$scope.components.push({'class' : ui.helper.context.className,'container':$scope.item.id});
 	};
 });
 
