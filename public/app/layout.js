@@ -16,6 +16,15 @@ app.controller('layoutCtrl', function($scope) {
 		layoutCount++;
 		$scope.containers.push({'id':(name+layoutCount)});
 	};
+	
+	$scope.delComponent = function(item) {
+		for (var i = 0; i < $scope.containers.length; i++) {
+			if(item.id == $scope.containers[i].id) {
+				this.containers.splice(i, 1);
+				layoutCount--;
+			}
+		}
+	};
 
 });
 
@@ -27,9 +36,9 @@ app.controller('contentCtrl', function($scope) {
 		for (var i = 0; i < $scope.components.length; i++) {
 			if(thing.id == $scope.components[i].id) {
 				this.components.splice(i, 1);
+				componentCount--;
 			}
 		}
-		
 	};
 	
 	$scope.dropCallback = function(event, ui) {
@@ -41,3 +50,4 @@ app.controller('contentCtrl', function($scope) {
 app.controller('productCtrl', function($scope) {
 	$scope.startcomponents = [{'class': 'componentWdgt'},{'class': 'componentImg'},{'class': 'componentTxt'}];
 });
+        

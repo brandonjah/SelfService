@@ -12,8 +12,9 @@
 	<a ng-repeat="btn in buttons" ng-click="addContainer(btn.name)" href="javascript:void(0)" class="btn btn-success btn-small m5"><i class="icon-white icon-plus-sign"></i> Add {{btn.name}}</a>
 <section>
 	<div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content'>{{item.id}}<br/>
+	<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delComponent(item)"><i class="icon-white icon-remove-sign"></i></a>
 		<section class='h150' ng-controller="contentCtrl" data-drop='true' jqyoui-droppable="{onDrop: 'dropCallback'}">
-			<span ng-repeat='thing in components' class="{{thing.class}}"><a href="javascript:void(0)" ng-click="$parent.delComponent(thing)" class="btn btn-danger btn-mini"><i class="icon-white icon-remove-sign"></i></a></span>
+			<span ng-repeat='thing in components' class="{{thing.class}}"><delete-btn thing='true'><a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delComponent(thing)"><i class="icon-white icon-remove-sign"></i></a></span>
 		</section>
 	</div>
 </section>
