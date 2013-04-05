@@ -20,24 +20,21 @@ app.controller('layoutCtrl', function($scope) {
 });
 
 app.controller('contentCtrl', function($scope) {
-	var layoutCount = 0;
+	var componentCount = 0;
 	$scope.components = [];
 
 	$scope.delComponent = function(thing) {
 		for (var i = 0; i < $scope.components.length; i++) {
-			if(thing.container == $scope.components[i].container) {
-				console.log('before');
-				console.log($scope.components);
-				$scope.components.splice(i, 1);
-				console.log('after');
-				console.log($scope.components);
+			if(thing.id == $scope.components[i].id) {
+				this.components.splice(i, 1);
 			}
 		}
 		
 	};
 	
 	$scope.dropCallback = function(event, ui) {
-		$scope.components.push({'class' : ui.helper.context.className,'container':$scope.item.id});
+		componentCount++;
+		$scope.components.push({'id':componentCount, 'class' : ui.helper.context.className, 'container':$scope.item.id});
 	};
 });
 
