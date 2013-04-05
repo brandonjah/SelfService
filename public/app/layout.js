@@ -6,7 +6,31 @@ app.config(['$routeProvider', function($routeProvider) {
 	      otherwise({redirectTo: '/layout'});
 	}]);
 
-app.controller('layoutCtrl', function($scope) {
+app.factory('saveObject', function($rootScope) {
+		var layout = [];
+		var components = [];
+		var containers = [];
+		
+	    var sharedService = {};
+	    
+	    sharedService.message = '';
+
+	    sharedService.prepForBroadcast = function(msg) {
+	        this.message = msg;
+	        this.broadcastItem();
+	    };
+
+	    sharedService.broadcastItem = function() {
+	        $rootScope.$broadcast('handleBroadcast');
+	    };
+
+	    return sharedService;
+		
+	});
+
+//create different factory to save to database which has components, containers, etc in it
+
+app.controller('layoutCtrl', function($scope, saveObject) {
 	var layoutCount = 0;
 	$scope.containers = [];
 	$scope.newObj = {};
@@ -25,10 +49,15 @@ app.controller('layoutCtrl', function($scope) {
 			}
 		}
 	};
+	
+    $scope.$on('handleBroadcast', function() {
+        console.log('layoutCtrl handling message');
+        saveObject.containers = $scope.containers;
+    }); 
 
 });
 
-app.controller('contentCtrl', function($scope) {
+app.controller('contentCtrl', function($scope, saveObject) {
 	var componentCount = 0;
 	$scope.components = [];
 
@@ -42,12 +71,23 @@ app.controller('contentCtrl', function($scope) {
 	};
 	
 	$scope.dropCallback = function(event, ui) {
-		componentCount++;
+		componentCount++; 
 		$scope.components.push({'id':componentCount, 'class' : ui.helper.context.className, 'container':$scope.item.id});
 	};
+	
+    $scope.$on('handleBroadcast', function() {
+    	console.log('contentCtrl handling message');
+    	saveObject.components = $scope.components;
+    }); 
 });
 
 app.controller('productCtrl', function($scope) {
 	$scope.startcomponents = [{'class': 'componentWdgt'},{'class': 'componentImg'},{'class': 'componentTxt'}];
 });
-        
+
+app.controller('submitCtrl', function($scope, saveObject) {
+	$scope.saveLayout = function() {
+		saveObject.prepForBroadcast();
+//		http://jsfiddle.net/simpulton/XqDxG/
+	};
+});
