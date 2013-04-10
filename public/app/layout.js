@@ -7,61 +7,93 @@ app.config(['$routeProvider', function($routeProvider) {
 	}]);
 
 app.factory('saveObject', function($rootScope) {
-		var layout = [];
-		var components = [];
-		var containers = [];
-		
 	    var sharedService = {};
+	    var dbLayoutObj = [];
+    	var layoutCount = 0;
 	    
-	    sharedService.message = '';
-
-	    sharedService.prepForBroadcast = function(msg) {
-	        this.message = msg;
+	    sharedService.prepForBroadcast = function() {
 	        this.broadcastItem();
 	    };
-
+	    
+	    sharedService.getLayout = function() {
+	    	return dbLayoutObj;
+	    };
+	    
+	    sharedService.updateComponents = function(oper, componentId, className, containerName) {
+    		for (var i=0;i<dbLayoutObj.length;i++) {
+    			console.log('first');
+    			if(containerName == dbLayoutObj[i].id) {
+    				if(oper == 'add') {
+    					dbLayoutObj[i].components.push({'id':componentId,'className':className});
+    				} else if(oper == 'del') {
+    					for (var x = 0; x < dbLayoutObj[i].components.length; x++) {
+    						if(componentId == dbLayoutObj[i].components[x].id) {
+    							dbLayoutObj[i].components.splice(x, 1);
+//    							componentCount--;
+    						}
+    					}
+    				}
+    			}
+    		}
+    		console.log('dbLayoutObj in updatecomponents');
+    		console.log(dbLayoutObj);
+	    };
+	    
+	    sharedService.updateContainers = function(id, oper) {
+	    	if(oper == 'add') {
+	    		dbLayoutObj.push({'id':(id+layoutCount),'components':[]});
+				layoutCount++;
+	    	} else if (oper == 'del') {
+	    		for (var i = 0; i < dbLayoutObj.length; i++) {
+	    			if(id == dbLayoutObj[i].id) {
+	    				dbLayoutObj.splice(i, 1);
+	    				layoutCount--;
+	    			}
+	    		}
+	    	}
+	    	console.log(dbLayoutObj);
+	    };
+	   
 	    sharedService.broadcastItem = function() {
 	        $rootScope.$broadcast('handleBroadcast');
+	    };
+	    
+	    sharedService.logContents = function() {
+	    	console.log('dbLayoutObj');
+	    	console.log(dbLayoutObj);
 	    };
 
 	    return sharedService;
 		
 	});
 
-//create different factory to save to database which has components, containers, etc in it
 
 app.controller('layoutCtrl', function($scope, saveObject) {
-	var layoutCount = 0;
-	$scope.containers = [];
+	$scope.containers = saveObject.getLayout();
 	$scope.newObj = {};
 	$scope.buttons = [{'name': 'Header'},{'name': 'Product'},{'name': 'Footer'}];
 	
 	$scope.addContainer = function(name) {
-		layoutCount++;
-		$scope.containers.push({'id':(name+layoutCount)});
+		saveObject.updateContainers(name, 'add');
 	};
 	
-	$scope.delComponent = function(item) {
-		for (var i = 0; i < $scope.containers.length; i++) {
-			if(item.id == $scope.containers[i].id) {
-				this.containers.splice(i, 1);
-				layoutCount--;
-			}
-		}
+	$scope.delContainer = function(item) {
+		saveObject.updateContainers(item.id, 'del');
 	};
 	
     $scope.$on('handleBroadcast', function() {
-        console.log('layoutCtrl handling message');
-        saveObject.containers = $scope.containers;
+        saveObject.logContents();
     }); 
 
 });
 
 app.controller('contentCtrl', function($scope, saveObject) {
 	var componentCount = 0;
+	$scope.containers = saveObject.getLayout();
 	$scope.components = [];
 
 	$scope.delComponent = function(thing) {
+		saveObject.updateComponents('del', thing.id, thing.className, thing.container);
 		for (var i = 0; i < $scope.components.length; i++) {
 			if(thing.id == $scope.components[i].id) {
 				this.components.splice(i, 1);
@@ -69,25 +101,26 @@ app.controller('contentCtrl', function($scope, saveObject) {
 			}
 		}
 	};
-	
+
 	$scope.dropCallback = function(event, ui) {
 		componentCount++; 
-		$scope.components.push({'id':componentCount, 'class' : ui.helper.context.className, 'container':$scope.item.id});
+		$scope.components.push({'id':componentCount, 'className' : ui.helper.context.className, 'container':$scope.item.id});
+		saveObject.updateComponents('add', componentCount, ui.helper.context.className, $scope.item.id);
 	};
 	
     $scope.$on('handleBroadcast', function() {
-    	console.log('contentCtrl handling message');
-    	saveObject.components = $scope.components;
+    	saveObject.logContents();
     }); 
 });
 
 app.controller('productCtrl', function($scope) {
-	$scope.startcomponents = [{'class': 'componentWdgt'},{'class': 'componentImg'},{'class': 'componentTxt'}];
+	$scope.startcomponents = [{'className': 'componentWdgt'},{'className': 'componentImg'},{'className': 'componentTxt'}];
 });
 
 app.controller('submitCtrl', function($scope, saveObject) {
 	$scope.saveLayout = function() {
 		saveObject.prepForBroadcast();
 //		http://jsfiddle.net/simpulton/XqDxG/
+		saveObject.logContents();
 	};
 });
