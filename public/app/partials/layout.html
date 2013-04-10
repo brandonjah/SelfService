@@ -14,7 +14,7 @@
 	<div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content'>{{item.id}}<br/>
 	<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delContainer(item)"><i class="icon-white icon-remove-sign"></i></a>
 		<section class='h150' ng-controller="contentCtrl" data-drop='true' jqyoui-droppable="{onDrop: 'dropCallback'}">
-			<span ng-repeat='thing in components' class="{{thing.className}}">
+			<span ng-repeat='thing in item.components' class="{{thing.className}}">
 				<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delComponent(thing)"><i class="icon-white icon-remove-sign"></i></a>
 			</span>
 		</section>
