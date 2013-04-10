@@ -14,3 +14,12 @@ out
 conf/mail.conf
 conf/evolutions
 documentation/
+bin/
+data/
+db/
+dist/
+logs/
+test-result/
+lib/
+tmp/
+modules/

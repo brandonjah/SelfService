@@ -2,7 +2,7 @@ var app = angular.module('Layout', ['ngDragDrop']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.
-	      when('/layout', {templateUrl: 'assets/app/partials/layout.html', controller: this.layoutCtrl}).
+	      when('/layout', {templateUrl: 'assets/app/partials/layout.html', controller: this.containerCtrl}).
 	      otherwise({redirectTo: '/layout'});
 	}]);
 
@@ -12,30 +12,25 @@ app.factory('saveObject', function($rootScope) {
     	var layoutCount = 0;
     	var componentCount = 0;
 	    
-	    sharedService.prepForBroadcast = function() {
-	        this.broadcastItem();
-	    };
-	    
 	    sharedService.getLayout = function() {
 	    	return dbLayoutObj;
 	    };
 	    
 	    sharedService.updateComponents = function(oper, className, containerName) {
     		for (var i=0;i<dbLayoutObj.length;i++) {
-    			if(containerName == dbLayoutObj[i].id) {
-    				if(oper == 'add') {
+    				if((oper == 'add')&&(containerName == dbLayoutObj[i].id)) {
     					dbLayoutObj[i].components.push({'id':componentCount,'className':className});
     					componentCount++;
     				} else if(oper == 'del') {
     					for (var x = 0; x < dbLayoutObj[i].components.length; x++) {
-    						if(componentCount == dbLayoutObj[i].components[x].id) {
+    						if (containerName == dbLayoutObj[i].components[x].className) {
     							dbLayoutObj[i].components.splice(x, 1);
-    							componentCount--;
+								componentCount--;
     						}
     					}
     				}
     			}
-    		}
+    		
     		console.log('dbLayoutObj in updatecomponents');
     		console.log(dbLayoutObj);
 	    };
@@ -53,10 +48,6 @@ app.factory('saveObject', function($rootScope) {
 	    		}
 	    	}
 	    };
-	   
-	    sharedService.broadcastItem = function() {
-	        $rootScope.$broadcast('handleBroadcast');
-	    };
 	    
 	    sharedService.logContents = function() {
 	    	console.log('dbLayoutObj');
@@ -64,11 +55,10 @@ app.factory('saveObject', function($rootScope) {
 	    };
 
 	    return sharedService;
-		
 	});
 
 
-app.controller('layoutCtrl', function($scope, saveObject) {
+app.controller('containerCtrl', function($scope, saveObject) {
 	$scope.containers = saveObject.getLayout();
 	$scope.newObj = {};
 	$scope.buttons = [{'name': 'Header'},{'name': 'Product'},{'name': 'Footer'}];
@@ -87,7 +77,7 @@ app.controller('layoutCtrl', function($scope, saveObject) {
 
 });
 
-app.controller('contentCtrl', function($scope, saveObject) {
+app.controller('componentCtrl', function($scope, saveObject) {
 	$scope.delComponent = function(thing) {
 		saveObject.updateComponents('del', thing.id, thing.className, thing.container);
 	};
@@ -107,8 +97,6 @@ app.controller('productCtrl', function($scope) {
 
 app.controller('submitCtrl', function($scope, saveObject) {
 	$scope.saveLayout = function() {
-		saveObject.prepForBroadcast();
-//		http://jsfiddle.net/simpulton/XqDxG/
 		saveObject.logContents();
 	};
 });

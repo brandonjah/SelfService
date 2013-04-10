@@ -47,6 +47,7 @@ public class User extends Model {
     public Date dateCreation;
 
     @Formats.NonEmpty
+    //@TODO change back to false for email confirmation
     public Boolean validated = false;
 
     //@TODO possibly should not be public
