@@ -130,6 +130,7 @@ public class Application extends Controller {
         if (loginForm.hasErrors()) {
             return badRequest(index.render(registerForm, loginForm));
         } else {
+            Logger.debug("loginForm.get().email " + loginForm.get().email);
             session("email", loginForm.get().email);
             return GO_DASHBOARD;
         }

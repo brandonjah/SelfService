@@ -68,7 +68,7 @@ public class User extends Model {
     }
     
     public static User findByEmail(String email) {
-    	Logger.debug("findbyemail in model user");
+    	Logger.debug("findbyemail in model user : " + db().findOne(DBQuery.is("email", email)).email);
     	return db().findOne(DBQuery.is("email", email));
     }
 
@@ -107,7 +107,9 @@ public class User extends Model {
     	User user = User.db().findOne(DBQuery.is("email", email));
         if (user != null) {
             // get the hash password from the salt + clear password
-            if (Hash.checkPassword(clearPassword, user.passwordHash)) {
+            if (Hash.checkPassword(clearPassword, user.passwordHash)) {        
+            	//@TODO fix account validation
+            	user.validated = true;
               return user;
             }
         }
