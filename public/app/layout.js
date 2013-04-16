@@ -16,14 +16,14 @@ app.factory('saveObject', function($rootScope) {
 	    	return dbLayoutObj;
 	    };
 	    
-	    sharedService.updateComponents = function(oper, className, containerName) {
+	    sharedService.updateComponents = function(oper, className, id, containerName) {
     		for (var i=0;i<dbLayoutObj.length;i++) {
-    				if((oper == 'add')&&(containerName == dbLayoutObj[i].id)) {
+    				if((oper == 'add')&&(id == dbLayoutObj[i].id)) {
     					dbLayoutObj[i].components.push({'id':componentCount,'className':className});
     					componentCount++;
     				} else if(oper == 'del') {
     					for (var x = 0; x < dbLayoutObj[i].components.length; x++) {
-    						if (containerName == dbLayoutObj[i].components[x].className) {
+    						if ((className == dbLayoutObj[i].components[x].className)&&(id == dbLayoutObj[i].components[x].id)) {
     							dbLayoutObj[i].components.splice(x, 1);
 								componentCount--;
     						}
@@ -79,7 +79,7 @@ app.controller('containerCtrl', function($scope, saveObject) {
 
 app.controller('componentCtrl', function($scope, saveObject) {
 	$scope.delComponent = function(thing) {
-		saveObject.updateComponents('del', thing.id, thing.className, thing.container);
+		saveObject.updateComponents('del', thing.className, thing.id, thing.container);
 	};
 
 	$scope.dropCallback = function(event, ui) {
