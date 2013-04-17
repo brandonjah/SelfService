@@ -1,5 +1,6 @@
 # Based off of Play20StartApp
 # using this angular module: https://github.com/codef0rmer/angular-dragdrop
+# using this mongo wrapper: https://github.com/vznet/play-mongo-jackson-mapper
 
 # Configuration notes
 * Must change java build path in project properties to prevent data binding error JSR-303
@@ -27,8 +28,14 @@
 * Failing with Passwords (a presentation on issues in user authentication) : http://tersesystems.com/2012/02/17/failing-with-passwords
 * Everything you ever wanted to know about secure password reset : http://www.troyhunt.com/2012/05/everything-you-ever-wanted-to-know.html
  
-#validate user without email thru mongo shell
+#validate user without email thru mongo shell, currently not needed as all accounts are validated
 > db.users.update({email : 'brandon.jahner@arestravelinc.com'},{$set: {'validated' : 'true'},})
 
 #test form post
 > curl --data "siteId=77&templateName=convis-1" http://localhost:9000/info
+
+## Heroku info
+* Procfile in root should override mongo uri
+* heroku open will launch the app in the browser or the domain is http://self-service.herokuapp.com/
+* if Play isn't running on heroku: heroku run sbt play
+* view logs: heroku logs -n 200

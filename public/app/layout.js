@@ -1,11 +1,3 @@
-var app = angular.module('Layout', ['ngDragDrop']);
-
-app.config(['$routeProvider', function($routeProvider) {
-	  $routeProvider.
-	      when('/layout', {templateUrl: 'assets/app/partials/layout.html', controller: this.containerCtrl}).
-	      otherwise({redirectTo: '/layout'});
-	}]);
-
 app.factory('saveObject', function($rootScope) {
 	    var sharedService = {};
 	    var dbLayoutObj = [];
@@ -30,9 +22,6 @@ app.factory('saveObject', function($rootScope) {
     					}
     				}
     			}
-    		
-    		console.log('dbLayoutObj in updatecomponents');
-    		console.log(dbLayoutObj);
 	    };
 	    
 	    sharedService.updateContainers = function(id, oper) {
