@@ -18,10 +18,9 @@ public class Template extends Controller {
             Base base = new Base();
             base.siteId = form.get("siteId");
             base.templateName = form.get("templateName");    
-            Logger.debug(base.siteId);
-            Base.save(base);            
+
+            Base.save(base);
 		
-		//return ok(json).as("application/json");
         return ok();
     }
 }

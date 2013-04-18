@@ -1,5 +1,5 @@
 <div ng-controller="BaseInfoCtrl">
-  <form class="form-horizontal">
+  <form class="form-horizontal" name="siteInfo">
     <fieldset>
       <div id="legend" class="">
         <legend class="">Base Site and Template Info</legend>
@@ -9,7 +9,7 @@
           <!-- Text input-->
           <label class="control-label" for="input01">Site ID:</label>
           <div class="controls">
-            <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId">
+            <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId" required>
           </div>
         </div>
 
@@ -18,7 +18,7 @@
           <!-- Text input-->
           <label class="control-label" for="input01">Template Name:</label>
           <div class="controls">
-            <input type="text" placeholder="Ex: convis-1" class="input-xlarge" ng-model="templateName">
+            <input type="text" placeholder="Ex: convis-1" class="input-xlarge" ng-model="templateName" required>
             <p class="help-block">company name in 1 word, increment number after dash by 1</p>
           </div>
         </div>
@@ -27,7 +27,7 @@
 
           <!-- Button -->
           <div class="controls">
-            <button class="btn btn-success" ng-click="save()">Save</button>
+            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save()">Save</button>
           </div>
         </div>
 

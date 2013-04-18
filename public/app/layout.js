@@ -1,13 +1,14 @@
-app.factory('saveObject', function($rootScope) {
+app.factory('saveObject', function($routeParams) {
 	    var sharedService = {};
 	    var dbLayoutObj = [];
     	var layoutCount = 0;
     	var componentCount = 0;
+    	dbLayoutObj.siteId = $routeParams.siteId;
 	    
 	    sharedService.getLayout = function() {
 	    	return dbLayoutObj;
 	    };
-	    
+
 	    sharedService.updateComponents = function(oper, className, id, containerName) {
     		for (var i=0;i<dbLayoutObj.length;i++) {
     				if((oper == 'add')&&(id == dbLayoutObj[i].id)) {
@@ -23,7 +24,7 @@ app.factory('saveObject', function($rootScope) {
     				}
     			}
 	    };
-	    
+
 	    sharedService.updateContainers = function(id, oper) {
 	    	if(oper == 'add') {
 	    		dbLayoutObj.push({'id':(id+layoutCount),'components':[]});
@@ -46,7 +47,6 @@ app.factory('saveObject', function($rootScope) {
 	    return sharedService;
 	});
 
-
 app.controller('containerCtrl', function($scope, saveObject) {
 	$scope.containers = saveObject.getLayout();
 	$scope.newObj = {};
@@ -59,10 +59,6 @@ app.controller('containerCtrl', function($scope, saveObject) {
 	$scope.delContainer = function(item) {
 		saveObject.updateContainers(item.id, 'del');
 	};
-	
-    $scope.$on('handleBroadcast', function() {
-        saveObject.logContents();
-    }); 
 
 });
 
@@ -75,9 +71,6 @@ app.controller('componentCtrl', function($scope, saveObject) {
 		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id);
 	};
 	
-    $scope.$on('handleBroadcast', function() {
-    	saveObject.logContents();
-    }); 
 });
 
 app.controller('productCtrl', function($scope) {
