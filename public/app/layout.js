@@ -1,23 +1,28 @@
 app.factory('saveObject', function($routeParams) {
 	    var sharedService = {};
 	    var dbLayoutObj = [];
+	    dbLayoutObj.containers = [];
     	var layoutCount = 0;
     	var componentCount = 0;
     	dbLayoutObj.siteId = $routeParams.siteId;
 	    
 	    sharedService.getLayout = function() {
-	    	return dbLayoutObj;
+	    	return dbLayoutObj.containers;
 	    };
+	    
+	    sharedService.getSiteId = function() {
+	    	return dbLayoutObj.siteId;
+	    };	   
 
 	    sharedService.updateComponents = function(oper, className, id, containerName) {
-    		for (var i=0;i<dbLayoutObj.length;i++) {
-    				if((oper == 'add')&&(id == dbLayoutObj[i].id)) {
-    					dbLayoutObj[i].components.push({'id':componentCount,'className':className});
+    		for (var i=0;i<dbLayoutObj.containers.length;i++) {
+    				if((oper == 'add')&&(id == dbLayoutObj.containers[i].id)) {
+    					dbLayoutObj.containers[i].components.push({'id':componentCount,'className':className});
     					componentCount++;
     				} else if(oper == 'del') {
-    					for (var x = 0; x < dbLayoutObj[i].components.length; x++) {
-    						if ((className == dbLayoutObj[i].components[x].className)&&(id == dbLayoutObj[i].components[x].id)) {
-    							dbLayoutObj[i].components.splice(x, 1);
+    					for (var x = 0; x < dbLayoutObj.containers[i].components.length; x++) {
+    						if ((className == dbLayoutObj.containers[i].components[x].className)&&(id == dbLayoutObj.containers[i].components[x].id)) {
+    							dbLayoutObj.containers[i].components.splice(x, 1);
 								componentCount--;
     						}
     					}
@@ -27,12 +32,12 @@ app.factory('saveObject', function($routeParams) {
 
 	    sharedService.updateContainers = function(id, oper) {
 	    	if(oper == 'add') {
-	    		dbLayoutObj.push({'id':(id+layoutCount),'components':[]});
+	    		dbLayoutObj.containers.push({'id':(id+layoutCount),'components':[]});
 				layoutCount++;
 	    	} else if (oper == 'del') {
-	    		for (var i = 0; i < dbLayoutObj.length; i++) {
-	    			if(id == dbLayoutObj[i].id) {
-	    				dbLayoutObj.splice(i, 1);
+	    		for (var i = 0; i < dbLayoutObj.containers.length; i++) {
+	    			if(id == dbLayoutObj.containers[i].id) {
+	    				dbLayoutObj.containers.splice(i, 1);
 	    				layoutCount--;
 	    			}
 	    		}
@@ -77,8 +82,27 @@ app.controller('productCtrl', function($scope) {
 	$scope.startcomponents = [{'className': 'componentWdgt'},{'className': 'componentImg'},{'className': 'componentTxt'}];
 });
 
-app.controller('submitCtrl', function($scope, saveObject) {
+app.controller('submitCtrl', function($scope, $http, saveObject) {
+	$scope.url = '/save-layout';
 	$scope.saveLayout = function() {
 		saveObject.logContents();
+		var containers = saveObject.getLayout();
+		var siteId = saveObject.getSiteId();
+
+		console.log('containers');
+		console.log(containers);
+			$http.post($scope.url, {
+				"siteId" : siteId,
+//				"containers" : $.param(containers)
+				"containers" : JSON.stringify(containers)
+				}).
+		      success(function(data){
+		    	  console.log('in submitCtrl success');
+		          $scope.success = true;
+		        }).
+		        error(function(data){
+		          $scope.httpError = true;
+		        });
+			
 	};
 });

@@ -37,3 +37,5 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 #Base info
 POST	/info						controllers.Template.save()
+#Layout save
+POST	/save-layout				controllers.Template.saveLayout()
