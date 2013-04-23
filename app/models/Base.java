@@ -28,6 +28,8 @@ public class Base extends Model {
     @Formats.NonEmpty
     public String siteId;
     
+    public String layoutId;
+    
     public static JacksonDBCollection<Base, Object> coll = MongoDB.getCollection("sites", Base.class, Object.class);
     
     public static Base findById(String id) {
