@@ -2,8 +2,11 @@ package controllers;
 
 import static play.data.Form.form;
 
+import org.codehaus.jackson.JsonNode;
+
 import models.Base;
 import models.Layout;
+import models.Layout.LayoutJSON;
 import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.Controller;
@@ -26,14 +29,13 @@ public class Template extends Controller {
     }
 	
 	public static Result saveLayout() {
-	    final DynamicForm form = form().bindFromRequest();
-	    	Logger.debug("saveLayout in controller template");
-            Layout layout = new Layout();
-            layout.siteId = form.get("siteId");
-            layout.containersString = form.get("containers");
-            Logger.debug(layout.containersString);
-            Layout.save(layout);
-		
+		JsonNode json = request().body().asJson();
+        Layout layout = new Layout();
+        //only grabbing siteid because it needs to loop
+        LayoutJSON returnedContainer = layout.parseContainer(json); 
+        layout.save(returnedContainer);
+        Logger.debug("nowimhere");
+        Logger.debug(returnedContainer.siteId.toString());
         return ok();
     }
 }

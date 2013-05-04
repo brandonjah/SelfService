@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 
@@ -27,8 +29,6 @@ public class Base extends Model {
     @Constraints.Required
     @Formats.NonEmpty
     public String siteId;
-    
-    public String layoutId;
     
     public static JacksonDBCollection<Base, Object> coll = MongoDB.getCollection("sites", Base.class, Object.class);
     

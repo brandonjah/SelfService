@@ -93,7 +93,7 @@ app.controller('submitCtrl', function($scope, $http, saveObject) {
 		console.log(containers);
 			$http.post($scope.url, {
 				"siteId" : siteId,
-				"containers" : JSON.stringify(angular.toJson(containers))
+				"containers" : containers
 				}).
 		      success(function(data){
 		    	  console.log('in submitCtrl success');

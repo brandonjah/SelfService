@@ -3,24 +3,20 @@ package models;
 import models.Base;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
+import java.util.Collection;
 
 import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ObjectNode;
+
+import com.mongodb.util.JSON;
 
 import net.vz.mongodb.jackson.DBCursor;
-import net.vz.mongodb.jackson.DBQuery;
-import net.vz.mongodb.jackson.DBUpdate;
 import net.vz.mongodb.jackson.JacksonDBCollection;
-import net.vz.mongodb.jackson.ObjectId;
+
 import play.Logger;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -28,63 +24,37 @@ import play.db.ebean.Model;
 import play.modules.mongodb.jackson.MongoDB;
 
 public class Layout extends Model {
-    @Constraints.Required
-    @Formats.NonEmpty
-    public String siteId;
     
-    public static String containersString;
-    
-    public static ArrayList<ArrayList<Components>> containers = new ArrayList<ArrayList<Components>> ();
-    
-    public static JacksonDBCollection<Containers, Object> siteLayoutCollection = MongoDB.getCollection("sites", Containers.class, Object.class);
-    
-    static ObjectMapper mapper = new ObjectMapper();
-    
-    public class Containers {
-        private String id;
-        private Components components;
-        
-        public String getId() {
-            return this.id;
-        }
-        public void setId(String id) {
-            this.id = id;
-        }
-        public Components getComponents() {
-            return this.components;
-        }
-        public void setComponents(Components components) {
-            this.components = components;
-        }
+    public static class LayoutJSON {
+    	public String siteId;
+    	public Collection<Containers> containers;
+    	
+	    static class Containers  {  
+	    	public String id;
+	    	public Collection<Components> components;
+	    }  
+	      
+	    static class Components  {  
+	    	public Integer id;  
+	    	public String className;  
+	    } 
+	    //used to prevent jackson error
+	    public LayoutJSON() {
+	    	
+	    }
     }
     
-    public class Components {
-        private String id;
-        private String className;
-        
-        public String getId() {
-            return this.id;
-        }
-        public void setId(String id) {
-            this.id = id;
-        }
-        public String getClassName() {
-            return this.className;
-        }
-        public void setClassName(String className) {
-            this.className = className;
-        }
-    }
+    public static JacksonDBCollection<LayoutJSON, Object> siteLayoutCollection = MongoDB.getCollection("sites", LayoutJSON.class, Object.class);
+    //http://programmerbruce.blogspot.co.uk/2011/05/deserialize-json-with-jackson-into.html
+    
+    protected static ObjectMapper mapper = new ObjectMapper();
     
     public static JacksonDBCollection<Base, Object> coll = MongoDB.getCollection("sites", Base.class, Object.class);
     
-    public static Containers parseContainer(String containerString) {
+    public static LayoutJSON parseContainer(JsonNode containerNode) {
 		try{
-			JsonFactory f = new JsonFactory();
-			JsonParser jp = f.createJsonParser(containersString);
-			String textVal = jp.nextTextValue();
-			Containers containers = mapper.readValue(jp, Containers.class);
-			return containers;
+			LayoutJSON mappedContainers = mapper.treeToValue(containerNode, LayoutJSON.class);
+			return mappedContainers;
 		}catch(IOException ioe){
 			Logger.debug("Exception saving containers:");
 			Logger.debug(ioe.toString());
@@ -92,17 +62,15 @@ public class Layout extends Model {
 		}
     }
     
-    public static boolean save(Layout layout) {
-    	DBCursor<Base> cursor = coll.find().is("siteId", layout.siteId);
+    public static boolean save(LayoutJSON returnedContainer) {
+    	DBCursor<Base> cursor = coll.find().is("siteId", returnedContainer.siteId);
     	if (cursor.hasNext()) {
     		Base dbInsertObj = cursor.next();
-    		Containers parsedContainer = parseContainer(layout.containersString);
-    		coll.updateById(dbInsertObj.id,DBUpdate.push("id",parsedContainer.id));
+    		coll.save(dbInsertObj);
         	return true;
     	} else {
     		Logger.debug("no cursor next in layout model");
-    		return true;
+    		return false;
     	}
     }
-
 }
