@@ -1,9 +1,14 @@
 package models;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import net.vz.mongodb.jackson.DBCursor;
 import net.vz.mongodb.jackson.DBQuery;
@@ -29,6 +34,29 @@ public class Base extends Model {
     @Constraints.Required
     @Formats.NonEmpty
     public String siteId;
+    
+    public LayoutJSON layout;
+    
+    public static class LayoutJSON {
+    	public String siteId;
+    	public Collection<Containers> containers;
+    	
+	    static class Containers  {  
+	    	public String id;
+	    	public Collection<Components> components;
+	    }  
+	      
+	    static class Components  {  
+	    	public Integer id;  
+	    	public String className;  
+	    } 
+	    //used to prevent jackson error
+	    public LayoutJSON() {
+	    	
+	    }
+    }
+    
+    protected static ObjectMapper mapper = new ObjectMapper();
     
     public static JacksonDBCollection<Base, Object> coll = MongoDB.getCollection("sites", Base.class, Object.class);
     
@@ -58,5 +86,29 @@ public class Base extends Model {
     		return true;
     	}
 
+    }
+    
+    public static LayoutJSON parseContainer(JsonNode containerNode) {
+		try{
+			LayoutJSON mappedContainers = mapper.treeToValue(containerNode, LayoutJSON.class);
+			return mappedContainers;
+		}catch(IOException ioe){
+			Logger.debug("Exception saving containers:");
+			Logger.debug(ioe.toString());
+			return null;
+		}
+    }
+    
+    public static boolean saveLayout(LayoutJSON returnedContainer) {
+    	DBCursor<Base> cursor = coll.find().is("siteId", returnedContainer.siteId);
+    	if (cursor.hasNext()) {
+    		Base dbInsertObj = cursor.next();
+    		dbInsertObj.layout = returnedContainer;
+    		coll.save(dbInsertObj);
+        	return true;
+    	} else {
+    		Logger.debug("no cursor next in layout model");
+    		return false;
+    	}
     }
 }

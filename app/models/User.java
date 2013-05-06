@@ -68,7 +68,7 @@ public class User extends Model {
     }
     
     public static User findByEmail(String email) {
-    	Logger.debug("findbyemail in model user : " + db().findOne(DBQuery.is("email", email)).email);
+//    	Logger.debug("findbyemail in model user : " + db().findOne(DBQuery.is("email", email)).email);
     	return db().findOne(DBQuery.is("email", email));
     }
 

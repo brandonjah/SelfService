@@ -1,6 +1,7 @@
 package models;
 
 import models.Base;
+import models.Base.LayoutJSON;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -25,27 +26,7 @@ import play.modules.mongodb.jackson.MongoDB;
 
 public class Layout extends Model {
     
-    public static class LayoutJSON {
-    	public String siteId;
-    	public Collection<Containers> containers;
-    	
-	    static class Containers  {  
-	    	public String id;
-	    	public Collection<Components> components;
-	    }  
-	      
-	    static class Components  {  
-	    	public Integer id;  
-	    	public String className;  
-	    } 
-	    //used to prevent jackson error
-	    public LayoutJSON() {
-	    	
-	    }
-    }
-    
     public static JacksonDBCollection<LayoutJSON, Object> siteLayoutCollection = MongoDB.getCollection("sites", LayoutJSON.class, Object.class);
-    //http://programmerbruce.blogspot.co.uk/2011/05/deserialize-json-with-jackson-into.html
     
     protected static ObjectMapper mapper = new ObjectMapper();
     
@@ -66,6 +47,7 @@ public class Layout extends Model {
     	DBCursor<Base> cursor = coll.find().is("siteId", returnedContainer.siteId);
     	if (cursor.hasNext()) {
     		Base dbInsertObj = cursor.next();
+    		dbInsertObj.layout = returnedContainer;
     		coll.save(dbInsertObj);
         	return true;
     	} else {
