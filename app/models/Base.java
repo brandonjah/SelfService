@@ -1,7 +1,6 @@
 package models;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -82,8 +81,8 @@ public class Base extends Model {
     	    coll.save(dbInsertObj);
         	return true;
     	} else {
-    	   	coll.save(base);
-    		return true;
+    		Logger.debug("no cursor next in base save model");
+    		return false;
     	}
 
     }
@@ -107,7 +106,7 @@ public class Base extends Model {
     		coll.save(dbInsertObj);
         	return true;
     	} else {
-    		Logger.debug("no cursor next in layout model");
+    		Logger.debug("no cursor next in saveLayout model");
     		return false;
     	}
     }

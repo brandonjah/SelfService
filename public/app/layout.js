@@ -67,7 +67,7 @@ app.controller('containerCtrl', function($scope, saveObject) {
 
 });
 
-app.controller('componentCtrl', function($scope, saveObject) {
+app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	$scope.delComponent = function(thing) {
 		saveObject.updateComponents('del', thing.className, thing.id, thing.container);
 	};
@@ -76,6 +76,41 @@ app.controller('componentCtrl', function($scope, saveObject) {
 		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id);
 	};
 	
+	  // Inlined template for demo
+	  var t = '<div class="modal-header">'+
+	          '<h1>This is the title</h1>'+
+	          '</div>'+
+	          '<div class="modal-body">'+
+	          '<p>Enter a value to pass to <code>close</code> as the result: <input ng-model="result" /></p>'+
+	          '</div>'+
+	          '<div class="modal-footer">'+
+	          '<button ng-click="close(result)" class="btn btn-primary" >Close</button>'+
+	          '</div>';
+
+	  $scope.opts = {
+	    backdrop: true,
+	    keyboard: true,
+	    backdropClick: true,
+	    template:  t, // OR: templateUrl: 'path/to/view.html',
+	    controller: 'closeModalController'
+	  };
+
+	  $scope.openProperties = function(){
+	    var d = $dialog.dialog($scope.opts);
+	    d.open().then(function(result){
+	      if(result)
+	      {
+	        alert('dialog closed with result: ' + result);
+	      }
+	    });
+	  };
+	 
+});
+
+app.controller('closeModalController', function($scope, dialog){
+	  $scope.close = function(result){
+	    dialog.close(result);
+	  };
 });
 
 app.controller('productCtrl', function($scope) {

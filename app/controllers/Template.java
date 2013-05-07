@@ -5,7 +5,6 @@ import static play.data.Form.form;
 import org.codehaus.jackson.JsonNode;
 
 import models.Base;
-import models.Layout;
 import models.Base.LayoutJSON;
 import play.Logger;
 import play.data.DynamicForm;
@@ -31,7 +30,6 @@ public class Template extends Controller {
 	public static Result saveLayout() {
 		JsonNode json = request().body().asJson();
         Base base = new Base();
-        //only grabbing siteid because it needs to loop
         LayoutJSON returnedContainer = base.parseContainer(json); 
         base.saveLayout(returnedContainer);
         Logger.debug("nowimhere");
