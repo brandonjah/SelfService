@@ -78,13 +78,20 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	
 	  // Inlined template for demo
 	  var t = '<div class="modal-header">'+
-	          '<h1>This is the title</h1>'+
+	          '<h3>Component Properties</h3>'+
 	          '</div>'+
 	          '<div class="modal-body">'+
-	          '<p>Enter a value to pass to <code>close</code> as the result: <input ng-model="result" /></p>'+
+	          '<h4>Width</h4>'+
+	          '<pre>{{radioModel}}</pre>'+
+	          '<div class="btn-group">'+
+	              '<button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="\'Third\'">1/3</button>'+
+	              '<button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="\'Half\'">1/2</button>'+
+	              '<button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="\'Full\'">Full</button>'+
+	          '</div><br><br>'+
+	          '<p>Text: <input ng-model="result" /></p>'+
 	          '</div>'+
 	          '<div class="modal-footer">'+
-	          '<button ng-click="close(result)" class="btn btn-primary" >Close</button>'+
+	          '<button ng-click="close(result)" class="btn btn-success" >Save</button>'+
 	          '</div>';
 
 	  $scope.opts = {
@@ -103,6 +110,16 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	        alert('dialog closed with result: ' + result);
 	      }
 	    });
+	  };
+	  
+	  $scope.singleModel = 1;
+
+	  $scope.radioModel = 'Third';
+
+	  $scope.checkModel = {
+	    Third: true,
+	    Half: false,
+	    Full: false
 	  };
 	 
 });
