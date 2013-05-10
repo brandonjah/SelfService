@@ -1,0 +1,24 @@
+<div class="modal-header">
+<h3>Component Properties</h3>
+</div>
+	<div class="modal-body">
+	<h4>Width</h4>
+	<pre>{{radioModel}}</pre>
+	<div class="btn-group">
+        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Third'">Third</button>
+        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Half'">Half</button>
+        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Full'">Full</button>
+	</div><br><br>
+	<p>Text: <input ng-model="result" /></p>
+	</div>
+	<div ng-controller="CollapseDemoCtrl">
+	<button class="btn" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>
+	<hr>
+	<div collapse="isCollapsed">
+		<div class="well well-large">Some content</div> 
+	</div>
+
+</div>
+<div class="modal-footer">
+<button ng-click="close(result, radioModel)" class="btn btn-success" >Save</button>
+</div>

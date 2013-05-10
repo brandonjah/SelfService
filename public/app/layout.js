@@ -71,60 +71,37 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	$scope.delComponent = function(thing) {
 		saveObject.updateComponents('del', thing.className, thing.id, thing.container);
 	};
-
+	
 	$scope.dropCallback = function(event, ui) {
 		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id);
 	};
-	
-	  // Inlined template for demo
-	  var t = '<div class="modal-header">'+
-	          '<h3>Component Properties</h3>'+
-	          '</div>'+
-	          '<div class="modal-body">'+
-	          '<h4>Width</h4>'+
-	          '<pre>{{radioModel}}</pre>'+
-	          '<div class="btn-group">'+
-	              '<button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="\'Third\'">1/3</button>'+
-	              '<button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="\'Half\'">1/2</button>'+
-	              '<button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="\'Full\'">Full</button>'+
-	          '</div><br><br>'+
-	          '<p>Text: <input ng-model="result" /></p>'+
-	          '</div>'+
-	          '<div class="modal-footer">'+
-	          '<button ng-click="close(result)" class="btn btn-success" >Save</button>'+
-	          '</div>';
-
 	  $scope.opts = {
 	    backdrop: true,
 	    keyboard: true,
 	    backdropClick: true,
-	    template:  t, // OR: templateUrl: 'path/to/view.html',
-	    controller: 'closeModalController'
+	    templateUrl: '/assets/app/partials/properties.html',
+	    controller: 'propertiesModalController'
 	  };
 
-	  $scope.openProperties = function(){
+	  $scope.openProperties = function(thing){
 	    var d = $dialog.dialog($scope.opts);
-	    d.open().then(function(result){
+	    d.open().then(function(result, radioModel){
 	      if(result)
 	      {
-	        alert('dialog closed with result: ' + result);
+	        alert('dialog closed with result: ' + result + '\n' + thing.id.toString() + '\n' + thing.className.toString());
 	      }
 	    });
 	  };
-	  
-	  $scope.singleModel = 1;
 
-	  $scope.radioModel = 'Third';
-
-	  $scope.checkModel = {
-	    Third: true,
-	    Half: false,
-	    Full: false
-	  };
-	 
 });
 
-app.controller('closeModalController', function($scope, dialog){
+function CollapseDemoCtrl($scope) {
+	  $scope.isCollapsed = false;
+	}
+
+app.controller('propertiesModalController', function($scope, dialog){
+	  $scope.radioModel = 'Third';
+
 	  $scope.close = function(result){
 	    dialog.close(result);
 	  };
