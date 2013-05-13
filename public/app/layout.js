@@ -14,10 +14,10 @@ app.factory('saveObject', function($routeParams) {
 	    	return dbLayoutObj.siteId;
 	    };	   
 
-	    sharedService.updateComponents = function(oper, className, id, containerName) {
+	    sharedService.updateComponents = function(oper, className, id, containerName, width) {
     		for (var i=0;i<dbLayoutObj.containers.length;i++) {
     				if((oper == 'add')&&(id == dbLayoutObj.containers[i].id)) {
-    					dbLayoutObj.containers[i].components.push({'id':componentCount,'className':className});
+    					dbLayoutObj.containers[i].components.push({'id':componentCount,'className':className, 'width':width});
     					componentCount++;
     				} else if(oper == 'del') {
     					for (var x = 0; x < dbLayoutObj.containers[i].components.length; x++) {
@@ -68,12 +68,14 @@ app.controller('containerCtrl', function($scope, saveObject) {
 });
 
 app.controller('componentCtrl', function($scope, $dialog, saveObject) {
+	var componentWidth = "Third";
+	
 	$scope.delComponent = function(thing) {
-		saveObject.updateComponents('del', thing.className, thing.id, thing.container);
+		saveObject.updateComponents('del', thing.className, thing.id, thing.container, null);
 	};
 	
 	$scope.dropCallback = function(event, ui) {
-		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id);
+		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id, null, componentWidth);
 	};
 	  $scope.opts = {
 	    backdrop: true,
@@ -83,24 +85,25 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	    controller: 'propertiesModalController'
 	  };
 
-	  $scope.openProperties = function(thing){
+	  $scope.openProperties = function(){
 	    var d = $dialog.dialog($scope.opts);
-	    d.open().then(function(result, radioModel){
+	    d.open().then(function(result){
 	      if(result)
 	      {
-	        alert('dialog closed with result: ' + result + '\n' + thing.id.toString() + '\n' + thing.className.toString());
+	        componentWidth = result.radioModel;
 	      }
 	    });
 	  };
 
 });
 
-function CollapseDemoCtrl($scope) {
-	  $scope.isCollapsed = false;
+function CollapseCtrl($scope) {
+	  $scope.isCollapsed = true;
 	}
 
 app.controller('propertiesModalController', function($scope, dialog){
-	  $scope.radioModel = 'Third';
+	$scope.result = {};  
+	$scope.result.radioModel = 'Third';
 
 	  $scope.close = function(result){
 	    dialog.close(result);

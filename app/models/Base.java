@@ -47,7 +47,8 @@ public class Base extends Model {
 	      
 	    static class Components  {  
 	    	public Integer id;  
-	    	public String className;  
+	    	public String className;
+	    	public String width;
 	    } 
 	    //used to prevent jackson error
 	    public LayoutJSON() {

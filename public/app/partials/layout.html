@@ -15,7 +15,7 @@
 	<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delContainer(item)"><i class="icon-white icon-remove-sign"></i></a>
 		<section class='h150' ng-controller="componentCtrl" data-drop='true' jqyoui-droppable="{onDrop: 'dropCallback'}">
 			<span ng-repeat='thing in item.components' class="{{thing.className}}" ng-dblclick="openProperties(thing)">
-				<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delComponent(thing)"><i class="icon-white icon-remove-sign"></i></a>
+				<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delComponent()"><i class="icon-white icon-remove-sign"></i></a>
 			</span>
 		</section>
 	</div>
