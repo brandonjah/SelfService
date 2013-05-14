@@ -1,4 +1,4 @@
-title=Play20StartApp
+title=SelfService
 
 # Default messages
 
