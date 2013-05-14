@@ -69,6 +69,7 @@ app.controller('containerCtrl', function($scope, saveObject) {
 
 app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	var componentWidth = "Third";
+	$scope.widget = "something";
 	
 	$scope.delComponent = function(thing) {
 		saveObject.updateComponents('del', thing.className, thing.id, thing.container, null);
@@ -77,15 +78,22 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	$scope.dropCallback = function(event, ui) {
 		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id, null, componentWidth);
 	};
+	  var componentClassName = "somethingElse";
 	  $scope.opts = {
 	    backdrop: true,
 	    keyboard: true,
 	    backdropClick: true,
 	    templateUrl: '/assets/app/partials/properties.html',
-	    controller: 'propertiesModalController'
+	    controller: 'propertiesModalController',
+	    resolve:       {componentClassName: function() {return angular.copy($scope.widget);}}
 	  };
 
-	  $scope.openProperties = function(){
+	  $scope.openProperties = function(viewComponent){
+	    if(viewComponent == "componentWdgt") {
+		  	  $scope.widget = "true";
+		    } else {
+		  	  $scope.widget = "false";
+		    }
 	    var d = $dialog.dialog($scope.opts);
 	    d.open().then(function(result){
 	      if(result)
@@ -94,14 +102,17 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	      }
 	    });
 	  };
-
 });
 
 function CollapseCtrl($scope) {
 	  $scope.isCollapsed = true;
 	}
 
-app.controller('propertiesModalController', function($scope, dialog){
+app.controller('propertiesModalController', function($scope, dialog, componentClassName){
+	$scope.widget = componentClassName;
+	$scope.updateWidget = function(viewComponent) {
+
+	};
 	$scope.result = {};  
 	$scope.result.radioModel = 'Third';
 

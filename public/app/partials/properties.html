@@ -1,8 +1,9 @@
 <div class="modal-header">
 <h3>Component Properties</h3>
 </div>
-	<div class="modal-body">
+	<div ng-init="updateWidget($parent.thing.className)" class="modal-body">
 	<h4>Width</h4>
+	<h5></h5>
 	<pre>{{result.radioModel}}</pre>
 	<div class="btn-group">
         <button type="button" class="btn btn-primary" ng-model="result.radioModel" btn-radio="'Third'">Third</button>
@@ -11,13 +12,15 @@
 	</div><br><br>
 	<p>Text: <input ng-model="result.text" /></p>
 	<br><br>
-	<div ng-controller="CollapseCtrl">
-	<button class="btn" ng-click="isCollapsed = !isCollapsed">Edit Tabs</button>
-	<hr>
-	<div collapse="isCollapsed">
-		<div class="well well-large">Layered and Enabled tabs here</div> 
+	<div>{{widget}}<br>
+		<div ng-controller="CollapseCtrl">
+			<button class="btn" ng-click="isCollapsed = !isCollapsed">Edit Tabs</button>
+			<hr>
+			<div collapse="isCollapsed">
+				<div class="well well-large">Layered and Enabled tabs here</div> 
+			</div>
+		</div>
 	</div>
-</div>
 </div>
 <div class="modal-footer">
 <button ng-click="close(result)" class="btn btn-success" >Save</button>
