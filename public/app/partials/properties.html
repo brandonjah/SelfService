@@ -3,7 +3,6 @@
 </div>
 	<div ng-init="updateWidget($parent.thing.className)" class="modal-body">
 	<h4>Width</h4>
-	<h5></h5>
 	<pre>{{result.radioModel}}</pre>
 	<div class="btn-group">
         <button type="button" class="btn btn-primary" ng-model="result.radioModel" btn-radio="'Third'">Third</button>
@@ -12,12 +11,12 @@
 	</div><br><br>
 	<p>Text: <input ng-model="result.text" /></p>
 	<br><br>
-	<div>{{widget}}<br>
+	<div><h4>Component Type: {{widget}}</h4><br>
 		<div ng-controller="CollapseCtrl">
-			<button class="btn" ng-click="isCollapsed = !isCollapsed">Edit Tabs</button>
+			<button class="btn" ng-click="isCollapsed = !isCollapsed">Edit Component</button>
 			<hr>
 			<div collapse="isCollapsed">
-				<div class="well well-large">Layered and Enabled tabs here</div> 
+				<div class="well well-large">More in-depth component configuration here</div> 
 			</div>
 		</div>
 	</div>

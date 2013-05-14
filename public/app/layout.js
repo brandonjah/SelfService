@@ -69,7 +69,6 @@ app.controller('containerCtrl', function($scope, saveObject) {
 
 app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	var componentWidth = "Third";
-	$scope.widget = "something";
 	
 	$scope.delComponent = function(thing) {
 		saveObject.updateComponents('del', thing.className, thing.id, thing.container, null);
@@ -78,7 +77,7 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	$scope.dropCallback = function(event, ui) {
 		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id, null, componentWidth);
 	};
-	  var componentClassName = "somethingElse";
+	  var componentClassName = "something";
 	  $scope.opts = {
 	    backdrop: true,
 	    keyboard: true,
@@ -90,9 +89,13 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 
 	  $scope.openProperties = function(viewComponent){
 	    if(viewComponent == "componentWdgt") {
-		  	  $scope.widget = "true";
+		  	  $scope.widget = "Widget";
+		    } else if(viewComponent == "componentImg") {
+		  	  $scope.widget = "Image";
+		    } else if(viewComponent == "componentTxt") {
+		  	  $scope.widget = "Text";
 		    } else {
-		  	  $scope.widget = "false";
+		    	$scope.widget = "Something Else";
 		    }
 	    var d = $dialog.dialog($scope.opts);
 	    d.open().then(function(result){
