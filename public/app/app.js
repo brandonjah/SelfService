@@ -1,4 +1,4 @@
-var app = angular.module('LandingPage', ['ngDragDrop','ui.bootstrap']);
+var app = angular.module('LandingPage', ['ngDragDrop','ui.bootstrap','colorpicker.module']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.

@@ -34,6 +34,9 @@ public class Base extends Model {
     @Formats.NonEmpty
     public String siteId;
     
+    public String bgColor;
+    public String txtColor;
+    
     public LayoutJSON layout;
     
     public static class LayoutJSON {

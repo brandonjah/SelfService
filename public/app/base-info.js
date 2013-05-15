@@ -1,9 +1,13 @@
+'use strict';
+
 app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location) {
 	$scope.url = '/info';
 	$scope.save = function() {
 		$http.post($scope.url, { 
 			"siteId" : $scope.siteId,
-			"templateName" : $scope.templateName
+			"templateName" : $scope.templateName,
+			"bgColor" : $scope.bgColor,
+			"txtColor" : $scope.txtColor
 			}).
 	      success(function(data){
 	    	  console.log('in success');
@@ -16,3 +20,4 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location) {
 	        });
 	}
 });
+

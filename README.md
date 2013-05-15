@@ -39,3 +39,6 @@
 * heroku open will launch the app in the browser or the domain is http://self-service.herokuapp.com/
 * if Play isn't running on heroku: heroku run sbt play
 * view logs: heroku logs -n 200
+
+## Angular UI Bootstrap info
+* template/progressbar/bar.html changed to /assets/app/template/progressbar/bar.html|progress.html in ui-bootstrap-0.3.0.min.js
