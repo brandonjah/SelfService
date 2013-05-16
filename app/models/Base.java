@@ -77,8 +77,15 @@ public class Base extends Model {
     	if (base == null) {
           return false;
         } else {
-        	coll.save(base);
-        	return true;
+        	DBCursor<Base> cursor = coll.find().is("siteId", base.siteId);
+        	if (cursor.hasNext()) {
+        	    coll.update(cursor.next(), base);
+            	return true;
+        	} else {
+        		Logger.debug("no cursor next in base save model");
+        		coll.save(base);
+        		return true;
+        	}
         }
     }
     
@@ -110,7 +117,6 @@ public class Base extends Model {
     	DBCursor<Base> cursor = coll.find().is("siteId", siteId);
     	if (cursor.hasNext()) {
     		Base dbInsertObj = cursor.next();
-//    		dbInsertObj.layout = returnedContainer;
         	return dbInsertObj.templateName;
     	} else {
     		Logger.debug("no cursor next in search model");

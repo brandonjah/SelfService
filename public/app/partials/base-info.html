@@ -9,7 +9,7 @@
           <!-- Text input-->
           <label class="control-label" for="input01">Site ID:</label>
           <div class="controls">
-            <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId" required>
+            <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId" value="siteId" required>
             <button class="btn btn-info" ng-disabled="!siteInfo.$invalid" ng-click="search(siteId)">Search</button>
           </div>
         </div>
@@ -19,7 +19,7 @@
           <!-- Text input-->
           <label class="control-label" for="input01">Template Name:</label>
           <div class="controls">
-            <input type="text" placeholder="Ex: convis-1" class="input-xlarge" ng-model="templateName" required>
+            <input type="text" placeholder="Ex: convis-1" class="input-xlarge" ng-model="templateName" value="templateName" required>
             <p class="help-block">company name in 1 word, increment number after dash by 1</p>
           </div>
           <br>

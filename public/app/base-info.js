@@ -26,8 +26,8 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location) {
 	$scope.search = function() {
 	    $http({method: 'GET', url: '/site/'+$scope.siteId}).
 	    success(function(data, status, headers, config) {
-	    	  console.log('sending site id, success');
-	    	  console.log(data.templateName.toString());
+	    	  $scope.siteId = data.siteId;
+	    	  $scope.templateName = data.templateName;
 	          $scope.success = true;
 	    }).
 	    error(function(data, status, headers, config) {
