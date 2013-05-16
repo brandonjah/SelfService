@@ -77,12 +77,9 @@ public class Base extends Model {
     	if (base == null) {
           return false;
         } else {
-        	DBCursor<Base> cursor = coll.find().is("siteId", base.siteId);
-        	Logger.debug("in Base save");
         	coll.save(base);
         	return true;
         }
-
     }
     
     public static LayoutJSON parseContainer(JsonNode containerNode) {
