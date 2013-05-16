@@ -39,3 +39,5 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 POST	/info						controllers.Template.save()
 #Layout save
 POST	/save-layout				controllers.Template.saveLayout()
+#Site search
+GET		/site/:siteId				controllers.Template.siteSearch(siteId:String)

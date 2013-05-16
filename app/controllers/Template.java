@@ -3,10 +3,12 @@ package controllers;
 import static play.data.Form.form;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.node.ObjectNode;
 
 import models.Base;
 import models.Base.LayoutJSON;
 import play.Logger;
+import play.libs.Json;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -35,5 +37,19 @@ public class Template extends Controller {
         Logger.debug("nowimhere");
         Logger.debug(returnedContainer.siteId.toString());
         return ok();
+    }
+//	@BodyParser.Of(Json.class)
+	public static Result siteSearch(String siteId) {
+		ObjectNode result = Json.newObject();
+		Base base = new Base();
+		String templateName = base.siteSearch(siteId);
+		if(templateName == null) {
+			return null;	
+		} else {
+			result.put("siteId", siteId);
+			result.put("templateName", templateName);
+			return ok(result);
+		}
+        
     }
 }

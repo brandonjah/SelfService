@@ -8,3 +8,4 @@ app.config(['$routeProvider', '$httpProvider', 'fileUploadProvider',
 	      otherwise({redirectTo: '/info'});
 	}
 ]);
+

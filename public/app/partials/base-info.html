@@ -10,6 +10,7 @@
           <label class="control-label" for="input01">Site ID:</label>
           <div class="controls">
             <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId" required>
+            <button class="btn btn-info" ng-disabled="!siteInfo.$invalid" ng-click="search(siteId)">Search</button>
           </div>
         </div>
 
@@ -33,9 +34,8 @@
 			</div>
         </div>
         
-     <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data" data-ng-app="demo" data-ng-controller="DemoFileUploadController" data-fileupload="options" ng-class="{true: 'fileupload-processing'}[!!processing() || loadingFiles]">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
-        <noscript><input type="hidden" name="redirect" value="http://blueimp.github.com/jQuery-File-Upload/"></noscript>
+     <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data" data-fileupload="options" ng-class="{true: 'fileupload-processing'}[!!processing() || loadingFiles]">
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="row fileupload-buttonbar">
             <div class="span7">
@@ -101,12 +101,40 @@
             </tr>
         </table>
     </form>
+    
+    <!-- modal-gallery is the modal dialog used for the image gallery -->
+<div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd" tabindex="-1">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3 class="modal-title"></h3>
+    </div>
+    <div class="modal-body"><div class="modal-image"></div></div>
+    <div class="modal-footer">
+        <a class="btn modal-download" target="_blank">
+            <i class="icon-download"></i>
+            <span>Download</span>
+        </a>
+        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
+            <i class="icon-play icon-white"></i>
+            <span>Slideshow</span>
+        </a>
+        <a class="btn btn-info modal-prev">
+            <i class="icon-arrow-left icon-white"></i>
+            <span>Previous</span>
+        </a>
+        <a class="btn btn-primary modal-next">
+            <span>Next</span>
+            <i class="icon-arrow-right icon-white"></i>
+        </a>
+    </div>
+</div>
 
           <label class="control-label"></label>
 
           <!-- Button -->
           <div class="controls">
-            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save()">Save</button>
+            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save()">Create New</button>
+            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="save()">Load Existing</button>
           </div>
         </div>
 
