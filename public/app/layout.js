@@ -12,7 +12,16 @@ app.factory('saveObject', function($routeParams) {
 	    
 	    sharedService.getSiteId = function() {
 	    	return dbLayoutObj.siteId;
-	    };	   
+	    };
+	    
+	    sharedService.update = function(dbReturnObj) {
+	    	console.log("in shared service update");
+	    	console.log(dbReturnObj);
+	    	if(dbReturnObj.containers) {
+	    		console.log("not null");
+	    		dbLayoutObj = dbReturnObj;
+	    	}
+	    };
 
 	    sharedService.updateComponents = function(oper, className, id, containerName, width) {
     		for (var i=0;i<dbLayoutObj.containers.length;i++) {

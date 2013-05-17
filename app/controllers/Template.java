@@ -23,9 +23,9 @@ public class Template extends Controller {
             Base base = new Base();
             base.siteId = form.get("siteId");
             base.templateName = form.get("templateName");    
-
+			base.bgColor = form.get("bgColor");
+			base.txtColor = form.get("txtColor");
             Base.save(base);
-		
         return ok();
     }
 	
@@ -34,11 +34,11 @@ public class Template extends Controller {
         Base base = new Base();
         LayoutJSON returnedContainer = base.parseContainer(json); 
         base.saveLayout(returnedContainer);
-        Logger.debug("nowimhere");
+        Logger.debug("saveLayout siteId:");
         Logger.debug(returnedContainer.siteId.toString());
         return ok();
     }
-//	@BodyParser.Of(Json.class)
+
 	public static Result siteSearch(String siteId) {
 		ObjectNode result = Json.newObject();
 		Base base = new Base();
@@ -49,6 +49,17 @@ public class Template extends Controller {
 			result.put("siteId", siteId);
 			result.put("templateName", templateName);
 			return ok(result);
+		}
+        
+    }
+	
+	public static Result loadLayout(String siteId) {
+		Base base = new Base();
+		Base returnedLayout = base.loadLayout(siteId);
+		if(returnedLayout == null) {
+			return badRequest();	
+		} else {
+			return ok(Json.toJson(returnedLayout));
 		}
         
     }

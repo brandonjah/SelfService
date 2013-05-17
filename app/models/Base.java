@@ -100,15 +100,20 @@ public class Base extends Model {
 		}
     }
     
-    public static boolean saveLayout(LayoutJSON returnedContainer) {
-    	DBCursor<Base> cursor = coll.find().is("siteId", returnedContainer.siteId);
+    // need to rename returned container
+    public static boolean saveLayout(LayoutJSON passedLayout) {
+    	Logger.debug("in savelayout, siteID then layout");
+    	Logger.debug(passedLayout.siteId.toString());
+    	Logger.debug(passedLayout.containers.toString());
+    	DBCursor<Base> cursor = coll.find().is("siteId", passedLayout.siteId);
     	if (cursor.hasNext()) {
     		Base dbInsertObj = cursor.next();
-    		dbInsertObj.layout = returnedContainer;
+    		dbInsertObj.layout = passedLayout;
     		coll.save(dbInsertObj);
         	return true;
     	} else {
-    		Logger.debug("no cursor next in saveLayout model");
+    		Logger.debug("no cursor next in saveLayout model, meaning no site found");
+    		// need to save in here
     		return false;
     	}
     }
@@ -123,4 +128,15 @@ public class Base extends Model {
     		return "null";
     	}
     }
+    
+    public static Base loadLayout(String siteId) {
+    	DBCursor<Base> cursor = coll.find().is("siteId", siteId);
+    	if (cursor.hasNext()) {
+    		Base dbReturnObj = cursor.next();
+        	return dbReturnObj;
+    	} else {
+    		Logger.debug("no cursor next in loadLayout model");
+    		return null;
+    	}
+    }    
 }

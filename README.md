@@ -41,4 +41,4 @@
 * view logs: heroku logs -n 200
 
 ## Angular UI Bootstrap info (needs to be changed again when updated)
-* template/progressbar/bar.html changed to /assets/app/template/progressbar/bar.html|progress.html in ui-bootstrap-0.3.0.min.js
+* find and replace : template/ with assets/app/template/ in ui-bootstrap-0.3.0.min.js

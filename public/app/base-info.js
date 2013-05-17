@@ -1,4 +1,4 @@
-app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location) {
+app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, saveObject) {
 	$scope.url = '/info';
 	$scope.submit = function() {
 //		https://github.com/blueimp/jQuery-File-Upload/wiki/API
@@ -26,13 +26,35 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location) {
 	$scope.search = function() {
 	    $http({method: 'GET', url: '/site/'+$scope.siteId}).
 	    success(function(data, status, headers, config) {
-	    	  $scope.siteId = data.siteId;
-	    	  $scope.templateName = data.templateName;
+	    	console.log(data.templateName);
+	    	  if(data.templateName == "null") {
+	    		  $scope.templateName = "no template exists for site ID " + data.siteId;
+	    	  } else {
+	    		  $scope.templateName = data.templateName;
+	    	  }
+	    	  $scope.siteId = data.siteId;	    	  
 	          $scope.success = true;
 	    }).
 	    error(function(data, status, headers, config) {
 	    	  console.log('sending site id, error');
 	    	  console.log(data);
+	          $scope.success = false;
+	    });
+	}
+	$scope.load = function() {
+	    $http({method: 'GET', url: '/load-layout/'+$scope.siteId}).
+	    success(function(data, status, headers, config) {
+	    	console.log(data);
+	    	console.log("data layout in base-info");
+	    	console.log(data.layout);
+	    	if(data.layout) {
+	    		saveObject.update(data.layout);
+	    	}
+	          $scope.success = true;
+	          $location.path('/layout/'+$scope.siteId);
+	    }).
+	    error(function(data, status, headers, config) {
+	    	alert("no layout found for site ID " + $scope.siteId);
 	          $scope.success = false;
 	    });
 	}
