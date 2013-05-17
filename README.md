@@ -4,8 +4,13 @@
 
 # Configuration notes
 * Must change java build path in project properties to prevent data binding error JSR-303
+* install homebrew
 * brew install play
 * brew install mongo
+
+#To Run Locally:
+* navigate to directory in terminal, then "play run"
+* run "mongod" in terminal
 
 ## Account details
 * No clear password stored in db
