@@ -31,9 +31,9 @@ public class Template extends Controller {
 	
 	public static Result saveLayout() {
 		JsonNode json = request().body().asJson();
-        Base base = new Base();
-        LayoutJSON returnedContainer = base.parseContainer(json); 
-        base.saveLayout(returnedContainer);
+//        Base base = new Base();
+        LayoutJSON returnedContainer = Base.parseContainer(json); 
+        Base.saveLayout(returnedContainer);
         Logger.debug("saveLayout siteId:");
         Logger.debug(returnedContainer.siteId.toString());
         return ok();
@@ -41,8 +41,8 @@ public class Template extends Controller {
 
 	public static Result siteSearch(String siteId) {
 		ObjectNode result = Json.newObject();
-		Base base = new Base();
-		String templateName = base.siteSearch(siteId);
+//		Base base = new Base();
+		String templateName = Base.siteSearch(siteId);
 		if(templateName == null) {
 			return null;	
 		} else {
@@ -54,8 +54,8 @@ public class Template extends Controller {
     }
 	
 	public static Result loadLayout(String siteId) {
-		Base base = new Base();
-		Base returnedLayout = base.loadLayout(siteId);
+//		Base base = new Base();
+		Base returnedLayout = Base.loadLayout(siteId);
 		if(returnedLayout == null) {
 			return badRequest();	
 		} else {

@@ -102,9 +102,6 @@ public class Base extends Model {
     
     // need to rename returned container
     public static boolean saveLayout(LayoutJSON passedLayout) {
-    	Logger.debug("in savelayout, siteID then layout");
-    	Logger.debug(passedLayout.siteId.toString());
-    	Logger.debug(passedLayout.containers.toString());
     	DBCursor<Base> cursor = coll.find().is("siteId", passedLayout.siteId);
     	if (cursor.hasNext()) {
     		Base dbInsertObj = cursor.next();
@@ -113,7 +110,6 @@ public class Base extends Model {
         	return true;
     	} else {
     		Logger.debug("no cursor next in saveLayout model, meaning no site found");
-    		// need to save in here
     		return false;
     	}
     }

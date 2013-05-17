@@ -28,7 +28,7 @@
 * Open a terminal in Play20StartApp directory and exec `play run`
 * Generate Scala Doc & Javadoc with exec `play app-doc` (task app-doc add in Build.scala file)
 
-## Documentation
+## Documentation for Accounts
 * Insecure Cryptography (an explanation of good web app password practices and why they're good) : http://webapp-hardening.heroku.com/insecure_crypto
 * Failing with Passwords (a presentation on issues in user authentication) : http://tersesystems.com/2012/02/17/failing-with-passwords
 * Everything you ever wanted to know about secure password reset : http://www.troyhunt.com/2012/05/everything-you-ever-wanted-to-know.html
