@@ -22,6 +22,10 @@ app.factory('saveObject', function($routeParams) {
 	    		dbLayoutObj = dbReturnObj;
 	    	}
 	    };
+	    
+	    sharedService.clear = function() {
+	    	dbLayoutObj.containers = [];
+	    };
 
 	    sharedService.updateComponents = function(oper, className, id, containerName, width) {
     		for (var i=0;i<dbLayoutObj.containers.length;i++) {

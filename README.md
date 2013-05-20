@@ -1,6 +1,7 @@
 # Based off of Play20StartApp
 # using this angular module: https://github.com/codef0rmer/angular-dragdrop
 # using this mongo wrapper: https://github.com/vznet/play-mongo-jackson-mapper
+# colorpicker: https://github.com/buberdds/angular-bootstrap-colorpicker, removed "componentPicker: '=ngModel'," from bootstrap-colorpicker-module.js to allow setting ngmodel 
 
 # Configuration notes
 * Must change java build path in project properties to prevent data binding error JSR-303

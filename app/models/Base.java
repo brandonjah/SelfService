@@ -114,14 +114,19 @@ public class Base extends Model {
     	}
     }
     
-    public static String siteSearch(String siteId) {
+    public static Base siteSearch(String siteId) {
     	DBCursor<Base> cursor = coll.find().is("siteId", siteId);
     	if (cursor.hasNext()) {
     		Base dbInsertObj = cursor.next();
-        	return dbInsertObj.templateName;
+    		Base returnSiteInfo = new Base();
+    		returnSiteInfo.siteId = dbInsertObj.siteId;
+    		returnSiteInfo.templateName = dbInsertObj.templateName;
+    		returnSiteInfo.bgColor = dbInsertObj.bgColor;
+    		returnSiteInfo.txtColor = dbInsertObj.txtColor;
+        	return returnSiteInfo;
     	} else {
     		Logger.debug("no cursor next in search model");
-    		return "null";
+    		return null;
     	}
     }
     

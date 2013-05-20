@@ -19,7 +19,6 @@ public class Template extends Controller {
     
 	public static Result save() {
 	    final DynamicForm form = form().bindFromRequest();
-	    	Logger.debug("save in controller template");
             Base base = new Base();
             base.siteId = form.get("siteId");
             base.templateName = form.get("templateName");    
@@ -42,12 +41,14 @@ public class Template extends Controller {
 	public static Result siteSearch(String siteId) {
 		ObjectNode result = Json.newObject();
 //		Base base = new Base();
-		String templateName = Base.siteSearch(siteId);
-		if(templateName == null) {
+		Base siteInfo = Base.siteSearch(siteId);
+		if(siteInfo == null) {
 			return null;	
 		} else {
 			result.put("siteId", siteId);
-			result.put("templateName", templateName);
+			result.put("templateName", siteInfo.templateName);
+			result.put("bgColor", siteInfo.bgColor);
+			result.put("txtColor", siteInfo.txtColor);
 			return ok(result);
 		}
         

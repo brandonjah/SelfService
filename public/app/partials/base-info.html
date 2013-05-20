@@ -25,12 +25,12 @@
           <br>
           	<label class="control-label" for="bgcolor">Background Color:</label>
           	<div class="controls">
-				<colorpicker input-name="bgcolor" input-class="span2" color-format="hex" ng-model="bgColor" />
+				<input colorpicker="hex" class="span2" type="text" ng-model="bgColor">
 			</div>
         <br>
           	<label class="control-label" for="txtcolor">Text Color:</label>
           	<div class="controls">
-				<colorpicker input-name="txtcolor" input-class="span2" color-format="hex" ng-model="txtColor" />
+				<input colorpicker="hex" class="span2" type="text" ng-model="txtColor">
 			</div>
         </div>
         
@@ -133,8 +133,9 @@
 
           <!-- Button -->
           <div class="controls">
-            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save()">Create New</button>
-            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load()">Load Existing</button>
+            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save()">Save Site Info</button>
+            <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew()">Create New Layout</button>
+            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load()">Load Existing Layout</button>
           </div>
         </div>
 

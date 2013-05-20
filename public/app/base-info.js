@@ -17,20 +17,27 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	    	  console.log('in success');
 	    	  console.log(data);
 	          $scope.success = true;
-	          $location.path('/layout/'+$scope.siteId);
 	        }).
 	        error(function(data){
 	          $scope.httpError = true;
 	        });
 	}
+	$scope.createNew = function() {
+		saveObject.clear();
+		layoutPage($scope.siteId);
+	}
 	$scope.search = function() {
 	    $http({method: 'GET', url: '/site/'+$scope.siteId}).
 	    success(function(data, status, headers, config) {
 	    	console.log(data.templateName);
-	    	  if(data.templateName == "null") {
+	    	  if(data.templateName == null) {
 	    		  $scope.templateName = "no template exists for site ID " + data.siteId;
 	    	  } else {
 	    		  $scope.templateName = data.templateName;
+	    		  console.log("here");
+	    		  console.log(data.bgColor);
+	    		  $scope.bgColor = data.bgColor;
+	    		  $scope.txtColor = data.txtColor;
 	    	  }
 	    	  $scope.siteId = data.siteId;	    	  
 	          $scope.success = true;
@@ -51,11 +58,14 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	    		saveObject.update(data.layout);
 	    	}
 	          $scope.success = true;
-	          $location.path('/layout/'+$scope.siteId);
+	          layoutPage($scope.siteId);
 	    }).
 	    error(function(data, status, headers, config) {
 	    	alert("no layout found for site ID " + $scope.siteId);
 	          $scope.success = false;
 	    });
+	}
+	var layoutPage = function(siteId) {
+		$location.path('/layout/'+siteId);
 	}
 });

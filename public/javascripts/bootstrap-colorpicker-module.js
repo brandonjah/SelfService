@@ -51,13 +51,12 @@ angular.module('colorpicker.module', [])
       replace: true,
       transclude: false,
       scope: {
-        componentPicker: '=ngModel',
         inputName: '@inputName',
         inputClass: '@inputClass',
         colorFormat: '@colorFormat'
       },
       template: '<div class="input-append color" data-color="rgb(0, 0, 0)" data-color-format="">' +
-        '<input type="text" class="{{ inputClass }}" name="{{ inputName }}" ng-model="componentPicker" value="" />' +
+        '<input type="text" class="{{ inputClass }}" name="{{ inputName }}" ng-model="modelVar" value="" />' +
         '<span class="add-on"><i style="background-color: rgb(0, 0, 0)"></i></span>' +
         '</div>',
 
