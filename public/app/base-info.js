@@ -1,11 +1,5 @@
-app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, saveObject) {
+app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, saveObject) {    
 	$scope.url = '/info';
-	$scope.submit = function() {
-//		https://github.com/blueimp/jQuery-File-Upload/wiki/API
-//		https://github.com/blueimp/jQuery-File-Upload/wiki/Options
-//		https://github.com/blueimp/jQuery-File-Upload/wiki
-		alert('not yet implemented');
-	}
 	$scope.save = function() {
 		$http.post($scope.url, { 
 			"siteId" : $scope.siteId,
@@ -29,22 +23,18 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	$scope.search = function() {
 	    $http({method: 'GET', url: '/site/'+$scope.siteId}).
 	    success(function(data, status, headers, config) {
-	    	console.log(data.templateName);
-	    	  if(data.templateName == null) {
-	    		  $scope.templateName = "no template exists for site ID " + data.siteId;
-	    	  } else {
-	    		  $scope.templateName = data.templateName;
-	    		  console.log("here");
-	    		  console.log(data.bgColor);
-	    		  $scope.bgColor = data.bgColor;
-	    		  $scope.txtColor = data.txtColor;
-	    	  }
+    		  $scope.templateName = data.templateName;
+    		  $scope.bgColor = data.bgColor;
+    		  $scope.txtColor = data.txtColor;
 	    	  $scope.siteId = data.siteId;	    	  
 	          $scope.success = true;
 	    }).
 	    error(function(data, status, headers, config) {
-	    	  console.log('sending site id, error');
-	    	  console.log(data);
+	    	$scope.templateName = "";
+	    	$scope.bgColor = "";
+	    	$scope.txtColor = "";
+//	    	  console.log('sending site id, error');
+//	    	  console.log(data);
 	          $scope.success = false;
 	    });
 	}
@@ -68,4 +58,12 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	var layoutPage = function(siteId) {
 		$location.path('/layout/'+siteId);
 	}
+	
+	//File Uploader
+	$scope.fileList = [];
+    $scope.addButtonClicked = function(){
+        var numFiles = $scope.fileList.length;
+        $scope.fileList.push({name: ('file' + numFiles)});
+    }
+    $scope.fileModel = {};
 });

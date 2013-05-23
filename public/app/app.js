@@ -8,3 +8,44 @@ app.config(['$routeProvider', '$httpProvider', 'fileUploadProvider',
 	      otherwise({redirectTo: '/info'});
 	}
 ]);
+
+app.directive('fileDirective', function() {
+    return {
+        template: '<li>{{file.name}}</li>',
+        replace: true,
+        restrict: 'E',
+//        scope: {
+//            filename: '=ngModel'
+//        },
+
+        link: function(scope, elm, attrs) {
+
+            $(elm).fileupload({
+                dataType: 'json',
+                paramName: 'files[]',
+                url: '/test',
+                add: function(e, data) {
+                	alert('in add');
+                },
+                progressall: function(e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    scope.$apply(function() {
+                        scope.progress = progress;
+                    });
+
+                },
+
+                done: function(e, data) {
+
+                    $.each(data.result, function(index, file) {
+                        scope.$apply(function() {
+                            scope.filename = file.name;
+                        });
+                    })
+
+                }
+            });
+        }
+
+    }
+});

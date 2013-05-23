@@ -21,7 +21,7 @@ public class Template extends Controller {
 	    final DynamicForm form = form().bindFromRequest();
             Base base = new Base();
             base.siteId = form.get("siteId");
-            base.templateName = form.get("templateName");    
+            base.templateName = form.get("templateName");
 			base.bgColor = form.get("bgColor");
 			base.txtColor = form.get("txtColor");
             Base.save(base);
@@ -62,6 +62,12 @@ public class Template extends Controller {
 		} else {
 			return ok(Json.toJson(returnedLayout));
 		}
+        
+    }
+	
+	public static Result fileUpload() {
+		Logger.debug("in controller fileUpload");
+		return ok();
         
     }
 }
