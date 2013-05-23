@@ -2,6 +2,8 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.io.File;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
 
@@ -11,6 +13,8 @@ import play.Logger;
 import play.libs.Json;
 import play.data.DynamicForm;
 import play.mvc.Controller;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.Security;
 
@@ -66,8 +70,19 @@ public class Template extends Controller {
     }
 	
 	public static Result fileUpload() {
-		Logger.debug("in controller fileUpload");
-		return ok();
-        
+		  MultipartFormData body = request().body().asMultipartFormData();
+		  FilePart picture = body.getFile("picture");
+		  if (picture != null) {
+		    String fileName = picture.getFilename();
+		    String contentType = picture.getContentType(); 
+		    File file = picture.getFile();
+		    Logger.debug("file upload info:");
+		    Logger.debug(contentType);
+		    Logger.debug(fileName);
+		    return ok("File uploaded");
+		  } else {
+		    flash("error", "Missing file");
+		    return redirect(routes.Application.index());    
+		  }
     }
 }

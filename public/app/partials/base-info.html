@@ -33,16 +33,6 @@
 				<input colorpicker="hex" class="span2" type="text" ng-model="txtColor">
 			</div>
         </div>
-        
-  <div class="control-group">
-      <input id="fileupload" type="file" name="files[]" data-url="/" multiple>
-      <ul>
-          <file-directive ng-model="fileModel" ng-repeat="file in fileList"></file-directive>
-      </ul>
-<br>
-  
-  <button ng-click='addButtonClicked()'>Add File</button>
-    </div>
 
           <label class="control-label"></label>
 
@@ -51,6 +41,10 @@
             <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save()">Save Site Info</button>
             <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew()">Create New Layout</button>
             <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load()">Load Existing Layout</button>
+          </div>
+          
+          <div class="controls mt15px">
+          	<a href="#/upload">Upload Files</a>
           </div>
         </div>
 

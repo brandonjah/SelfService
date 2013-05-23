@@ -2,7 +2,7 @@
 # using this angular module: https://github.com/codef0rmer/angular-dragdrop
 # using this mongo wrapper: https://github.com/vznet/play-mongo-jackson-mapper
 # colorpicker: https://github.com/buberdds/angular-bootstrap-colorpicker, removed "componentPicker: '=ngModel'," from bootstrap-colorpicker-module.js to allow setting ngmodel 
-# file uploader: https://github.com/blueimp/jQuery-File-Upload
+# file uploader: http://twilson63.github.io/ngUpload/
 
 # Configuration notes
 * Must change java build path in project properties to prevent data binding error JSR-303

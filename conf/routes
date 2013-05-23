@@ -44,4 +44,4 @@ GET		/site/:siteId				controllers.Template.siteSearch(siteId:String)
 #Site search
 GET		/load-layout/:siteId		controllers.Template.loadLayout(siteId:String)
 #File upload
-GET		/file-upload				controllers.Template.fileUpload()
+POST	/file-upload				controllers.Template.fileUpload()

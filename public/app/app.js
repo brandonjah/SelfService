@@ -1,51 +1,26 @@
-var app = angular.module('LandingPage', ['ngDragDrop','ui.bootstrap','colorpicker.module', 'blueimp.fileupload']);
+var app = angular.module('LandingPage', ['ngDragDrop','ui.bootstrap','colorpicker.module', 'ngUpload']);
 
-app.config(['$routeProvider', '$httpProvider', 'fileUploadProvider',
+app.config(['$routeProvider', '$httpProvider',
     function($routeProvider) {
 	  $routeProvider.
 	      when('/layout/:siteId', {templateUrl: 'assets/app/partials/layout.html', controller: this.containerCtrl}).
 	      when('/info', {templateUrl: 'assets/app/partials/base-info.html', controller: this.BaseInfoCtrl}).
+	      when('/upload', {templateUrl: 'assets/app/partials/upload.html', controller: this.UploadCtrl}).
 	      otherwise({redirectTo: '/info'});
 	}
 ]);
 
-app.directive('fileDirective', function() {
-    return {
-        template: '<li>{{file.name}}</li>',
-        replace: true,
-        restrict: 'E',
-//        scope: {
-//            filename: '=ngModel'
-//        },
-
-        link: function(scope, elm, attrs) {
-
-            $(elm).fileupload({
-                dataType: 'json',
-                paramName: 'files[]',
-                url: '/test',
-                add: function(e, data) {
-                	alert('in add');
-                },
-                progressall: function(e, data) {
-                    var progress = parseInt(data.loaded / data.total * 100, 10);
-                    scope.$apply(function() {
-                        scope.progress = progress;
-                    });
-
-                },
-
-                done: function(e, data) {
-
-                    $.each(data.result, function(index, file) {
-                        scope.$apply(function() {
-                            scope.filename = file.name;
-                        });
-                    })
-
-                }
-            });
-        }
-
-    }
+app.controller('UploadCtrl', function($scope) {
+	//File Uploader
+	$scope.results = function(content, completed) {
+	      if (completed && content.length > 0) {
+	    	  console.log('completed and content on file upload');
+	    	  console.log(content); // process content
+	      } else {
+	    	  console.log('failed check in file upload');
+	    	  console.log(content);
+	        // 1. ignore content and adjust your model to show/hide UI snippets; or
+	        // 2. show content as an _operation progress_ information
+	      }
+	    }
 });

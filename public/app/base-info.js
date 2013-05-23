@@ -33,8 +33,6 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	    	$scope.templateName = "";
 	    	$scope.bgColor = "";
 	    	$scope.txtColor = "";
-//	    	  console.log('sending site id, error');
-//	    	  console.log(data);
 	          $scope.success = false;
 	    });
 	}
@@ -58,12 +56,4 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	var layoutPage = function(siteId) {
 		$location.path('/layout/'+siteId);
 	}
-	
-	//File Uploader
-	$scope.fileList = [];
-    $scope.addButtonClicked = function(){
-        var numFiles = $scope.fileList.length;
-        $scope.fileList.push({name: ('file' + numFiles)});
-    }
-    $scope.fileModel = {};
 });
