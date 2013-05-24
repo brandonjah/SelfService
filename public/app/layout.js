@@ -20,6 +20,9 @@ app.factory('saveObject', function($routeParams) {
 	    	if(dbReturnObj.containers) {
 	    		console.log("not null");
 	    		dbLayoutObj = dbReturnObj;
+	    	} else {
+	    		console.log("null");
+	    		dbLayoutObj.containers = [];
 	    	}
 	    };
 	    

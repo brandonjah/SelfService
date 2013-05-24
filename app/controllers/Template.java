@@ -37,8 +37,6 @@ public class Template extends Controller {
 //        Base base = new Base();
         LayoutJSON returnedContainer = Base.parseContainer(json); 
         Base.saveLayout(returnedContainer);
-        Logger.debug("saveLayout siteId:");
-        Logger.debug(returnedContainer.siteId.toString());
         return ok();
     }
 
@@ -62,8 +60,11 @@ public class Template extends Controller {
 //		Base base = new Base();
 		Base returnedLayout = Base.loadLayout(siteId);
 		if(returnedLayout == null) {
+			Logger.debug("returnedLayout is null");
 			return badRequest();	
 		} else {
+			Logger.debug("returnedLayout ok");
+			Logger.debug(returnedLayout.siteId);
 			return ok(Json.toJson(returnedLayout));
 		}
         

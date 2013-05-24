@@ -103,41 +103,42 @@ public class Base extends Model {
     // need to rename returned container
     public static boolean saveLayout(LayoutJSON passedLayout) {
     	DBCursor<Base> cursor = coll.find().is("siteId", passedLayout.siteId);
-    	if (cursor.hasNext()) {
+    	while (cursor.hasNext()) {
     		Base dbInsertObj = cursor.next();
     		dbInsertObj.layout = passedLayout;
     		coll.save(dbInsertObj);
         	return true;
-    	} else {
-    		Logger.debug("no cursor next in saveLayout model, meaning no site found");
-    		return false;
-    	}
+    	} //else {
+//    		Logger.debug("no cursor next in saveLayout model, meaning no site found");
+//    		return false;
+//    	}
+    	return false;
     }
     
     public static Base siteSearch(String siteId) {
-    	DBCursor<Base> cursor = coll.find().is("siteId", siteId);
-    	if (cursor.hasNext()) {
-    		Base dbInsertObj = cursor.next();
-    		Base returnSiteInfo = new Base();
-    		returnSiteInfo.siteId = dbInsertObj.siteId;
-    		returnSiteInfo.templateName = dbInsertObj.templateName;
-    		returnSiteInfo.bgColor = dbInsertObj.bgColor;
-    		returnSiteInfo.txtColor = dbInsertObj.txtColor;
-        	return returnSiteInfo;
-    	} else {
-    		Logger.debug("no cursor next in search model");
-    		return null;
-    	}
+    	DBCursor<Base> cursor = coll.find(DBQuery.is("siteId", siteId));
+		Base returnSiteInfo = new Base();
+			while (cursor.hasNext()) {
+	    		Base dbInsertObj = cursor.next();
+	    		returnSiteInfo.siteId = dbInsertObj.siteId;
+	    		returnSiteInfo.templateName = dbInsertObj.templateName;
+	    		returnSiteInfo.bgColor = dbInsertObj.bgColor;
+	    		returnSiteInfo.txtColor = dbInsertObj.txtColor;
+	        	Logger.debug("found site in sitesearch");
+    		}
+    		return returnSiteInfo;
     }
     
     public static Base loadLayout(String siteId) {
-    	DBCursor<Base> cursor = coll.find().is("siteId", siteId);
-    	if (cursor.hasNext()) {
-    		Base dbReturnObj = cursor.next();
-        	return dbReturnObj;
-    	} else {
-    		Logger.debug("no cursor next in loadLayout model");
-    		return null;
-    	}
+    	DBCursor<Base> cursor = coll.find(DBQuery.is("siteId", siteId));
+    	return cursor.next();
+//    	if (cursor.hasNext()) {
+////    		Base dbReturnObj = cursor.next();
+//        	return cursor.next();
+//    	} else {
+//    		Logger.debug("no cursor next in loadLayout model");
+//    		return null;
+//    	}
+
     }    
 }
