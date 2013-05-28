@@ -57,9 +57,8 @@ public class Template extends Controller {
     }
 	
 	public static Result loadLayout(String siteId) {
-//		Base base = new Base();
 		Base returnedLayout = Base.loadLayout(siteId);
-		if(returnedLayout == null) {
+		if(returnedLayout.siteId == null) {
 			Logger.debug("returnedLayout is null");
 			return badRequest();	
 		} else {

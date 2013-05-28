@@ -108,10 +108,7 @@ public class Base extends Model {
     		dbInsertObj.layout = passedLayout;
     		coll.save(dbInsertObj);
         	return true;
-    	} //else {
-//    		Logger.debug("no cursor next in saveLayout model, meaning no site found");
-//    		return false;
-//    	}
+    	} 
     	return false;
     }
     
@@ -131,14 +128,10 @@ public class Base extends Model {
     
     public static Base loadLayout(String siteId) {
     	DBCursor<Base> cursor = coll.find(DBQuery.is("siteId", siteId));
-    	return cursor.next();
-//    	if (cursor.hasNext()) {
-////    		Base dbReturnObj = cursor.next();
-//        	return cursor.next();
-//    	} else {
-//    		Logger.debug("no cursor next in loadLayout model");
-//    		return null;
-//    	}
-
+    	Base base = new Base();
+    	while(cursor.hasNext()) {
+    		return cursor.next();
+    	}
+    	return base;
     }    
 }
