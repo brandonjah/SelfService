@@ -15,6 +15,7 @@ object ApplicationBuild extends Build {
       "com.typesafe" %% "play-plugins-mailer" % "2.1.0",
       "org.mindrot" % "jbcrypt" % "0.3m",
       "net.vz.mongodb.jackson" %% "play-mongo-jackson-mapper" % "1.1.0" ,
+      "com.amazonaws" % "aws-java-sdk" % "1.3.11",
       javaEbean
     )
 

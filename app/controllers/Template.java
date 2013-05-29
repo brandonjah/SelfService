@@ -9,6 +9,7 @@ import org.codehaus.jackson.node.ObjectNode;
 
 import models.Base;
 import models.Base.LayoutJSON;
+import models.S3File;
 import play.Logger;
 import play.libs.Json;
 import play.data.DynamicForm;
@@ -79,6 +80,11 @@ public class Template extends Controller {
 		    Logger.debug("file upload info:");
 		    Logger.debug(contentType);
 		    Logger.debug(fileName);
+            S3File s3File = new S3File();
+            s3File.name = fileName;
+            s3File.file = file;
+            s3File.save();
+
 		    return ok("File uploaded");
 		  } else {
 		    flash("error", "Missing file");
