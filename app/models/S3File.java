@@ -9,6 +9,9 @@ import plugins.S3Plugin;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+
+import net.vz.mongodb.jackson.ObjectId;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,7 +20,7 @@ import java.util.UUID;
 @Entity
 public class S3File extends Model {
 
-    @Id
+    @ObjectId @Id
     public UUID id;
 
     private String bucket;
@@ -44,8 +47,7 @@ public class S3File extends Model {
         else {
             this.bucket = S3Plugin.s3Bucket;
             
-            super.save(); // assigns an id
-
+//            super.save(); // assigns an id
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, getActualFileName(), file);
             putObjectRequest.withCannedAcl(CannedAccessControlList.PublicRead); // public for all
             S3Plugin.amazonS3.putObject(putObjectRequest); // upload file

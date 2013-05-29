@@ -3,6 +3,7 @@
 * using this mongo wrapper: https://github.com/vznet/play-mongo-jackson-mapper
 * colorpicker: https://github.com/buberdds/angular-bootstrap-colorpicker, removed "componentPicker: '=ngModel'," from bootstrap-colorpicker-module.js to allow setting ngmodel 
 * file uploader: http://twilson63.github.io/ngUpload/ with s3 storage: https://devcenter.heroku.com/articles/using-amazon-s3-for-file-uploads-with-java-and-play-2 (using classpath to store keys)
+here is how to set env variables on macosx mountain lion: http://stackoverflow.com/questions/135688/setting-environment-variables-in-os-x/588442#588442 (I also set it in my ~/.profile)
 
 # Configuration notes
 * Must change java build path in project properties to prevent data binding error JSR-303
