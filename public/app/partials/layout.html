@@ -20,11 +20,11 @@
 			<li class="active"><a href="#">Content</a></li>
 				<li class="dropdown" ng-controller="productCtrl">
 				  <a class="dropdown-toggle">
-				    Add Content
+				    {{selectedProduct}}
 				  </a>
 				  <ul class="dropdown-menu">
 				    <li ng-repeat="choice in items">
-				      <a>{{choice}}</a>
+				      <a ng-click="selection(choice)">{{choice}}</a>
 				    </li>
 				  </ul>
 				</li>

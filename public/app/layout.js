@@ -163,12 +163,16 @@ app.controller('headerCtrl', function($scope) {
 	                ];
 });
 app.controller('productCtrl', function($scope) {
+	$scope.selectedProduct = "Add Content";
 	  $scope.items = [
 	                  "Full Widget",
 	                  "Full Header",
 	                  "Full Text",
 	                  "Widget + 3/4 Image"
 	                ];
+	  $scope.selection = function(choice) {
+		  $scope.selectedProduct = choice;
+	  };
 });
 app.controller('footerCtrl', function($scope) {
 	  $scope.items = [
