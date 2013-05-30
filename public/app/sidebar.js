@@ -1,14 +1,42 @@
 app.controller('sidebarContainerCtrl', function($scope, saveObject) {
+	$scope.isCollapsed = true;
 	$scope.containers = saveObject.getLayout();
 });
 
-app.controller('headerCtrl', function($scope) {
+app.controller('headerCtrl', function($scope, $dialog) {
 	  $scope.items = [
 	                  "Full Widget",
 	                  "Full Header",
 	                  "Full Text",
 	                  "Widget + 3/4 Image"
 	                ];
+	  
+	  $scope.opts = {
+			    backdrop: true,
+			    keyboard: true,
+			    backdropClick: true,
+			    templateUrl: '/assets/app/partials/sidebar-modal.html',
+			    controller: 'headerModalCtrl',
+			    resolve:       {componentClassName: function() {return angular.copy($scope.widget);}}
+			  };
+
+	  $scope.openProperties = function(){
+	    var d = $dialog.dialog($scope.opts);
+	    d.open().then(function(result){
+	      if(result)
+	      {
+	    	  console.log("here");
+	      }
+	    });
+	  };
+});
+
+app.controller('headerModalCtrl', function($scope, dialog){
+	$scope.result = {};  
+
+	  $scope.close = function(result){
+	    dialog.close(result);
+	  };
 });
 
 
@@ -16,10 +44,12 @@ app.controller('productCtrl', function($scope, saveObject) {
 	$scope.setContainer = function(container) {
 		console.log("setContainer");
 		console.log(container);
-		console.log($scope.className);
+		console.log($scope.components);
 		container.className = $scope.className;
+		container.components = $scope.components;
 		saveObject.sidebarUpdateContainer(container);
 	}
+	$scope.components = [];
 	$scope.selectedProduct = "Add Content";
 	$scope.widget = false;
 	  $scope.widgetTabs = {
@@ -52,22 +82,9 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                  {"text":"Hotel","enabled":"h","className":"hotel"},
 	                  {"text":"Attraction","enabled":"a","className":"attraction"},
 	                  {"text":"Deals","enabled":"d","className":"deal"}
-//	                  {"text":"Full Widget","enabled":"w","className":"fw"},
-//	                  {"text":"Full Image","enabled":"i","className":"fi"},
-//	                  {"text":"Full Text","enabled":"t","className":"ft"},
-//	                  {"text":"Widget + 3/4 Image","enabled":"wi","className":"w34i"},
-//	                  {"text":"Widget + 1/4 Image","enabled":"wi","className":"w14i"},
-//	                  {"text":"Widget + 1/2 Image","enabled":"wi","className":"w12i"},
-//	                  {"text":"Widget + 3/4 Text","enabled":"wt","className":"w34t"},
-//	                  {"text":"Widget + 1/4 Text","enabled":"wt","className":"w14t"},
-//	                  {"text":"Widget + 1/2 Text","enabled":"wt","className":"w12t"},
-//	                  {"text":"Text + 3/4 Image","enabled":"ti","className":"t34i"},
-//	                  {"text":"Text + 1/4 Image","enabled":"ti","className":"t14i"},
-//	                  {"text":"Hotel","enabled":"h","className":"hotel"},
-//	                  {"text":"Attraction","enabled":"a","className":"attraction"},
-//	                  {"text":"Deals","enabled":"d","className":"deal"}
 	                ];
 	  $scope.selection = function(choice) {
+		  $scope.components = [];
 		  $scope.selectedProduct = choice.text;
 		  $scope.className = choice.className;
 		  $scope.widget = false;
@@ -80,33 +97,42 @@ app.controller('productCtrl', function($scope, saveObject) {
 		  {
 		  case "w":
 			  $scope.widget = true;
+			  $scope.components.push({"type":"widget"});
 		    break;
 		  case "i":
 			  $scope.image = true;
+			  $scope.components.push({"type":"image"});
 		    break;
 		  case "t":
 			  $scope.text = true;
+			  $scope.components.push({"type":"text"});
 		    break;
 		  case "wi":
 			  $scope.image = true;
 			  $scope.widget = true;
+			  $scope.components.push({"type":"image"},{"type":"widget"});
 		    break;
 		  case "wt":
 			  $scope.text = true;
 			  $scope.widget = true;
+			  $scope.components.push({"type":"text"},{"type":"widget"});
 		    break;
 		  case "ti":
 			  $scope.text = true;
 			  $scope.image = true;
+			  $scope.components.push({"type":"text"},{"type":"image"});
 		    break;
 		  case "h":
 				$scope.hotel = true;
+				$scope.components.push({"type":"hotel"});
 		    break;
 		  case "a":
 				$scope.attraction = true;
+				$scope.components.push({"type":"attraction"});
 		    break;
 		  case "d":
 				$scope.deal = true;
+				$scope.components.push({"type":"deal"});
 		    break;
 		  }
 	  };
