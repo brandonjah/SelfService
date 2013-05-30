@@ -1,20 +1,71 @@
-<section ng-controller="productCtrl" id="products">
-  <h3 class="ui-widget-header">Components</h3>
-  <div id="catalog">
-    <div data-drop="true">
-      <div>
-		<span ng-repeat='item in startcomponents' data-drag="true" class="{{item.className}}" jqyoui-draggable="{index: {{$index}},placeholder:'keep'}" data-jqyoui-options="{revert: 'invalid'}"></span>
-      </div>
-    </div>
+<section class="row-fluid row" id="products">
+
+	<!-- Start Sidebar -->
+      <div class="well sidebar-nav-fixed">
+        <ul class="nav nav-list">
+
+			<li class="nav-header">Sidebar</li>
+			<li class="active"><a href="#">Header</a></li>
+				<li class="dropdown" ng-controller="headerCtrl">
+				  <a class="dropdown-toggle">
+				    Add Content
+				  </a>
+				  <ul class="dropdown-menu">
+				    <li ng-repeat="choice in items">
+				      <a>{{choice}}</a>
+				    </li>
+				  </ul>
+				</li>
+			
+			<li class="active"><a href="#">Content</a></li>
+				<li class="dropdown" ng-controller="productCtrl">
+				  <a class="dropdown-toggle">
+				    Add Content
+				  </a>
+				  <ul class="dropdown-menu">
+				    <li ng-repeat="choice in items">
+				      <a>{{choice}}</a>
+				    </li>
+				  </ul>
+				</li>
+			<li class="active"><a href="#">Footer</a></li>
+				<li class="dropdown" ng-controller="footerCtrl">
+				  <a class="dropdown-toggle">
+				    Add Content
+				  </a>
+				  <ul class="dropdown-menu">
+				    <li ng-repeat="choice in items">
+				      <a>{{choice}}</a>
+				    </li>
+				  </ul>
+				</li>
+        </ul>
+      </div><!--/.well -->
+	<!-- End Sidebar -->
+	
+	
+	<div ng-controller="componentCtrl">
+ 	 <h3 class="ui-widget-header">Components</h3>
+	  <div id="catalog">
+	    <div data-drop="true">
+	      <div>
+			<span ng-repeat='item in startcomponents' data-drag="true" class="{{item.className}}" jqyoui-draggable="{index: {{$index}},placeholder:'keep'}" data-jqyoui-options="{revert: 'invalid'}"></span>
+	      </div>
+	    </div>
+	  </div>
   </div>
+  
+  
 </section>
+
+
 <div ng-controller="containerCtrl" id="layoutContainer">
 	<a ng-repeat="btn in buttons" ng-click="addContainer(btn.name)" href="javascript:void(0)" class="btn btn-success btn-small m5"><i class="icon-white icon-plus-sign"></i> Add {{btn.name}}</a>
 <section>
 	<div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content'>{{item.id}}<br/>
 	<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delContainer(item)"><i class="icon-white icon-remove-sign"></i></a>
 		<section class='h150' ng-controller="componentCtrl" data-drop='true' jqyoui-droppable="{onDrop: 'dropCallback'}">
-			<span ng-repeat='thing in item.components' class="{{thing.className}}" ng-dblclick="openProperties(thing.className)">
+			<span ng-repeat='thing in item.components' class="{{thing.className}}" ng-dblclick="openProperties(thing)">
 				<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delComponent(thing)"><i class="icon-white icon-remove-sign"></i></a>
 			</span>
 		</section>

@@ -52,6 +52,8 @@ public class Base extends Model {
 	    	public Integer id;  
 	    	public String className;
 	    	public String width;
+//	    	@ObjectId @Id
+//	        public String fileId;
 	    } 
 	    //used to prevent jackson error
 	    public LayoutJSON() {

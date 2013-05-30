@@ -1,8 +1,8 @@
 app.factory('saveObject', function($routeParams) {
 	    var sharedService = {};
 	    var dbLayoutObj = [];
-	    dbLayoutObj.containers = [];
-    	var layoutCount = 0;
+	    dbLayoutObj.containers = [{"id":"Header0"},{"id":"Product1"},{"id":"Footer2"}];
+    	var containerCount = 3;
     	var componentCount = 0;
     	dbLayoutObj.siteId = $routeParams.siteId;
 	    
@@ -44,17 +44,21 @@ app.factory('saveObject', function($routeParams) {
     					}
     				}
     			}
+    		
+    		sharedService.updateComponentProperties = function(newComponent) {
+    			//@TODO find component by id then replace it newComponent
+    		}
 	    };
 
 	    sharedService.updateContainers = function(id, oper) {
 	    	if(oper == 'add') {
-	    		dbLayoutObj.containers.push({'id':(id+layoutCount),'components':[]});
-				layoutCount++;
+	    		dbLayoutObj.containers.push({'id':(id+containerCount),'components':[]});
+	    		containerCount++;
 	    	} else if (oper == 'del') {
 	    		for (var i = 0; i < dbLayoutObj.containers.length; i++) {
 	    			if(id == dbLayoutObj.containers[i].id) {
 	    				dbLayoutObj.containers.splice(i, 1);
-	    				layoutCount--;
+	    				containerCount--;
 	    			}
 	    		}
 	    	}
@@ -93,31 +97,35 @@ app.controller('componentCtrl', function($scope, $dialog, saveObject) {
 	$scope.dropCallback = function(event, ui) {
 		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id, null, componentWidth);
 	};
-	  var componentClassName = "something";
+	  var componentClassName;
 	  $scope.opts = {
 	    backdrop: true,
 	    keyboard: true,
 	    backdropClick: true,
 	    templateUrl: '/assets/app/partials/properties.html',
-	    controller: 'propertiesModalController',
+	    controller: 'propertiesModalCtrl',
 	    resolve:       {componentClassName: function() {return angular.copy($scope.widget);}}
 	  };
 
 	  $scope.openProperties = function(viewComponent){
-	    if(viewComponent == "componentWdgt") {
+	    if(viewComponent.className == "componentWdgt") {
 		  	  $scope.widget = "Widget";
-		    } else if(viewComponent == "componentImg") {
+		    } else if(viewComponent.className == "componentImg") {
 		  	  $scope.widget = "Image";
-		    } else if(viewComponent == "componentTxt") {
+		    } else if(viewComponent.className == "componentTxt") {
 		  	  $scope.widget = "Text";
 		    } else {
-		    	$scope.widget = "Something Else";
+		    	$scope.widget = "somethingElse";
 		    }
 	    var d = $dialog.dialog($scope.opts);
 	    d.open().then(function(result){
 	      if(result)
 	      {
+	    	  console.log(viewComponent);
 	        componentWidth = result.radioModel;
+	        viewComponent.width = result.radioModel;
+	        saveObject.updateComponentProperties(viewComponent);
+	        //$scope.item.id
 	      }
 	    });
 	  };
@@ -127,22 +135,50 @@ function CollapseCtrl($scope) {
 	  $scope.isCollapsed = true;
 	}
 
-app.controller('propertiesModalController', function($scope, dialog, componentClassName){
+app.controller('propertiesModalCtrl', function($scope, dialog, componentClassName){
 	$scope.widget = componentClassName;
 	$scope.updateWidget = function(viewComponent) {
-
+		console.log("update Widget: ");
+		console.log(viewComponent);
 	};
 	$scope.result = {};  
 	$scope.result.radioModel = 'Third';
 
 	  $scope.close = function(result){
+		//result.radioModel
 	    dialog.close(result);
 	  };
 });
 
-app.controller('productCtrl', function($scope) {
+app.controller('componentCtrl', function($scope) {
 	$scope.startcomponents = [{'className': 'componentWdgt'},{'className': 'componentImg'},{'className': 'componentTxt'}];
 });
+
+app.controller('headerCtrl', function($scope) {
+	  $scope.items = [
+	                  "Full Widget",
+	                  "Full Header",
+	                  "Full Text",
+	                  "Widget + 3/4 Image"
+	                ];
+});
+app.controller('productCtrl', function($scope) {
+	  $scope.items = [
+	                  "Full Widget",
+	                  "Full Header",
+	                  "Full Text",
+	                  "Widget + 3/4 Image"
+	                ];
+});
+app.controller('footerCtrl', function($scope) {
+	  $scope.items = [
+	                  "Full Widget",
+	                  "Full Header",
+	                  "Full Text",
+	                  "Widget + 3/4 Image"
+	                ];
+});
+
 
 app.controller('submitCtrl', function($scope, $http, saveObject) {
 	$scope.url = '/save-layout';
@@ -167,53 +203,3 @@ app.controller('submitCtrl', function($scope, $http, saveObject) {
 			
 	};
 });
-
-app.directive('ckEditor', function() {
-	  return {
-	    require: '?ngModel',
-	    link: function(scope, elm, attr, ngModel) {
-	      var ck = CKEDITOR.replace(elm[0],
-	            {
-	                toolbar_Full:
-	                [
-	                { name: 'document', items : [] },
-	                { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
-	                { name: 'editing', items : [ 'Find','Replace','-','SpellChecker', 'Scayt' ] },
-	                { name: 'forms', items : [] },
-	                { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript' ] },
-	                { name: 'paragraph', items : [
-	                'NumberedList','BulletedList','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
-	                { name: 'links', items : [] },
-	                { name: 'insert', items : [ 'SpecialChar' ] },
-	                '/',
-	                { name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
-	                { name: 'colors', items : [] },
-	                { name: 'tools', items : [ 'Maximize' ] }
-	                ]
-	                ,
-	                height: '290px',
-	                width: '99%'
-	            }
-	    );
-
-	      if (!ngModel) return;
-
-	      //loaded didn't seem to work, but instanceReady did
-	      //I added this because sometimes $render would call setData before the ckeditor was ready
-	      ck.on('instanceReady', function() {
-	        ck.setData(ngModel.$viewValue);
-	      });
-
-	      ck.on('pasteState', function() {
-	        scope.$apply(function() {
-	          ngModel.$setViewValue(ck.getData());
-	        });
-	      });
-
-	      ngModel.$render = function(value) {
-	        ck.setData(ngModel.$viewValue);
-	      };
-
-	    }
-	  };
-	});
