@@ -19,7 +19,7 @@
 			
 			
 			
-			<li class="active"><a href="#">Content</a></li>
+			<li class="active mt15px"><a href="#">Content</a></li>
 				<li class="dropdown" ng-controller="productCtrl">
 				  <a class="dropdown-toggle">
 				    {{selectedProduct}}
@@ -29,22 +29,23 @@
 				      <a ng-click="selection(choice)">{{choice.text}}</a>
 				    </li>
 				  </ul>
-				  <input type="text" placeholder="text" class="input-small" ng-hide="!text" required>
+				  <input type="text" placeholder="text content" class="input-small" ng-hide="!text" required>
+				  <input type="text" placeholder="hotel ids" class="input-small" ng-hide="!hotel" required>
 				  
-						<div class="btn-group" ng-hide="!widget">
+						<div class="" ng-hide="!widget">
 							<h5>Enabled Tabs</h5>
-						    <button type="button" class="btn btn-primary" ng-model="checkModel.hotel" btn-checkbox>Hotel</button>
-						    <button type="button" class="btn btn-primary" ng-model="checkModel.deal" btn-checkbox>Deal</button>
-						    <button type="button" class="btn btn-primary" ng-model="checkModel.car" btn-checkbox>Car</button>
-						    <button type="button" class="btn btn-primary" ng-model="checkModel.flight" btn-checkbox>Flight</button>
-						    <button type="button" class="btn btn-primary" ng-model="checkModel.ticket" btn-checkbox>Ticket</button>
+						    <button type="button" class="btn w75 displayBlock btn-primary" ng-model="checkModel.hotel" btn-checkbox>Hotel</button>
+						    <button type="button" class="btn w75 displayBlock btn-primary" ng-model="checkModel.deal" btn-checkbox>Deal</button>
+						    <button type="button" class="btn w75 displayBlock btn-primary" ng-model="checkModel.car" btn-checkbox>Car</button>
+						    <button type="button" class="btn w75 displayBlock btn-primary" ng-model="checkModel.flight" btn-checkbox>Flight</button>
+						    <button type="button" class="btn w75 displayBlock btn-primary" ng-model="checkModel.ticket" btn-checkbox>Ticket</button>
 						</div>
 				</li>
 				
 				
 				
 				
-			<li class="active"><a href="#">Footer</a></li>
+			<li class="active mt15px"><a href="#">Footer</a></li>
 				<li class="dropdown" ng-controller="footerCtrl">
 				  <a class="dropdown-toggle">
 				    Add Content
