@@ -1,6 +1,9 @@
 app.controller('sidebarContainerCtrl', function($scope, saveObject) {
 	$scope.isCollapsed = true;
 	$scope.containers = saveObject.getLayout();
+	$scope.addContainer = function() {
+		saveObject.updateContainers("Product", 'add');
+	};
 });
 
 app.controller('headerCtrl', function($scope, $dialog) {
@@ -42,7 +45,7 @@ app.controller('headerModalCtrl', function($scope, dialog){
 
 app.controller('productCtrl', function($scope, saveObject) {
 	//start modal
-	$scope.open = function () {
+	$scope.openModal = function () {
 	    $scope.shouldBeOpen = true;
 	  };
 
@@ -64,9 +67,10 @@ app.controller('productCtrl', function($scope, saveObject) {
 		container.className = $scope.className;
 		container.components = $scope.components;
 		saveObject.sidebarUpdateContainer(container);
-	}
+	};
+	
 	$scope.components = [];
-	$scope.selectedProduct = "Add Content";
+	$scope.selectedProduct = "Content Properties";
 	$scope.widget = false;
 	  $scope.widgetTabs = {
 			    hotel: true,
@@ -153,7 +157,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 				$scope.components.push({"type":"deal"});
 		    break;
 		  }
-		  $scope.open();
+		  $scope.openModal();
 	  };
 });
 

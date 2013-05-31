@@ -30,7 +30,6 @@
 					  
 					  <ul class="dropdown-menu">
 					    <li ng-repeat="choice in items">
-					      <!-- <a ng-click="selection(choice)">{{choice.text}}</a> -->
 					      <a ng-click="selection(choice)">{{choice.text}}</a>
 					    </li>
 					  </ul>
@@ -50,11 +49,11 @@
 						  
 								<div class="" ng-hide="!widget">
 									<h5>Enabled Tabs</h5>
-								    <button type="button" class="btn-mini w75 displayBlock btn-primary" ng-model="checkModel.hotel" btn-checkbox>Hotel</button>
-								    <button type="button" class="btn-mini w75 displayBlock btn-primary" ng-model="checkModel.deal" btn-checkbox>Deal</button>
-								    <button type="button" class="btn-mini w75 displayBlock btn-primary" ng-model="checkModel.car" btn-checkbox>Car</button>
-								    <button type="button" class="btn-mini w75 displayBlock btn-primary" ng-model="checkModel.flight" btn-checkbox>Flight</button>
-								    <button type="button" class="btn-mini w75 displayBlock btn-primary" ng-model="checkModel.ticket" btn-checkbox>Ticket</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.hotel" btn-checkbox>Hotel</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.deal" btn-checkbox>Deal</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.car" btn-checkbox>Car</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.flight" btn-checkbox>Flight</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.ticket" btn-checkbox>Ticket</button>
 								</div>
 									<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(container)">Set Container</button>
 							</div>
@@ -64,6 +63,7 @@
 						</div>
 						</li>
 					</div>
+					<button type="button" class="btn displayBlock btn-success" ng-click="addContainer()">Add Container</button>
 				</div>
 
 				
