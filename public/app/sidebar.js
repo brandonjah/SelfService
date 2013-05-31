@@ -40,7 +40,23 @@ app.controller('headerModalCtrl', function($scope, dialog){
 });
 
 
-app.controller('productCtrl', function($scope, saveObject) {	
+app.controller('productCtrl', function($scope, saveObject) {
+	//start modal
+	$scope.open = function () {
+	    $scope.shouldBeOpen = true;
+	  };
+
+	  $scope.close = function () {
+	    $scope.closeMsg = 'I was closed at: ' + new Date();
+	    $scope.shouldBeOpen = false;
+	  };
+	  
+	  $scope.opts = {
+	    backdropFade: true,
+	    dialogFade:true
+	  };
+	//end modal	
+	
 	$scope.setContainer = function(container) {
 		console.log("setContainer");
 		console.log(container);
@@ -82,7 +98,9 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                  {"text":"Hotel","enabled":"h","className":"hotel"},
 	                  {"text":"Attraction","enabled":"a","className":"attraction"},
 	                  {"text":"Deals","enabled":"d","className":"deal"}
-	                ];
+	                ]; 
+	  
+	  
 	  $scope.selection = function(choice) {
 		  $scope.components = [];
 		  $scope.selectedProduct = choice.text;
@@ -135,6 +153,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 				$scope.components.push({"type":"deal"});
 		    break;
 		  }
+		  $scope.open();
 	  };
 });
 

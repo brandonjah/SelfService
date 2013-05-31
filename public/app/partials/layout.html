@@ -27,14 +27,21 @@
 					  <a class="dropdown-toggle">
 					    {{selectedProduct}}
 					  </a>
-					  <span ng-click="isCollapsed = !isCollapsed">Hide/Show</span>
+					  
 					  <ul class="dropdown-menu">
 					    <li ng-repeat="choice in items">
+					      <!-- <a ng-click="selection(choice)">{{choice.text}}</a> -->
 					      <a ng-click="selection(choice)">{{choice.text}}</a>
 					    </li>
 					  </ul>
-					  <div collapse="!isCollapsed">
+ 					  <div modal="shouldBeOpen" close="close()" options="opts"> 					  
+ 					    <div class="modal-header">
+            				<h3>Set Component Properties</h3>
+        				</div>
+        				<div class="modal-body">
 						  <div ng-repeat="component in components">
+						  <span ng-click="isCollapsed = !isCollapsed">Hide/Show</span>
+	   					  <div collapse="!isCollapsed">
 						  <h4 class="m5">{{component.type}}</h4>
 						  <input type="text" placeholder="text content" class="input-small" ng-hide="!text" required>
 						  <input type="text" placeholder="hotel ids" class="input-small" ng-hide="!hotel" required>
@@ -49,9 +56,12 @@
 								    <button type="button" class="btn-mini w75 displayBlock btn-primary" ng-model="checkModel.flight" btn-checkbox>Flight</button>
 								    <button type="button" class="btn-mini w75 displayBlock btn-primary" ng-model="checkModel.ticket" btn-checkbox>Ticket</button>
 								</div>
-								<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(container)">Set Container</button>
+									<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(container)">Set Container</button>
 							</div>
-							</div><!-- end collapse -->
+														</div><!-- end collapse -->
+							</div> <!-- end modal body -->
+
+						</div>
 						</li>
 					</div>
 				</div>
