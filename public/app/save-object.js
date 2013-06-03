@@ -1,8 +1,8 @@
 app.factory('saveObject', function($routeParams) {
 	    var sharedService = {};
 	    var dbLayoutObj = [];
-	    dbLayoutObj.containers = [{"id":"Header0"},{"id":"Product1"},{"id":"Footer2"}];
-    	var containerCount = 3;
+	    dbLayoutObj.containers = [{"id":"Product0"}];
+    	var containerCount = 1;
     	var componentCount = 0;
     	dbLayoutObj.siteId = $routeParams.siteId;
 	    

@@ -1,7 +1,6 @@
 app.controller('containerCtrl', function($scope, saveObject) {
 	$scope.containers = saveObject.getLayout();
 	$scope.newObj = {};
-	$scope.buttons = [{'name': 'Header'},{'name': 'Product'},{'name': 'Footer'}];
 	
 	$scope.addContainer = function(name) {
 		saveObject.updateContainers(name, 'add');

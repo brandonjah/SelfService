@@ -91,6 +91,12 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                 {"text":"1/2","id":"12"},
 	                 {"text":"Full","id":"1"}
 	                 ];
+	$scope.tiers = [
+	                {"id":"1"},
+	                {"id":"2"},
+	                {"id":"3"},
+	                {"id":"4"}
+	                ];
 	$scope.align = ["left","right"];
 	  $scope.items = [
 	                  {"text":"Widget","enabled":"w","className":"fw"},
@@ -103,58 +109,53 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                  {"text":"Attraction","enabled":"a","className":"attraction"},
 	                  {"text":"Deals","enabled":"d","className":"deal"}
 	                ]; 
-	  
+	  $scope.showHotel = function(type) {
+		  console.log("here");
+		  console.log(type);
+		  if(type == 'hotel') {
+			  console.log("in true?");
+			  return true;
+		  } else {
+			  console.log("what the hell?");
+			  return type != 'hotel';
+		  }
+	  };
 	  
 	  $scope.selection = function(choice) {
+		  console.log("in selection");
+		  console.log(choice);
 		  $scope.components = [];
 		  $scope.selectedProduct = choice.text;
 		  $scope.className = choice.className;
-		  $scope.widget = false;
-		  $scope.image = false;
-		  $scope.text = false;
-			$scope.hotel = false;
-			$scope.attraction = false;
-			$scope.deal = false;
+
 		  switch (choice.enabled)
 		  {
 		  case "w":
-			  $scope.widget = true;
-			  $scope.components.push({"type":"widget"});
+			  $scope.components.push({"type":"widget",showWidget:true});
 		    break;
 		  case "i":
-			  $scope.image = true;
-			  $scope.components.push({"type":"image"});
+			  $scope.components.push({"type":"image",showImage:true});
 		    break;
 		  case "t":
-			  $scope.text = true;
-			  $scope.components.push({"type":"text"});
+			  $scope.components.push({"type":"text",showText:true});
 		    break;
 		  case "wi":
-			  $scope.image = true;
-			  $scope.widget = true;
-			  $scope.components.push({"type":"image"},{"type":"widget"});
+			  $scope.components.push({"type":"image",showImage:true},{"type":"widget",showWidget:true});
 		    break;
 		  case "wt":
-			  $scope.text = true;
-			  $scope.widget = true;
-			  $scope.components.push({"type":"text"},{"type":"widget"});
+			  $scope.components.push({"type":"text",showText:true},{"type":"widget",showWidget:true});
 		    break;
 		  case "ti":
-			  $scope.text = true;
-			  $scope.image = true;
-			  $scope.components.push({"type":"text"},{"type":"image"});
+			  $scope.components.push({"type":"text",showText:true},{"type":"image",showImage:true});
 		    break;
 		  case "h":
-				$scope.hotel = true;
-				$scope.components.push({"type":"hotel"});
+				$scope.components.push({"type":"hotel",showHotel:true});
 		    break;
 		  case "a":
-				$scope.attraction = true;
-				$scope.components.push({"type":"attraction"});
+				$scope.components.push({"type":"attraction",showAttraction:true});
 		    break;
 		  case "d":
-				$scope.deal = true;
-				$scope.components.push({"type":"deal"});
+				$scope.components.push({"type":"deal",showDeal:true});
 		    break;
 		  }
 		  $scope.openModal();

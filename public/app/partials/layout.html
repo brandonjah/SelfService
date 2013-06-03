@@ -4,8 +4,8 @@
       <div class="well sidebar-nav-fixed">
         <ul class="nav nav-list">
 
-			<li class="nav-header">Sidebar</li>
-			<li class="active"><a href="#">Header</a></li>
+			<li class="nav-header">Landing Page</li>
+			<li class="active"><a>Header</a></li>
 				<li class="dropdown" ng-controller="headerCtrl">
 				  <a class="dropdown-toggle" ng-click="openProperties()">
 				    Add Content
@@ -19,7 +19,7 @@
 			
 			
 			<li class="active mt15px">
-				<a href="#">Content</a>
+				<a>Content</a>
 			</li>
 			<div ng-controller="sidebarContainerCtrl">
 				<div ng-repeat="container in containers">
@@ -41,13 +41,16 @@
 						  <div ng-repeat="component in components">
 						  <span ng-click="isCollapsed = !isCollapsed">Hide/Show</span>
 	   					  <div collapse="!isCollapsed">
-						  <h4 class="m5">{{component.type}}</h4>
-						  <input type="text" placeholder="text content" class="input-small" ng-hide="!text" required>
-						  <input type="text" placeholder="hotel ids" class="input-small" ng-hide="!hotel" required>
+						  <h3 class="m5">{{component.type}}</h3>
+						  <input type="text" placeholder="text content" class="input" ng-show="component.showText" required>
+						  <input type="text" placeholder="hotel ids" class="input" ng-show="component.showHotel" required>
+						  <br>
+						  	<label class="control-label displayInlineBlock w75">Width:</label>
+							<select class="input-small" ng-model="selectedWidth" ng-options="width as width.text for width in widths"><option value="">-- width --</option></select><br>
+							<label class="control-label displayInlineBlock w75" ng-show="component.showHotel">Tier:</label>
+							<select class="input-small" ng-model="selectedTier" ng-options="tier as tier.id for tier in tiers" ng-show="component.showHotel"><option value="">-- tier --</option></select><br>
 						  
-							<select class="input-block-level" ng-model="selectedWidth" ng-options="width as width.text for width in widths"><option value="">-- width --</option></select>
-						  
-								<div class="" ng-hide="!widget">
+								<div class="" ng-show="component.showWidget">
 									<h5>Enabled Tabs</h5>
 								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.hotel" btn-checkbox>Hotel</button>
 								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.deal" btn-checkbox>Deal</button>
@@ -57,8 +60,8 @@
 								</div>
 									<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(container)">Set Container</button>
 							</div>
-														</div><!-- end collapse -->
-							</div> <!-- end modal body -->
+							</div><!-- end collapse -->
+						</div> <!-- end modal body -->
 
 						</div>
 						</li>
@@ -69,7 +72,7 @@
 				
 				
 				
-			<li class="active mt15px"><a href="#">Footer</a></li>
+			<li class="active mt15px"><a>Footer</a></li>
 				<li class="dropdown" ng-controller="footerCtrl">
 				  <a class="dropdown-toggle">
 				    Add Content
@@ -103,13 +106,15 @@
 <div ng-controller="containerCtrl" id="layoutContainer">
 	<a style="display:none;" ng-repeat="btn in buttons" ng-click="addContainer(btn.name)" href="javascript:void(0)" class="btn btn-success btn-small m5"><i class="icon-white icon-plus-sign"></i> Add {{btn.name}}</a>
 <section>
+	<div class='dropzone ui-widget-content'>Header<br/>
+		<section class='h150' ng-controller="headerCtrl"></section>
+	</div>
 	<div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content {{item.className}}'>{{item.id}}<br/>
 	<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delContainer(item)"><i class="icon-white icon-remove-sign"></i></a>
-		<section class='h150' ng-controller="componentCtrl" data-drop='true' jqyoui-droppable="{onDrop: 'dropCallback'}">
-			<span ng-repeat='thing in item.components' class="{{thing.className}}" ng-dblclick="openProperties(thing)">
-				<a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delComponent(thing)"><i class="icon-white icon-remove-sign"></i></a>
-			</span>
-		</section>
+		<section class='h150' ng-controller="componentCtrl" data-drop='true' jqyoui-droppable="{onDrop: 'dropCallback'}"></section>
+	</div>
+	<div class='dropzone ui-widget-content'>Footer<br/>
+		<section class='h150' ng-controller="footerCtrl"></section>
 	</div>
 </section>
 </div>
