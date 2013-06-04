@@ -37,27 +37,27 @@
 						  <h3 class="m5" ng-click="isCollapsed = !isCollapsed">{{component.type}}</h3>
 	   					  <div collapse="!isCollapsed">
 						  
-						  <input type="text" placeholder="text content" class="input" ng-show="component.showText" required>
-						  <input type="text" placeholder="hotel ids" class="input" ng-show="component.showHotel" required>
+						  <input type="text" placeholder="text content" class="input" ng-model="component.text" ng-show="component.showText" required>
+						  <input type="text" placeholder="hotel ids" class="input" ng-model="component.hotelIds" ng-show="component.showHotel" required>
 						  <br>
 						  	<label class="control-label displayInlineBlock w75">Width:</label>
-							<select class="input-small" ng-model="selectedWidth" ng-options="width as width.text for width in widths"><option value="">-- width --</option></select><br>
+							<select class="input-small" ng-model="component.selectedWidth" ng-options="width as width.text for width in widths"><option value="">-- width --</option></select><br>
 						  	<label class="control-label displayInlineBlock w75" ng-show="component.showImage||component.showText">Align:</label>
-							<select class="input-small" ng-model="selectedAlign" ng-options="align as align.text for align in alignments" ng-show="component.showImage||component.showText"><option value="">-- align --</option></select><br>
+							<select class="input-small" ng-model="component.selectedAlign" ng-options="align as align for align in alignments" ng-show="component.showImage||component.showText"><option value="">-- align --</option></select><br>
 							<label class="control-label displayInlineBlock w75" ng-show="component.showHotel">Tier:</label>
-							<select class="input-small" ng-model="selectedTier" ng-options="tier as tier.id for tier in tiers" ng-show="component.showHotel"><option value="">-- tier --</option></select><br>
+							<select class="input-small" ng-model="component.selectedTier" ng-options="tier as tier.id for tier in tiers" ng-show="component.showHotel"><option value="">-- tier --</option></select><br>
 						  
 								<div class="" ng-show="component.showWidget">
 									<h5>Enabled Tabs</h5>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.hotel" btn-checkbox>Hotel</button>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.deal" btn-checkbox>Deal</button>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.car" btn-checkbox>Car</button>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.flight" btn-checkbox>Flight</button>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="checkModel.ticket" btn-checkbox>Ticket</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.hotel" btn-checkbox>Hotel</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.deal" btn-checkbox>Deal</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.car" btn-checkbox>Car</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.flight" btn-checkbox>Flight</button>
+								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.ticket" btn-checkbox>Ticket</button>
 								</div>
-									<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(container)">Set Container</button>
+									<button type="button" class="btn displayBlock btn-success" ng-click="setComponent(container, component)">Set Container</button>
 							</div>
-							</div><!-- end collapse -->
+							</div><!-- end component repeat -->
 						</div> <!-- end modal body -->
 
 						</div>

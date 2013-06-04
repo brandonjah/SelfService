@@ -65,12 +65,18 @@ app.controller('productCtrl', function($scope, saveObject) {
 	  };
 	//end modal	
 	
-	$scope.setContainer = function(container) {
-		console.log("setContainer");
-		console.log(container);
-		console.log($scope.components);
-		container.className = $scope.className;
-		container.components = $scope.components;
+	$scope.setComponent = function(container, component) {
+		for (var i=0;i<$scope.components.length;i++) {
+			if($scope.components[i].id == component.id) {
+				$scope.components[i].align = component.align;
+				$scope.components[i].width = component.width;
+				$scope.components[i].text = component.text;
+				$scope.components[i].tabs = [];
+				$scope.components[i].tabs = component.tabs;
+			}
+		}
+		container.components = [];
+		container.components.push($scope.components);
 		saveObject.sidebarUpdateContainer(container);
 	};
 	
@@ -119,35 +125,35 @@ app.controller('productCtrl', function($scope, saveObject) {
 		  $scope.components = [];
 		  $scope.selectedProduct = choice.text;
 		  $scope.className = choice.className;
-
+		  
 		  switch (choice.enabled)
 		  {
 		  case "w":
-			  $scope.components.push({"type":"widget",showWidget:true});
+			  $scope.components.push({"type":"widget",showWidget:true,id:"1"});
 		    break;
 		  case "i":
-			  $scope.components.push({"type":"image",showImage:true});
+			  $scope.components.push({"type":"image",showImage:true,id:"1"});
 		    break;
 		  case "t":
-			  $scope.components.push({"type":"text",showText:true});
+			  $scope.components.push({"type":"text",showText:true,id:"1"});
 		    break;
 		  case "wi":
-			  $scope.components.push({"type":"image",showImage:true},{"type":"widget",showWidget:true});
+			  $scope.components.push({"type":"image",showImage:true,id:"1"},{"type":"widget",showWidget:true,id:"2"});
 		    break;
 		  case "wt":
-			  $scope.components.push({"type":"text",showText:true},{"type":"widget",showWidget:true});
+			  $scope.components.push({"type":"text",showText:true,id:"1"},{"type":"widget",showWidget:true,id:"2"});
 		    break;
 		  case "ti":
-			  $scope.components.push({"type":"text",showText:true},{"type":"image",showImage:true});
+			  $scope.components.push({"type":"text",showText:true,id:"1"},{"type":"image",showImage:true,id:"2"});
 		    break;
 		  case "h":
-				$scope.components.push({"type":"hotel",showHotel:true});
+				$scope.components.push({"type":"hotel",showHotel:true,id:"1"});
 		    break;
 		  case "a":
-				$scope.components.push({"type":"attraction",showAttraction:true});
+				$scope.components.push({"type":"attraction",showAttraction:true,id:"1"});
 		    break;
 		  case "d":
-				$scope.components.push({"type":"deal",showDeal:true});
+				$scope.components.push({"type":"deal",showDeal:true,id:"1"});
 		    break;
 		  }
 		  $scope.openModal();
