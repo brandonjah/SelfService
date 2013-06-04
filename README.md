@@ -7,7 +7,8 @@ here is how to set env variables on macosx mountain lion: http://stackoverflow.c
 
 # Configuration notes
 * Must change java build path in project properties to prevent data binding error JSR-303
-* install homebrew
+* install homebrew (http://mxcl.github.io/homebrew/ see section titled "Install Homebrew")
+* brew install git (if it isn't already installed)
 * brew install play
 * brew install mongo
 * must set classpath with AWS keys for S3 uploads, see fileuploader notes

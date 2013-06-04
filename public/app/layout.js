@@ -5,11 +5,6 @@ app.controller('containerCtrl', function($scope, saveObject) {
 	$scope.addContainer = function(name) {
 		saveObject.updateContainers(name, 'add');
 	};
-	
-	$scope.delContainer = function(item) {
-		saveObject.updateContainers(item.id, 'del');
-	};
-
 });
 
 app.controller('componentCtrl', function($scope, $dialog, saveObject) {
@@ -62,10 +57,6 @@ function CollapseCtrl($scope) {
 
 app.controller('propertiesModalCtrl', function($scope, dialog, componentClassName){
 	$scope.widget = componentClassName;
-	$scope.updateWidget = function(viewComponent) {
-		console.log("update Widget: ");
-		console.log(viewComponent);
-	};
 	$scope.result = {};  
 	$scope.result.radioModel = 'Third';
 
@@ -75,11 +66,7 @@ app.controller('propertiesModalCtrl', function($scope, dialog, componentClassNam
 	  };
 });
 
-app.controller('componentCtrl', function($scope) {
-	$scope.startcomponents = [{'className': 'componentWdgt'},{'className': 'componentImg'},{'className': 'componentTxt'}];
-});
-
-app.controller('submitCtrl', function($scope, $http, saveObject) {
+app.controller('submitCtrl', function($scope, $http, $location, saveObject) {
 	$scope.url = '/save-layout';
 	$scope.saveLayout = function() {
 		saveObject.logContents();
@@ -101,4 +88,11 @@ app.controller('submitCtrl', function($scope, $http, saveObject) {
 		        });
 			
 	};
+	$scope.previewLayout = function() {
+		$location.path('/preview');
+	};
+});
+
+app.controller('PreviewCtrl', function($scope, saveObject) {
+	
 });

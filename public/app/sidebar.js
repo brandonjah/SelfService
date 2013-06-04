@@ -4,14 +4,20 @@ app.controller('sidebarContainerCtrl', function($scope, saveObject) {
 	$scope.addContainer = function() {
 		saveObject.updateContainers("Product", 'add');
 	};
+	$scope.delContainer = function(item) {
+		saveObject.updateContainers(item.id, 'del');
+	};
 });
 
 app.controller('headerCtrl', function($scope, $dialog) {
 	  $scope.items = [
-	                  "Full Widget",
-	                  "Full Header",
-	                  "Full Text",
-	                  "Widget + 3/4 Image"
+	                  {"text":"Widget","enabled":"w","className":"fw"},
+	                  {"text":"Image","enabled":"i","className":"fi"},
+	                  {"text":"Text","enabled":"t","className":"ft"},
+	                  {"text":"Widget + Image","enabled":"wi","className":"w34i"},
+	                  {"text":"Widget + Text","enabled":"wt","className":"w34t"},
+	                  {"text":"Text + Image","enabled":"ti","className":"t34i"},
+	                  {"text":"Empty","enabled":"","className":""}
 	                ];
 	  
 	  $scope.opts = {
@@ -50,7 +56,6 @@ app.controller('productCtrl', function($scope, saveObject) {
 	  };
 
 	  $scope.close = function () {
-	    $scope.closeMsg = 'I was closed at: ' + new Date();
 	    $scope.shouldBeOpen = false;
 	  };
 	  
@@ -97,7 +102,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                {"id":"3"},
 	                {"id":"4"}
 	                ];
-	$scope.align = ["left","right"];
+	$scope.alignments = ["left","right"];
 	  $scope.items = [
 	                  {"text":"Widget","enabled":"w","className":"fw"},
 	                  {"text":"Image","enabled":"i","className":"fi"},
@@ -109,21 +114,8 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                  {"text":"Attraction","enabled":"a","className":"attraction"},
 	                  {"text":"Deals","enabled":"d","className":"deal"}
 	                ]; 
-	  $scope.showHotel = function(type) {
-		  console.log("here");
-		  console.log(type);
-		  if(type == 'hotel') {
-			  console.log("in true?");
-			  return true;
-		  } else {
-			  console.log("what the hell?");
-			  return type != 'hotel';
-		  }
-	  };
 	  
 	  $scope.selection = function(choice) {
-		  console.log("in selection");
-		  console.log(choice);
 		  $scope.components = [];
 		  $scope.selectedProduct = choice.text;
 		  $scope.className = choice.className;
@@ -166,9 +158,13 @@ app.controller('productCtrl', function($scope, saveObject) {
 
 app.controller('footerCtrl', function($scope) {
 	  $scope.items = [
-	                  "Full Widget",
-	                  "Full Header",
-	                  "Full Text",
-	                  "Widget + 3/4 Image"
+	                  {"text":"Widget","enabled":"w","className":"fw"},
+	                  {"text":"Image","enabled":"i","className":"fi"},
+	                  {"text":"Text","enabled":"t","className":"ft"},
+	                  {"text":"Widget + Image","enabled":"wi","className":"w34i"},
+	                  {"text":"Widget + Text","enabled":"wt","className":"w34t"},
+	                  {"text":"Text + Image","enabled":"ti","className":"t34i"},
+	                  {"text":"Empty","enabled":"","className":""}
 	                ];
+	  
 });
