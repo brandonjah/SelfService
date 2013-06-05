@@ -25,27 +25,31 @@ public class Application extends Controller {
     public static Result GO_DASHBOARD = redirect(
             routes.Dashboard.index()
     );
+    
+    public static Result index() {
+    	return GO_DASHBOARD;
+    }
 
     /**
      * Display the login page or dashboard if connected
      *
      * @return login page or dashboard
      */
-    public static Result index() {
-        // Check that the email matches a confirmed user before we redirect
-        String email = ctx().session().get("email");
-        if (email != null) {
-            User user = User.findByEmail(email);
-            if (user != null && user.validated) {
-                return GO_DASHBOARD;
-            } else {
-                Logger.debug("Clearing invalid session credentials");
-                session().clear();
-            }
-        }
-
-        return ok(index.render(form(Register.class), form(Login.class)));
-    }
+//    public static Result index() {
+//        // Check that the email matches a confirmed user before we redirect
+//        String email = ctx().session().get("email");
+//        if (email != null) {
+//            User user = User.findByEmail(email);
+//            if (user != null && user.validated) {
+//                return GO_DASHBOARD;
+//            } else {
+//                Logger.debug("Clearing invalid session credentials");
+//                session().clear();
+//            }
+//        }
+//
+//        return ok(index.render(form(Register.class), form(Login.class)));
+//    }
 
     /**
      * Login class used by Login Form.

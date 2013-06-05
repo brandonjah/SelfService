@@ -14,6 +14,7 @@ import views.html.dashboard.index;
 public class Dashboard extends Controller {
 
     public static Result index() {
-        return ok(index.render(User.findByEmail(request().username())));
+//        return ok(index.render(User.findByEmail(request().username())));
+    	return ok(index.render());
     }
 }
