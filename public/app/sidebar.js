@@ -53,12 +53,12 @@ app.controller('productCtrl', function($scope, saveObject) {
 	$scope.containers = saveObject.getLayout();
 	$scope.addContainer = function() {
 		saveObject.updateContainers("Product", 'add');
-		//@TODO should wait until update is done to run
+		//@TODO rewrite as promise
 		$scope.containers = saveObject.getLayout();
 	};
 	$scope.delContainer = function(item) {
 		saveObject.updateContainers(item.id, 'del');
-		//@TODO should wait until update is done to run
+		//@TODO rewrite as promise
 		$scope.containers = saveObject.getLayout();
 	};	
 	
@@ -83,10 +83,8 @@ app.controller('productCtrl', function($scope, saveObject) {
 		for (var i=0;i<$scope.containers.length;i++) {
 			if($scope.containers[i].id == passedContainer.id) {
 				$scope.containers[i].component = passedContainer.component;
-				$scope.containers[i].className = "w14i";
-				if(passedContainer.component.type == "image_widget"||passedContainer.component.type == "image_text") {
-					$scope.containers[i].className = passedContainer.component.type+passedContainer.component.align+passedContainer.component.width.id;
-				}
+				$scope.containers[i].className = passedContainer.component.type+(passedContainer.component.align||"")+
+				((passedContainer.component.width) ? passedContainer.component.width.id : "")+((passedContainer.component.tier) ? passedContainer.component.tier.id : "");
 			}
 		}
 		saveObject.sidebarUpdateContainer($scope.containers);

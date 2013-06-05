@@ -32,34 +32,42 @@
                </div>
                <div class="modal-body">
                         <h3 class="m5">{{openedContainer.component.text}}</h3>
-                           <input type="text" placeholder="header" class="input" ng-model="openedContainer.component.header" ng-show="openedContainer.component.showText" required><br>
-                           <textarea rows="3" placeholder="text content" ng-model="openedContainer.component.textArea" ng-show="openedContainer.component.showText" required></textarea>
-                           <input type="text" placeholder="hotel ids" class="input" ng-model="openedContainer.component.hotelIds" ng-show="openedContainer.component.showHotel" required>
+                           <section ng-show="openedContainer.component.showText">
+	                           <input type="text" placeholder="header" class="input" ng-model="openedContainer.component.header" required><br>
+	                           <textarea rows="3" placeholder="text content" ng-model="openedContainer.component.textArea" required></textarea>
+                           </section>
+                           <section ng-show="openedContainer.component.showHotel">
+                           <input type="text" placeholder="hotel ids" class="input" ng-model="openedContainer.component.hotelIds" required>
                            <br>
-                           <label class="control-label displayInlineBlock w75" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">Image Width:</label>
-                           <select class="input-small" ng-model="openedContainer.component.width" ng-options="width as width.text for width in widths" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">
-                              <option value="">-- width --</option>
-                           </select>
-                           <br>
-                           <label class="control-label displayInlineBlock w75" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">Image Alignment:</label>
-                           <select class="input-small" ng-model="openedContainer.component.align" ng-options="align as align for align in alignments" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">
-                              <option value="">-- align --</option>
-                           </select>
-                           <br>
-                           <label class="control-label displayInlineBlock w75" ng-show="openedContainer.component.showHotel">Tier:</label>
-                           <select class="input-small" ng-model="openedContainer.component.tier" ng-options="tier as tier.id for tier in tiers" ng-show="openedContainer.component.showHotel">
-                              <option value="">-- tier --</option>
-                           </select>
-                           <br>
-                           <div class="" ng-show="openedContainer.component.showWidget">
+                           </section>
+                           <section ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">
+	                           <label class="control-label displayInlineBlock w75">Image Width:</label>
+	                           <select class="input-small" ng-model="openedContainer.component.width" ng-options="width as width.text for width in widths">
+	                              <option value="">-- width --</option>
+	                           </select>
+	                           <br>
+	                           <label class="control-label displayInlineBlock w75">Image Alignment:</label>
+	                           <select class="input-small" ng-model="openedContainer.component.align" ng-options="align as align for align in alignments">
+	                              <option value="">-- align --</option>
+	                           </select>
+                           </section>
+						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction">
+	                           <label class="control-label displayInlineBlock w75">Tier:</label>
+	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-options="tier as tier.id for tier in tiers">
+	                              <option value="">-- tier --</option>
+	                           </select>
+                           </section>
+                           <section class="" ng-show="openedContainer.component.showWidget">
                               <h5>Enabled Tabs</h5>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.hotel" btn-checkbox>Hotel</button>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.deal" btn-checkbox>Deal</button>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.car" btn-checkbox>Car</button>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.flight" btn-checkbox>Flight</button>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.ticket" btn-checkbox>Ticket</button>
-                           </div>
-                     <button type="button" class="btn displayBlock btn-success" ng-click="setContainer(openedContainer)">Set Container</button>							
+                           </section>
+                     <section>
+                     	<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(openedContainer)">Set Container</button>
+                     </section>							
                </div><!-- end modal body -->
             </div><!-- end modal div -->
          </div><!-- end productCtrl -->
