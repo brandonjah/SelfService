@@ -1,4 +1,4 @@
-app.controller('sidebarContainerCtrl', function($scope, saveObject) {
+app.controller('sidebarContainerCtrl', function($scope, saveObject) { //remove this controller, consolidate to product ctrl
 	$scope.isCollapsed = true;
 	$scope.containers = saveObject.getLayout();
 	$scope.addContainer = function() {
@@ -48,10 +48,20 @@ app.controller('headerModalCtrl', function($scope, dialog){
 	  };
 });
 
-
 app.controller('productCtrl', function($scope, saveObject) {
+	$scope.isCollapsed = true;
+	$scope.containers = saveObject.getLayout();
+	$scope.addContainer = function() {
+		saveObject.updateContainers("Product", 'add');
+	};
+	$scope.delContainer = function(item) {
+		saveObject.updateContainers(item.id, 'del');
+	};	
+	
+	
 	//start modal
-	$scope.openModal = function () {
+	$scope.openModal = function (openedContainer) {
+		$scope.openedContainer = openedContainer;
 	    $scope.shouldBeOpen = true;
 	  };
 
@@ -65,22 +75,17 @@ app.controller('productCtrl', function($scope, saveObject) {
 	  };
 	//end modal	
 	
-	$scope.setComponent = function(container, component) {
-		for (var i=0;i<$scope.components.length;i++) {
-			if($scope.components[i].id == component.id) {
-				$scope.components[i].align = component.align;
-				$scope.components[i].width = component.width;
-				$scope.components[i].text = component.text;
-				$scope.components[i].tabs = [];
-				$scope.components[i].tabs = component.tabs;
+	$scope.setContainer = function(container) {
+		$scope.close();
+		for (var i=0;i<$scope.containers.length;i++) {
+			if($scope.containers[i].id == container.id) {
+				$scope.containers[i].components = container.components;
+				$scope.containers[i].className = "w14i";
 			}
 		}
-		container.components = [];
-		container.components.push($scope.components);
-		saveObject.sidebarUpdateContainer(container);
+		saveObject.sidebarUpdateContainer($scope.containers);
 	};
 	
-	$scope.components = [];
 	$scope.selectedProduct = "Content Properties";
 	$scope.widget = false;
 	  $scope.widgetTabs = {
@@ -121,42 +126,46 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                  {"text":"Deals","enabled":"d","className":"deal"}
 	                ]; 
 	  
-	  $scope.selection = function(choice) {
-		  $scope.components = [];
-		  $scope.selectedProduct = choice.text;
-		  $scope.className = choice.className;
-		  
-		  switch (choice.enabled)
-		  {
-		  case "w":
-			  $scope.components.push({"type":"widget",showWidget:true,id:"1"});
-		    break;
-		  case "i":
-			  $scope.components.push({"type":"image",showImage:true,id:"1"});
-		    break;
-		  case "t":
-			  $scope.components.push({"type":"text",showText:true,id:"1"});
-		    break;
-		  case "wi":
-			  $scope.components.push({"type":"image",showImage:true,id:"1"},{"type":"widget",showWidget:true,id:"2"});
-		    break;
-		  case "wt":
-			  $scope.components.push({"type":"text",showText:true,id:"1"},{"type":"widget",showWidget:true,id:"2"});
-		    break;
-		  case "ti":
-			  $scope.components.push({"type":"text",showText:true,id:"1"},{"type":"image",showImage:true,id:"2"});
-		    break;
-		  case "h":
-				$scope.components.push({"type":"hotel",showHotel:true,id:"1"});
-		    break;
-		  case "a":
-				$scope.components.push({"type":"attraction",showAttraction:true,id:"1"});
-		    break;
-		  case "d":
-				$scope.components.push({"type":"deal",showDeal:true,id:"1"});
-		    break;
+	  $scope.selection = function(choice,container) {
+		  for (var i=0;i<$scope.containers.length;i++) {
+			  console.log("containers loop in selection");
+			  if(container.id == $scope.containers[i].id) {
+				  console.log("container ids match");
+				  $scope.containers[i].components = [];
+				  switch (choice.enabled)
+				  {
+				  case "w":
+					  $scope.containers[i].components.push({"type":"widget",showWidget:true,id:"1"});
+				    break;
+				  case "i":
+					  $scope.containers[i].components.push({"type":"image",showImage:true,id:"1"});
+				    break;
+				  case "t":
+					  $scope.containers[i].components.push({"type":"text",showText:true,id:"1"});
+				    break;
+				  case "wi":
+					  $scope.containers[i].components.push({"type":"image",showImage:true,id:"1"},{"type":"widget",showWidget:true,id:"2"});
+				    break;
+				  case "wt":
+					  $scope.containers[i].components.push({"type":"text",showText:true,id:"1"},{"type":"widget",showWidget:true,id:"2"});
+				    break;
+				  case "ti":
+					  $scope.containers[i].components.push({"type":"text",showText:true,id:"1"},{"type":"image",showImage:true,id:"2"});
+				    break;
+				  case "h":
+						$scope.containers[i].components.push({"type":"hotel",showHotel:true,id:"1"});
+				    break;
+				  case "a":
+						$scope.containers[i].components.push({"type":"attraction",showAttraction:true,id:"1"});
+				    break;
+				  case "d":
+						$scope.containers[i].components.push({"type":"deal",showDeal:true,id:"1"});
+				    break;
+				  }
+			  }
 		  }
-		  $scope.openModal();
+		  console.log("about to open modal");
+		  $scope.openModal(container);
 	  };
 });
 

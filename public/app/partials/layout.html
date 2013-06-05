@@ -1,97 +1,95 @@
 <section class="row-fluid row" id="products">
-
-	<!-- Start Sidebar -->
-      <div class="well sidebar-nav-fixed">
-        <ul class="nav nav-list">
-
-			<li class="nav-header">Landing Page</li>
-			<li class="active"><a>Header</a></li>
-				<li class="dropdown" ng-controller="headerCtrl">
-				  <a class="dropdown-toggle" ng-click="openProperties()">
-				    Add Content
-				  </a>
-				</li>
-			
-			
-			<li class="active mt15px">
-				<a>Content</a>
-			</li>
-			<div ng-controller="sidebarContainerCtrl">
-				<div ng-repeat="container in containers">
-					<li class="dropdown" ng-controller="productCtrl">
-					  <a class="dropdown-toggle">
-					    {{selectedProduct}}
-					  </a><a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delContainer(container)"><i class="icon-white icon-remove-sign"></i></a>
-					  
-					  <ul class="dropdown-menu">
-					    <li ng-repeat="choice in items">
-					      <a ng-click="selection(choice)">{{choice.text}}</a>					      
-					    </li>
-					  </ul>
- 					  <div modal="shouldBeOpen" close="close()" options="opts"> 					  
- 					    <div class="modal-header">
-            				<h3>Set Component Properties</h3>
-        				</div>
-        				<div class="modal-body">
-						  <div ng-repeat="component in components">
-						  <h3 class="m5" ng-click="isCollapsed = !isCollapsed">{{component.type}}</h3>
-	   					  <div collapse="!isCollapsed">
-						  
-						  <input type="text" placeholder="text content" class="input" ng-model="component.text" ng-show="component.showText" required>
-						  <input type="text" placeholder="hotel ids" class="input" ng-model="component.hotelIds" ng-show="component.showHotel" required>
-						  <br>
-						  	<label class="control-label displayInlineBlock w75">Width:</label>
-							<select class="input-small" ng-model="component.selectedWidth" ng-options="width as width.text for width in widths"><option value="">-- width --</option></select><br>
-						  	<label class="control-label displayInlineBlock w75" ng-show="component.showImage||component.showText">Align:</label>
-							<select class="input-small" ng-model="component.selectedAlign" ng-options="align as align for align in alignments" ng-show="component.showImage||component.showText"><option value="">-- align --</option></select><br>
-							<label class="control-label displayInlineBlock w75" ng-show="component.showHotel">Tier:</label>
-							<select class="input-small" ng-model="component.selectedTier" ng-options="tier as tier.id for tier in tiers" ng-show="component.showHotel"><option value="">-- tier --</option></select><br>
-						  
-								<div class="" ng-show="component.showWidget">
-									<h5>Enabled Tabs</h5>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.hotel" btn-checkbox>Hotel</button>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.deal" btn-checkbox>Deal</button>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.car" btn-checkbox>Car</button>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.flight" btn-checkbox>Flight</button>
-								    <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.ticket" btn-checkbox>Ticket</button>
-								</div>
-									<button type="button" class="btn displayBlock btn-success" ng-click="setComponent(container, component)">Set Container</button>
-							</div>
-							</div><!-- end component repeat -->
-						</div> <!-- end modal body -->
-
-						</div>
-						</li>
-					</div>
-					<button type="button" class="btn displayBlock btn-success" ng-click="addContainer()">Add Container</button>
-				</div>
-
-
-			<li class="active mt15px"><a>Footer</a></li>
-				<li class="dropdown" ng-controller="footerCtrl">
-				  <a class="dropdown-toggle">
-				    Add Content
-				  </a>
-				</li>
-        </ul>
-      </div><!--/.well -->
-	<!-- End Sidebar -->  
+   <!-- Start Sidebar -->
+   <div class="well sidebar-nav-fixed">
+      <ul class="nav nav-list">
+         <li class="nav-header">Landing Page</li>
+         <li class="active"><a>Header</a></li>
+         <li class="dropdown" ng-controller="headerCtrl">
+            <a class="dropdown-toggle" ng-click="openProperties()">
+            Add Content
+            </a>
+         </li>
+         <li class="active mt15px">
+            <a>Content</a>
+         </li>
+         <div ng-controller="productCtrl">
+            <li class="dropdown">
+            <div ng-repeat="container in containers">
+               <a class="dropdown-toggle">
+               {{selectedProduct}}
+               </a><a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delContainer(container)"><i class="icon-white icon-remove-sign"></i></a>
+               <ul class="dropdown-menu">
+                  <li ng-repeat="choice in items">
+                     <a ng-click="selection(choice, container)">{{choice.text}}</a>					      
+                  </li>
+               </ul>
+               </div>
+            </li>
+            <button type="button" class="btn displayBlock btn-success" ng-click="addContainer()">Add Container</button>
+            <div modal="shouldBeOpen" close="close()" options="opts">
+               <div class="modal-header">
+                  <h3>Set Component Properties</h3>
+               </div>
+               <div class="modal-body">
+                     <div ng-repeat="component in openedContainer.components">
+                        <h3 class="m5" ng-click="isCollapsed = !isCollapsed">{{component.type}}</h3>
+                        <div collapse="!isCollapsed">
+                           <input type="text" placeholder="text content" class="input" ng-model="component.text" ng-show="component.showText" required>
+                           <input type="text" placeholder="hotel ids" class="input" ng-model="component.hotelIds" ng-show="component.showHotel" required>
+                           <br>
+                           <label class="control-label displayInlineBlock w75">Width:</label>
+                           <select class="input-small" ng-model="component.width" ng-options="width as width.text for width in widths">
+                              <option value="">-- width --</option>
+                           </select>
+                           <br>
+                           <label class="control-label displayInlineBlock w75" ng-show="component.showImage||component.showText">Align:</label>
+                           <select class="input-small" ng-model="component.align" ng-options="align as align for align in alignments" ng-show="component.showImage||component.showText">
+                              <option value="">-- align --</option>
+                           </select>
+                           <br>
+                           <label class="control-label displayInlineBlock w75" ng-show="component.showHotel">Tier:</label>
+                           <select class="input-small" ng-model="component.tier" ng-options="tier as tier.id for tier in tiers" ng-show="component.showHotel">
+                              <option value="">-- tier --</option>
+                           </select>
+                           <br>
+                           <div class="" ng-show="component.showWidget">
+                              <h5>Enabled Tabs</h5>
+                              <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.hotel" btn-checkbox>Hotel</button>
+                              <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.deal" btn-checkbox>Deal</button>
+                              <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.car" btn-checkbox>Car</button>
+                              <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.flight" btn-checkbox>Flight</button>
+                              <button type="button" class="btn-mini w75 btn-primary" ng-model="component.tabs.ticket" btn-checkbox>Ticket</button>
+                           </div>
+                        </div>
+                     </div><!-- end component repeat -->
+                     <button type="button" class="btn displayBlock btn-success" ng-click="setContainer(openedContainer)">Set Container</button>							
+               </div><!-- end modal body -->
+            </div><!-- end modal div -->
+         </div><!-- end productCtrl -->
+         <li class="active mt15px"><a>Footer</a></li>
+         <li class="dropdown" ng-controller="footerCtrl">
+            <a class="dropdown-toggle">
+            Add Content
+            </a>
+         </li>
+      </ul>
+   </div>
+   <!--/.well -->
+   <!-- End Sidebar -->  
 </section>
-
-
 <div ng-controller="containerCtrl" id="layoutContainer" class="ml200">
-	<a style="display:none;" ng-repeat="btn in buttons" ng-click="addContainer(btn.name)" href="javascript:void(0)" class="btn btn-success btn-small m5 icon-white icon-plus-sign pr20"><i class="icon-white icon-plus-sign"></i> Add {{btn.name}}</a>
-<section class="pt0">
-	<div class='dropzone ui-widget-content'>Header<br/>
-	</div>
-	<div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content {{item.className}}'>{{item.id}}<br/>
-	</div>
-	<div class='dropzone ui-widget-content'>Footer<br/>
-	</div>
-</section>
+   <a style="display:none;" ng-repeat="btn in buttons" ng-click="addContainer(btn.name)" href="javascript:void(0)" class="btn btn-success btn-small m5 icon-white icon-plus-sign pr20"><i class="icon-white icon-plus-sign"></i> Add {{btn.name}}</a>
+   <section class="pt0">
+      <div class='dropzone ui-widget-content'>Header<br/>
+      </div>
+      <div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content {{item.className}}'>{{item.id}}<br/>
+      </div>
+      <div class='dropzone ui-widget-content'>Footer<br/>
+      </div>
+   </section>
 </div>
 <section ng-controller="submitCtrl" class="ml200">
-	<a ng-click="saveLayout()" href="javascript:void(0)" class="btn btn-success m5">Save Layout</a>
-	<a ng-click="previewLayout()" href="javascript:void(0)" class="btn btn-action m5">Preview</a>
-	<a href="javascript:void(0)" class="btn btn-info m5">Generate Page</a>
+   <a ng-click="saveLayout()" href="javascript:void(0)" class="btn btn-success m5">Save Layout</a>
+   <a ng-click="previewLayout()" href="javascript:void(0)" class="btn btn-action m5">Preview</a>
+   <a href="javascript:void(0)" class="btn btn-info m5">Generate Page</a>
 </section>

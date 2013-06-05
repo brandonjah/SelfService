@@ -51,6 +51,8 @@ app.factory('saveObject', function($routeParams) {
 	    };
 	    
 	    sharedService.sidebarUpdateContainer = function(container) {
+			console.log("sidebarUpdateContainer");
+			console.log(container);
 	    	for (var i=0;i<dbLayoutObj.containers.length;i++) {
 	    		if(container.id == dbLayoutObj.containers[i].id) {
 					dbLayoutObj.containers[i] = container;
