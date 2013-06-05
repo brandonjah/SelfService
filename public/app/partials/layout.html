@@ -77,7 +77,7 @@
    <!--/.well -->
    <!-- End Sidebar -->  
 </section>
-<div ng-controller="containerCtrl" id="layoutContainer" class="ml200">
+<div ng-controller="containerCtrl" id="layoutContainer">
    <a style="display:none;" ng-repeat="btn in buttons" ng-click="addContainer(btn.name)" href="javascript:void(0)" class="btn btn-success btn-small m5 icon-white icon-plus-sign pr20"><i class="icon-white icon-plus-sign"></i> Add {{btn.name}}</a>
    <section class="pt0">
       <div class='dropzone ui-widget-content'>Header<br/>
@@ -88,7 +88,7 @@
       </div>
    </section>
 </div>
-<section ng-controller="submitCtrl" class="ml200">
+<section ng-controller="submitCtrl">
    <a ng-click="saveLayout()" href="javascript:void(0)" class="btn btn-success m5">Save Layout</a>
    <a ng-click="previewLayout()" href="javascript:void(0)" class="btn btn-action m5">Preview</a>
    <a href="javascript:void(0)" class="btn btn-info m5">Generate Page</a>

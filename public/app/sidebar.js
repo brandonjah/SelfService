@@ -75,12 +75,20 @@ app.controller('productCtrl', function($scope, saveObject) {
 	  };
 	//end modal	
 	
-	$scope.setContainer = function(container) {
+	$scope.setContainer = function(passedContainer) {
 		$scope.close();
 		for (var i=0;i<$scope.containers.length;i++) {
-			if($scope.containers[i].id == container.id) {
-				$scope.containers[i].components = container.components;
+			if($scope.containers[i].id == passedContainer.id) {
+				$scope.containers[i].components = passedContainer.components;
 				$scope.containers[i].className = "w14i";
+				for (var x=0;x<passedContainer.length;x++) {
+					if(passedContainer.components.type=="image") {
+						if(passedContainer.components[x].align=="left"){
+							console.log("image align left");
+						}
+					}
+				}
+
 			}
 		}
 		saveObject.sidebarUpdateContainer($scope.containers);
@@ -119,18 +127,16 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                  {"text":"Image","enabled":"i","className":"fi"},
 	                  {"text":"Text","enabled":"t","className":"ft"},
 	                  {"text":"Widget + Image","enabled":"wi","className":"w34i"},
-	                  {"text":"Widget + Text","enabled":"wt","className":"w34t"},
-	                  {"text":"Text + Image","enabled":"ti","className":"t34i"},
+	                  {"text":"Image + Text","enabled":"it","className":"t34i"},
 	                  {"text":"Hotel","enabled":"h","className":"hotel"},
 	                  {"text":"Attraction","enabled":"a","className":"attraction"},
 	                  {"text":"Deals","enabled":"d","className":"deal"}
 	                ]; 
 	  
 	  $scope.selection = function(choice,container) {
+		  $scope.selectedProduct = choice.text;
 		  for (var i=0;i<$scope.containers.length;i++) {
-			  console.log("containers loop in selection");
 			  if(container.id == $scope.containers[i].id) {
-				  console.log("container ids match");
 				  $scope.containers[i].components = [];
 				  switch (choice.enabled)
 				  {
@@ -144,13 +150,10 @@ app.controller('productCtrl', function($scope, saveObject) {
 					  $scope.containers[i].components.push({"type":"text",showText:true,id:"1"});
 				    break;
 				  case "wi":
-					  $scope.containers[i].components.push({"type":"image",showImage:true,id:"1"},{"type":"widget",showWidget:true,id:"2"});
+					  $scope.containers[i].components.push({"type":"image_widget",showImage:true,id:"1"});
 				    break;
-				  case "wt":
-					  $scope.containers[i].components.push({"type":"text",showText:true,id:"1"},{"type":"widget",showWidget:true,id:"2"});
-				    break;
-				  case "ti":
-					  $scope.containers[i].components.push({"type":"text",showText:true,id:"1"},{"type":"image",showImage:true,id:"2"});
+				  case "it":
+					  $scope.containers[i].components.push({"type":"image_text",showText:true,id:"1"});
 				    break;
 				  case "h":
 						$scope.containers[i].components.push({"type":"hotel",showHotel:true,id:"1"});
@@ -164,7 +167,6 @@ app.controller('productCtrl', function($scope, saveObject) {
 				  }
 			  }
 		  }
-		  console.log("about to open modal");
 		  $scope.openModal(container);
 	  };
 });
