@@ -1,7 +1,7 @@
 app.factory('saveObject', function($routeParams) {
 	    var sharedService = {};
 	    var dbLayoutObj = [];
-	    dbLayoutObj.containers = [{"id":"Product0"}];
+	    dbLayoutObj.containers = [{id:"Product0",component:{text:"Choose Content"}}];
     	var containerCount = 1;
     	var componentCount = 0;
     	dbLayoutObj.siteId = $routeParams.siteId;
@@ -51,8 +51,6 @@ app.factory('saveObject', function($routeParams) {
 	    };
 	    
 	    sharedService.sidebarUpdateContainer = function(container) {
-			console.log("sidebarUpdateContainer");
-			console.log(container);
 	    	for (var i=0;i<dbLayoutObj.containers.length;i++) {
 	    		if(container.id == dbLayoutObj.containers[i].id) {
 					dbLayoutObj.containers[i] = container;
@@ -62,7 +60,8 @@ app.factory('saveObject', function($routeParams) {
 
 	    sharedService.updateContainers = function(id, oper) {
 	    	if(oper == 'add') {
-	    		dbLayoutObj.containers.push({'id':(id+containerCount),'components':[]});
+//	    		dbLayoutObj.containers.push({'id':(id+containerCount),'components':[]});
+	    		dbLayoutObj.containers.push({id:(id+containerCount),component:{text:'Choose Content'}});
 	    		containerCount++;
 	    	} else if (oper == 'del') {
 	    		for (var i = 0; i < dbLayoutObj.containers.length; i++) {

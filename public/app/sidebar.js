@@ -1,4 +1,4 @@
-app.controller('sidebarContainerCtrl', function($scope, saveObject) { //remove this controller, consolidate to product ctrl
+app.controller('sidebarContainerCtrl', function($scope, saveObject) {
 	$scope.isCollapsed = true;
 	$scope.containers = saveObject.getLayout();
 	$scope.addContainer = function() {
@@ -53,11 +53,14 @@ app.controller('productCtrl', function($scope, saveObject) {
 	$scope.containers = saveObject.getLayout();
 	$scope.addContainer = function() {
 		saveObject.updateContainers("Product", 'add');
+		//@TODO should wait until update is done to run
+		$scope.containers = saveObject.getLayout();
 	};
 	$scope.delContainer = function(item) {
 		saveObject.updateContainers(item.id, 'del');
+		//@TODO should wait until update is done to run
+		$scope.containers = saveObject.getLayout();
 	};	
-	
 	
 	//start modal
 	$scope.openModal = function (openedContainer) {
@@ -79,22 +82,16 @@ app.controller('productCtrl', function($scope, saveObject) {
 		$scope.close();
 		for (var i=0;i<$scope.containers.length;i++) {
 			if($scope.containers[i].id == passedContainer.id) {
-				$scope.containers[i].components = passedContainer.components;
+				$scope.containers[i].component = passedContainer.component;
 				$scope.containers[i].className = "w14i";
-				for (var x=0;x<passedContainer.length;x++) {
-					if(passedContainer.components.type=="image") {
-						if(passedContainer.components[x].align=="left"){
-							console.log("image align left");
-						}
-					}
+				if(passedContainer.component.type == "image_widget"||passedContainer.component.type == "image_text") {
+					$scope.containers[i].className = passedContainer.component.type+passedContainer.component.align+passedContainer.component.width.id;
 				}
-
 			}
 		}
 		saveObject.sidebarUpdateContainer($scope.containers);
 	};
 	
-	$scope.selectedProduct = "Content Properties";
 	$scope.widget = false;
 	  $scope.widgetTabs = {
 			    hotel: true,
@@ -112,8 +109,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 	$scope.widths = [
 	                 {"text":"1/4","id":"14"},
 	                 {"text":"3/4","id":"34"},
-	                 {"text":"1/2","id":"12"},
-	                 {"text":"Full","id":"1"}
+	                 {"text":"1/2","id":"12"}
 	                 ];
 	$scope.tiers = [
 	                {"id":"1"},
@@ -137,32 +133,32 @@ app.controller('productCtrl', function($scope, saveObject) {
 		  $scope.selectedProduct = choice.text;
 		  for (var i=0;i<$scope.containers.length;i++) {
 			  if(container.id == $scope.containers[i].id) {
-				  $scope.containers[i].components = [];
+				  $scope.containers[i].component = {};
 				  switch (choice.enabled)
 				  {
 				  case "w":
-					  $scope.containers[i].components.push({"type":"widget",showWidget:true,id:"1"});
+					  $scope.containers[i].component = {type:"widget",text:"Widget",showWidget:true};
 				    break;
 				  case "i":
-					  $scope.containers[i].components.push({"type":"image",showImage:true,id:"1"});
+					  $scope.containers[i].component = {type:"image",text:"Image",showImage:true};
 				    break;
 				  case "t":
-					  $scope.containers[i].components.push({"type":"text",showText:true,id:"1"});
+					  $scope.containers[i].component = {type:"text",text:"Text",showText:true};
 				    break;
 				  case "wi":
-					  $scope.containers[i].components.push({"type":"image_widget",showImage:true,id:"1"});
+					  $scope.containers[i].component = {type:"image_widget",text:"Image + Widget",showImageWidget:true};
 				    break;
 				  case "it":
-					  $scope.containers[i].components.push({"type":"image_text",showText:true,id:"1"});
+					  $scope.containers[i].component = {type:"image_text",text:"Image + Text",showImageText:true};
 				    break;
 				  case "h":
-						$scope.containers[i].components.push({"type":"hotel",showHotel:true,id:"1"});
+						$scope.containers[i].component = {type:"hotel",text:"Hotel",showHotel:true};
 				    break;
 				  case "a":
-						$scope.containers[i].components.push({"type":"attraction",showAttraction:true,id:"1"});
+						$scope.containers[i].component = {type:"attraction",text:"Attraction",showAttraction:true};
 				    break;
 				  case "d":
-						$scope.containers[i].components.push({"type":"deal",showDeal:true,id:"1"});
+						$scope.containers[i].component = {type:"deal",text:"Deal",showDeal:true};
 				    break;
 				  }
 			  }
