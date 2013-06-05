@@ -1,20 +1,14 @@
 <section class="row-fluid row" id="products">
    <!-- Start Sidebar -->
-   <div class="well sidebar-nav-fixed">
+   <div class="sidebar-nav-fixed">
       <ul class="nav nav-list">
          <li class="nav-header">Landing Page</li>
-         <li class="active"><a>Header</a></li>
-         <li class="dropdown" ng-controller="headerCtrl">
-            <a class="dropdown-toggle" ng-click="openProperties()">
-            Add Content
-            </a>
-         </li>
          <li class="active mt15px">
             <a>Content</a>
          </li>
          <div ng-controller="productCtrl">
             <li class="dropdown">
-            <div ng-repeat="container in containers">
+            <section ng-repeat="container in containers">
                <a class="dropdown-toggle">
                {{container.component.text}}
                </a><a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delContainer(container)"><i class="icon-white icon-remove-sign"></i></a>
@@ -23,9 +17,11 @@
                      <a ng-click="selection(choice, container)">{{choice.text}}</a>					      
                   </li>
                </ul>
-               </div>
+               </section>
             </li>
-            <button type="button" class="btn displayBlock btn-success" ng-click="addContainer()">Add Container</button>
+            <section>
+            	<button type="button" class="btn displayBlock btn-success" ng-click="addContainer()">Add Container</button>
+            </section>
             <div modal="shouldBeOpen" close="close()" options="opts">
                <div class="modal-header">
                   <h3>Set Component Properties</h3>
@@ -57,7 +53,7 @@
 	                              <option value="">-- tier --</option>
 	                           </select>
                            </section>
-                           <section class="" ng-show="openedContainer.component.showWidget">
+                           <section class="" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
                               <h5>Enabled Tabs</h5>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.hotel" btn-checkbox>Hotel</button>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.deal" btn-checkbox>Deal</button>
@@ -71,26 +67,15 @@
                </div><!-- end modal body -->
             </div><!-- end modal div -->
          </div><!-- end productCtrl -->
-         <li class="active mt15px"><a>Footer</a></li>
-         <li class="dropdown" ng-controller="footerCtrl">
-            <a class="dropdown-toggle">
-            Add Content
-            </a>
-         </li>
       </ul>
    </div>
-   <!--/.well -->
+   <!--/.nav-list -->
    <!-- End Sidebar -->  
 </section>
-<div ng-controller="containerCtrl" id="layoutContainer">
+<div ng-controller="containerCtrl" id="layoutContainer" class="">
    <a style="display:none;" ng-repeat="btn in buttons" ng-click="addContainer(btn.name)" href="javascript:void(0)" class="btn btn-success btn-small m5 icon-white icon-plus-sign pr20"><i class="icon-white icon-plus-sign"></i> Add {{btn.name}}</a>
    <section class="pt0">
-      <div class='dropzone ui-widget-content'>Header<br/>
-      </div>
-      <div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content {{item.className}}'>{{item.id}}<br/>
-      </div>
-      <div class='dropzone ui-widget-content'>Footer<br/>
-      </div>
+      <div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content {{item.className}}'></div>
    </section>
 </div>
 <section ng-controller="submitCtrl">

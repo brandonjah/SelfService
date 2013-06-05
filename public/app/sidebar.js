@@ -9,45 +9,6 @@ app.controller('sidebarContainerCtrl', function($scope, saveObject) {
 	};
 });
 
-app.controller('headerCtrl', function($scope, $dialog) {
-	  $scope.items = [
-	                  {"text":"Widget","enabled":"w","className":"fw"},
-	                  {"text":"Image","enabled":"i","className":"fi"},
-	                  {"text":"Text","enabled":"t","className":"ft"},
-	                  {"text":"Widget + Image","enabled":"wi","className":"w34i"},
-	                  {"text":"Widget + Text","enabled":"wt","className":"w34t"},
-	                  {"text":"Text + Image","enabled":"ti","className":"t34i"},
-	                  {"text":"Empty","enabled":"","className":""}
-	                ];
-	  
-	  $scope.opts = {
-			    backdrop: true,
-			    keyboard: true,
-			    backdropClick: true,
-			    templateUrl: '/assets/app/partials/sidebar-modal.html',
-			    controller: 'headerModalCtrl',
-			    resolve:       {componentClassName: function() {return angular.copy($scope.widget);}}
-			  };
-
-	  $scope.openProperties = function(){
-	    var d = $dialog.dialog($scope.opts);
-	    d.open().then(function(result){
-	      if(result)
-	      {
-	    	  console.log("here");
-	      }
-	    });
-	  };
-});
-
-app.controller('headerModalCtrl', function($scope, dialog){
-	$scope.result = {};  
-
-	  $scope.close = function(result){
-	    dialog.close(result);
-	  };
-});
-
 app.controller('productCtrl', function($scope, saveObject) {
 	$scope.isCollapsed = true;
 	$scope.containers = saveObject.getLayout();
@@ -90,7 +51,6 @@ app.controller('productCtrl', function($scope, saveObject) {
 		saveObject.sidebarUpdateContainer($scope.containers);
 	};
 	
-	$scope.widget = false;
 	  $scope.widgetTabs = {
 			    hotel: true,
 			    deal: true,
@@ -98,11 +58,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 			    ticket: true,
 			    flight: true
 			  };
-	$scope.image = false;
-	$scope.text = false;
-	$scope.hotel = false;
-	$scope.attraction = false;
-	$scope.deal = false;
+
 	$scope.classname;
 	$scope.widths = [
 	                 {"text":"1/4","id":"14"},
@@ -113,7 +69,8 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                {"id":"1"},
 	                {"id":"2"},
 	                {"id":"3"},
-	                {"id":"4"}
+	                {"id":"4"},
+	                {"id":"5"}
 	                ];
 	$scope.alignments = ["left","right"];
 	  $scope.items = [
@@ -163,19 +120,4 @@ app.controller('productCtrl', function($scope, saveObject) {
 		  }
 		  $scope.openModal(container);
 	  };
-});
-
-
-
-app.controller('footerCtrl', function($scope) {
-	  $scope.items = [
-	                  {"text":"Widget","enabled":"w","className":"fw"},
-	                  {"text":"Image","enabled":"i","className":"fi"},
-	                  {"text":"Text","enabled":"t","className":"ft"},
-	                  {"text":"Widget + Image","enabled":"wi","className":"w34i"},
-	                  {"text":"Widget + Text","enabled":"wt","className":"w34t"},
-	                  {"text":"Text + Image","enabled":"ti","className":"t34i"},
-	                  {"text":"Empty","enabled":"","className":""}
-	                ];
-	  
 });
