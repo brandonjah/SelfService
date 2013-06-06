@@ -27,7 +27,7 @@ app.factory('saveObject', function($routeParams) {
 	    };
 	    
 	    sharedService.clear = function() {
-	    	dbLayoutObj.containers = [];
+	    	dbLayoutObj.containers = [{id:"Product0",component:{text:"Choose Content"}}];
 	    };
 
 	    sharedService.updateComponents = function(oper, className, id, containerName, width) {

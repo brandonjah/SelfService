@@ -48,6 +48,16 @@ app.controller('submitCtrl', function($scope, $http, $location, saveObject) {
 	$scope.previewLayout = function() {
 		$location.path('/preview');
 	};
+	$scope.generate = function() {
+		$http.post('/generate', {}).
+	      success(function(data){
+	    	  console.log('in generate success');
+	          $scope.success = true;
+	        }).
+	        error(function(data){
+	          $scope.httpError = true;
+	        });
+	};
 });
 
 app.controller('PreviewCtrl', function($scope, saveObject) {

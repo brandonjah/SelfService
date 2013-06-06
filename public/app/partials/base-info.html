@@ -1,58 +1,54 @@
 <div ng-controller="BaseInfoCtrl">
-  <form class="form-horizontal" name="siteInfo">
-    <fieldset>
-      <div id="legend" class="">
-        <legend class="">Base Site and Template Info</legend>
-      </div>
-    <div class="control-group">
-
-          <!-- Text input-->
-          <label class="control-label" for="input01">Site ID:</label>
-          <div class="controls">
-            <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId" value="siteId" required>
-            <button class="btn btn-info" ng-disabled="!siteId" ng-click="search(siteId)">Search</button>
-          </div>
-        </div>
-
-    <div class="control-group">
-
-          <!-- Text input-->
-          <label class="control-label" for="input01">Template Name:</label>
-          <div class="controls">
-            <input type="text" placeholder="Ex: convis-1" class="input-xlarge" ng-model="templateName" value="templateName" required>
-            <p class="help-block">company name in 1 word, increment number after dash by 1</p>
-          </div>
-          <br>
-          	<label class="control-label" for="bgcolor">Background Color:</label>
-          	<div class="controls">
-				<input colorpicker="hex" class="span2" type="text" ng-model="bgColor">
-			</div>
-        <br>
-          	<label class="control-label" for="txtcolor">Text Color:</label>
-          	<div class="controls">
-				<input colorpicker="hex" class="span2" type="text" ng-model="txtColor">
-			</div>
-			        <br>
-          	<label class="control-label" for="txtcolor">Client Site URL:</label>
-          <div class="controls">
-            <input type="text" placeholder="Ex: sandiego.org" class="input-xlarge" ng-model="clientSite" value="clientSite">
-          </div>
-        </div>
-
-          <label class="control-label"></label>
-
-          <!-- Button -->
-          <div class="controls">
-            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save()">Save Site Info</button>
-            <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew()">Create New Layout</button>
-            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load()">Load Existing Layout</button>
-          </div>
-          
-          <div class="controls mt15px">
-          	<a href="#/upload">Upload Files</a>
-          </div>
-        </div>
-
-    </fieldset>
-  </form>
+   <form class="form-horizontal" name="siteInfo">
+      <fieldset>
+         <div id="legend" class="">
+            <legend class="">Base Site and Template Info</legend>
+         </div>
+         <div class="control-group">
+            <!-- Text input-->
+            <label class="control-label" for="input01">Bundle</label>
+            <div class="controls">
+               <select class="input-small w120" ng-model="bundleId" ng-options="bundle as bundle for bundle in bundles">
+                    <option value="">-- bundle --</option>
+               </select>
+<!--                <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId" value="siteId" required>
+               <button class="btn btn-info" ng-disabled="!siteId" ng-click="search(siteId)">Search</button> -->
+            </div>
+         </div>
+         <div class="control-group">
+            <!-- Text input-->
+<!--             <label class="control-label" for="input01">Template Name:</label>
+            <div class="controls">
+               <input type="text" placeholder="Ex: convis-1" class="input-xlarge" ng-model="templateName" value="templateName" required>
+               <p class="help-block">company name in 1 word, increment number after dash by 1</p>
+            </div>
+            <br> -->
+            <label class="control-label" for="bgcolor">Background Color:</label>
+            <div class="controls">
+               <input colorpicker="hex" class="span2" type="text" ng-model="bgColor">
+            </div>
+            <br>
+            <label class="control-label" for="txtcolor">Text Color:</label>
+            <div class="controls">
+               <input colorpicker="hex" class="span2" type="text" ng-model="txtColor">
+            </div>
+            <br>
+            <label class="control-label" for="txtcolor">Client Site URL:</label>
+            <div class="controls">
+               <input type="text" placeholder="Ex: sandiego.org" class="input-xlarge" ng-model="clientSite" value="clientSite">
+            </div>
+         </div>
+         <label class="control-label"></label>
+         <!-- Button -->
+         <div class="controls">
+            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save(siteId)">Update Site Info</button>
+            <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew(siteId)">Create New Layout</button>
+            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load(siteId)">Load Existing Layout</button>
+         </div>
+         <div class="controls mt15px">
+            <a href="#/upload">Upload Files</a>
+         </div>
+</div>
+</fieldset>
+</form>
 </div>

@@ -2,16 +2,15 @@
    <!-- Start Sidebar -->
    <div class="sidebar-nav-fixed">
       <ul class="nav nav-list">
-         <li class="nav-header">Landing Page</li>
          <li class="active mt15px">
             <a>Content</a>
          </li>
          <div ng-controller="productCtrl">
             <li class="dropdown">
             <section ng-repeat="container in containers">
-               <a class="dropdown-toggle">
+               <a class="dropdown-toggle w100 displayInlineBlock">
                {{container.component.text}}
-               </a><a href="javascript:void(0)" class="btn btn-danger btn-mini" ng-click="$parent.delContainer(container)"><i class="icon-white icon-remove-sign"></i></a>
+               </a><a href="javascript:void(0)" ng-click="$parent.delContainer(container)"><span class="icon-remove-sign"></span></a>
                <ul class="dropdown-menu">
                   <li ng-repeat="choice in items">
                      <a ng-click="selection(choice, container)">{{choice.text}}</a>					      
@@ -29,12 +28,11 @@
                <div class="modal-body">
                         <h3 class="m5">{{openedContainer.component.text}}</h3>
                            <section ng-show="openedContainer.component.showText">
-	                           <input type="text" placeholder="header" class="input" ng-model="openedContainer.component.header" required><br>
+	                           <input type="text" placeholder="header" class="input-block-level" ng-model="openedContainer.component.header" required>
 	                           <textarea rows="3" placeholder="text content" ng-model="openedContainer.component.textArea" required></textarea>
                            </section>
                            <section ng-show="openedContainer.component.showHotel">
-                           <input type="text" placeholder="hotel ids" class="input" ng-model="openedContainer.component.hotelIds" required>
-                           <br>
+                           <input type="text" placeholder="hotel ids" class="input-block-level" ng-model="openedContainer.component.hotelIds" required>
                            </section>
                            <section ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">
 	                           <label class="control-label displayInlineBlock w75">Image Width:</label>
@@ -47,6 +45,9 @@
 	                              <option value="">-- align --</option>
 	                           </select>
                            </section>
+                           <section ng-show="openedContainer.component.showImage">
+                           		<input class="input-file" type="file" name="picture"></input>
+                           </section>
 						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction">
 	                           <label class="control-label displayInlineBlock w75">Tier:</label>
 	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-options="tier as tier.id for tier in tiers">
@@ -55,6 +56,11 @@
                            </section>
                            <section class="" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
                               <h5>Enabled Tabs</h5>
+                              <input type="text" placeholder="tab order" class="input w65">
+                              <input type="text" placeholder="tab order" class="input w65">
+                              <input type="text" placeholder="tab order" class="input w65">
+                              <input type="text" placeholder="tab order" class="input w65">
+                              <input type="text" placeholder="tab order" class="input w65"><br>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.hotel" btn-checkbox>Hotel</button>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.deal" btn-checkbox>Deal</button>
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.car" btn-checkbox>Car</button>
@@ -62,7 +68,7 @@
                               <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.ticket" btn-checkbox>Ticket</button>
                            </section>
                      <section>
-                     	<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(openedContainer)">Set Container</button>
+                     	<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(openedContainer)">Save</button>
                      </section>							
                </div><!-- end modal body -->
             </div><!-- end modal div -->
@@ -81,5 +87,5 @@
 <section ng-controller="submitCtrl">
    <a ng-click="saveLayout()" href="javascript:void(0)" class="btn btn-success m5">Save Layout</a>
    <a ng-click="previewLayout()" href="javascript:void(0)" class="btn btn-action m5">Preview</a>
-   <a href="javascript:void(0)" class="btn btn-info m5">Generate Page</a>
+   <a ng-click="generate()" href="javascript:void(0)" class="btn btn-info m5">Generate Page</a>
 </section>

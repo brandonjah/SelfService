@@ -1,6 +1,10 @@
-app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, saveObject) {    
+app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, saveObject) {
+	$scope.bundles = [
+	                  "convis",
+	                  "san-fran"
+	                  ];
 	$scope.url = '/info';
-	$scope.save = function() {
+	$scope.save = function(siteId) {
 		$http.post($scope.url, { 
 			"siteId" : $scope.siteId,
 			"templateName" : $scope.templateName,
@@ -16,12 +20,13 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	          $scope.httpError = true;
 	        });
 	}
-	$scope.createNew = function() {
+	$scope.createNew = function(siteId) {
+		$scope.save(siteId);
 		saveObject.clear();
-		layoutPage($scope.siteId);
+		layoutPage(siteId);
 	}
-	$scope.search = function() {
-	    $http({method: 'GET', url: '/site/'+$scope.siteId}).
+	$scope.search = function(siteId) {
+	    $http({method: 'GET', url: '/site/'+siteId}).
 	    success(function(data, status, headers, config) {
     		  $scope.templateName = data.templateName;
     		  $scope.bgColor = data.bgColor;
@@ -36,8 +41,8 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	          $scope.success = false;
 	    });
 	}
-	$scope.load = function() {
-	    $http({method: 'GET', url: '/load-layout/'+$scope.siteId}).
+	$scope.load = function(siteId) {
+	    $http({method: 'GET', url: '/load-layout/'+siteId}).
 	    success(function(data, status, headers, config) {
 	    	console.log(data);
 	    	console.log("data layout in base-info");
@@ -49,7 +54,7 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	          layoutPage($scope.siteId);
 	    }).
 	    error(function(data, status, headers, config) {
-	    	alert("no layout found for site ID " + $scope.siteId);
+	    	alert("no layout found for site ID " + siteId);
 	          $scope.success = false;
 	    });
 	}
