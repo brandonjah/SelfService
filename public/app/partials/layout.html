@@ -13,7 +13,7 @@
                </a><a href="javascript:void(0)" ng-click="$parent.delContainer(container)"><span class="icon-remove-sign"></span></a>
                <ul class="dropdown-menu">
                   <li ng-repeat="choice in items">
-                     <a ng-click="selection(choice, container)">{{choice.text}}</a>					      
+                     <a ng-click="$parent.selection(choice, container)">{{choice.text}}</a>					      
                   </li>
                </ul>
                </section>
@@ -29,7 +29,7 @@
                         <h3 class="m5">{{openedContainer.component.text}}</h3>
                            <section ng-show="openedContainer.component.showText">
 	                           <input type="text" placeholder="header" class="input-block-level" ng-model="openedContainer.component.header" required>
-	                           <textarea rows="3" placeholder="text content" ng-model="openedContainer.component.textArea" required></textarea>
+	                           <textarea class="input-block-level" rows="3" placeholder="text content" ng-model="openedContainer.component.textArea" required></textarea>
                            </section>
                            <section ng-show="openedContainer.component.showHotel">
                            <input type="text" placeholder="hotel ids" class="input-block-level" ng-model="openedContainer.component.hotelIds" required>
@@ -54,7 +54,7 @@
 	                              <option value="">-- tier --</option>
 	                           </select>
                            </section>
-                           <section class="" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
+                           <section class="tabs" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
                               <h5>Enabled Tabs</h5>
                               <input type="text" placeholder="tab order" class="input w65">
                               <input type="text" placeholder="tab order" class="input w65">
