@@ -40,9 +40,9 @@ POST	/info						controllers.Template.save()
 #Layout save
 POST	/save-layout				controllers.Template.saveLayout()
 #Site search
-GET		/site/:siteId				controllers.Template.siteSearch(siteId:String)
+GET		/site/:bundleId				controllers.Template.siteSearch(bundleId:String)
 #Load layout
-GET		/load-layout/:siteId		controllers.Template.loadLayout(siteId:String)
+GET		/load-layout/:bundleId		controllers.Template.loadLayout(bundleId:String)
 #File upload
 POST	/file-upload				controllers.Template.fileUpload()
 GET		/list-uploads				controllers.Template.listUploads()

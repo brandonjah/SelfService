@@ -28,12 +28,12 @@ app.controller('submitCtrl', function($scope, $http, $location, saveObject) {
 	$scope.saveLayout = function() {
 		saveObject.logContents();
 		var containers = saveObject.getLayout();
-		var siteId = saveObject.getSiteId();
+		var bundleId = saveObject.getbundleId();
 
 		console.log('containers');
 		console.log(containers);
 			$http.post($scope.url, {
-				"siteId" : siteId,
+				"bundleId" : bundleId,
 				"containers" : containers
 				}).
 		      success(function(data){

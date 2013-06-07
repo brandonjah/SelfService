@@ -6,9 +6,9 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	                  "san-fran"
 	                  ];
 	$scope.url = '/info';
-	$scope.save = function(siteId) {
+	$scope.save = function(bundleId) {
 		$http.post($scope.url, { 
-			"siteId" : $scope.siteId,
+			"bundleId" : $scope.bundleId,
 			"templateName" : $scope.templateName,
 			"bgColor" : $scope.bgColor,
 			"txtColor" : $scope.txtColor
@@ -22,18 +22,18 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	          $scope.httpError = true;
 	        });
 	}
-	$scope.createNew = function(siteId) {
-		$scope.save(siteId);
+	$scope.createNew = function(bundleId) {
+		$scope.save(bundleId);
 		saveObject.clear();
-		layoutPage(siteId);
+		layoutPage(bundleId);
 	}
-	$scope.search = function(siteId) {
-	    $http({method: 'GET', url: '/site/'+siteId}).
+	$scope.search = function(bundleId) {
+	    $http({method: 'GET', url: '/site/'+bundleId}).
 	    success(function(data, status, headers, config) {
     		  $scope.templateName = data.templateName;
     		  $scope.bgColor = data.bgColor;
     		  $scope.txtColor = data.txtColor;
-	    	  $scope.siteId = data.siteId;	    	  
+	    	  $scope.bundleId = data.bundleId;	    	  
 	          $scope.success = true;
 	    }).
 	    error(function(data, status, headers, config) {
@@ -43,8 +43,8 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	          $scope.success = false;
 	    });
 	}
-	$scope.load = function(siteId) {
-	    $http({method: 'GET', url: '/load-layout/'+siteId}).
+	$scope.load = function(bundleId) {
+	    $http({method: 'GET', url: '/load-layout/'+bundleId}).
 	    success(function(data, status, headers, config) {
 	    	console.log(data);
 	    	console.log("data layout in base-info");
@@ -53,14 +53,14 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	    		saveObject.update(data.layout);
 	    	}
 	          $scope.success = true;
-	          layoutPage($scope.siteId);
+	          layoutPage($scope.bundleId);
 	    }).
 	    error(function(data, status, headers, config) {
-	    	alert("no layout found for site ID " + siteId);
+	    	alert("no layout found for bundle ID " + bundleId);
 	          $scope.success = false;
 	    });
 	}
-	var layoutPage = function(siteId) {
-		$location.path('/layout/'+siteId);
+	var layoutPage = function(bundleId) {
+		$location.path('/layout/'+bundleId);
 	}
 });

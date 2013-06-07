@@ -4,14 +4,14 @@ app.factory('saveObject', function($routeParams) {
 	    dbLayoutObj.containers = [{id:"Product0",component:{text:"Choose Content"}}];
     	var containerCount = 1;
     	var componentCount = 0;
-    	dbLayoutObj.siteId = $routeParams.siteId;
+    	dbLayoutObj.bundleId = $routeParams.bundleId;
 	    
 	    sharedService.getLayout = function() {
 	    	return dbLayoutObj.containers;
 	    };
 	    
-	    sharedService.getSiteId = function() {
-	    	return dbLayoutObj.siteId;
+	    sharedService.getbundleId = function() {
+	    	return dbLayoutObj.bundleId;
 	    };
 	    
 	    sharedService.update = function(dbReturnObj) {

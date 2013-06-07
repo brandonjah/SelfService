@@ -32,7 +32,7 @@ public class Base extends Model {
     
     @Constraints.Required
     @Formats.NonEmpty
-    public String siteId;
+    public String bundleId;
     
     public String bgColor;
     public String txtColor;
@@ -40,7 +40,7 @@ public class Base extends Model {
     public LayoutJSON layout;
     
     public static class LayoutJSON {
-    	public String siteId;
+    	public String bundleId;
     	public Collection<Containers> containers;
     	
 	    static class Containers  {  
@@ -70,16 +70,16 @@ public class Base extends Model {
         return coll.findOne(DBQuery.is("id", id));
     }
     
-    public static Base findBySiteId(String siteId) {
-    	Logger.debug("findbysiteid in model base");
-    	return coll.findOne(DBQuery.is("siteId", siteId));
+    public static Base findByBundleId(String bundleId) {
+    	Logger.debug("findbybundleId in model base");
+    	return coll.findOne(DBQuery.is("bundleId", bundleId));
     }
-    
+
     public static boolean save(Base base) {
     	if (base == null) {
           return false;
         } else {
-        	DBCursor<Base> cursor = coll.find().is("siteId", base.siteId);
+        	DBCursor<Base> cursor = coll.find().is("bundleId", base.bundleId);
         	if (cursor.hasNext()) {
         	    coll.update(cursor.next(), base);
             	return true;
@@ -104,7 +104,7 @@ public class Base extends Model {
     
     // need to rename returned container
     public static boolean saveLayout(LayoutJSON passedLayout) {
-    	DBCursor<Base> cursor = coll.find().is("siteId", passedLayout.siteId);
+    	DBCursor<Base> cursor = coll.find().is("bundleId", passedLayout.bundleId);
     	while (cursor.hasNext()) {
     		Base dbInsertObj = cursor.next();
     		dbInsertObj.layout = passedLayout;
@@ -114,12 +114,12 @@ public class Base extends Model {
     	return false;
     }
     
-    public static Base siteSearch(String siteId) {
-    	DBCursor<Base> cursor = coll.find(DBQuery.is("siteId", siteId));
+    public static Base siteSearch(String bundleId) {
+    	DBCursor<Base> cursor = coll.find(DBQuery.is("bundleId", bundleId));
 		Base returnSiteInfo = new Base();
 			while (cursor.hasNext()) {
 	    		Base dbInsertObj = cursor.next();
-	    		returnSiteInfo.siteId = dbInsertObj.siteId;
+	    		returnSiteInfo.bundleId = dbInsertObj.bundleId;
 	    		returnSiteInfo.templateName = dbInsertObj.templateName;
 	    		returnSiteInfo.bgColor = dbInsertObj.bgColor;
 	    		returnSiteInfo.txtColor = dbInsertObj.txtColor;
@@ -128,8 +128,8 @@ public class Base extends Model {
     		return returnSiteInfo;
     }
     
-    public static Base loadLayout(String siteId) {
-    	DBCursor<Base> cursor = coll.find(DBQuery.is("siteId", siteId));
+    public static Base loadLayout(String bundleId) {
+    	DBCursor<Base> cursor = coll.find(DBQuery.is("bundleId", bundleId));
     	Base base = new Base();
     	while(cursor.hasNext()) {
     		return cursor.next();

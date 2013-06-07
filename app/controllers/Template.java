@@ -33,7 +33,7 @@ public class Template extends Controller {
 	public static Result save() {
 	    final DynamicForm form = form().bindFromRequest();
             Base base = new Base();
-            base.siteId = form.get("siteId");
+            base.bundleId = form.get("bundleId");
             base.templateName = form.get("templateName");
 			base.bgColor = form.get("bgColor");
 			base.txtColor = form.get("txtColor");
@@ -49,14 +49,14 @@ public class Template extends Controller {
         return ok();
     }
 
-	public static Result siteSearch(String siteId) {
+	public static Result siteSearch(String bundleId) {
 		ObjectNode result = Json.newObject();
 //		Base base = new Base();
-		Base siteInfo = Base.siteSearch(siteId);
+		Base siteInfo = Base.siteSearch(bundleId);
 		if(siteInfo == null) {
 			return null;	
 		} else {
-			result.put("siteId", siteId);
+			result.put("bundleId", bundleId);
 			result.put("templateName", siteInfo.templateName);
 			result.put("bgColor", siteInfo.bgColor);
 			result.put("txtColor", siteInfo.txtColor);
@@ -65,14 +65,14 @@ public class Template extends Controller {
         
     }
 	
-	public static Result loadLayout(String siteId) {
-		Base returnedLayout = Base.loadLayout(siteId);
-		if(returnedLayout.siteId == null) {
+	public static Result loadLayout(String bundleId) {
+		Base returnedLayout = Base.loadLayout(bundleId);
+		if(returnedLayout.bundleId == null) {
 			Logger.debug("returnedLayout is null");
 			return badRequest();	
 		} else {
 			Logger.debug("returnedLayout ok");
-			Logger.debug(returnedLayout.siteId);
+			Logger.debug(returnedLayout.bundleId);
 			return ok(Json.toJson(returnedLayout));
 		}
         

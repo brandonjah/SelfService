@@ -8,7 +8,7 @@
             <!-- Text input-->
             <label class="control-label" for="input01">Bundle</label>
             <div class="controls">
-               <select class="input-small w120" ng-model="bundleId" ng-options="bundle as bundle for bundle in bundles">
+               <select class="input-xlarge" ng-model="bundleId" ng-options="bundle as bundle for bundle in bundles">
                     <option value="">-- bundle --</option>
                </select>
 <!--                <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId" value="siteId" required>
@@ -30,7 +30,7 @@
             <br>
             <label class="control-label" for="txtcolor">Text Color:</label>
             <div class="controls">
-               <input colorpicker="hex" class="span2" type="text" ng-model="txtColor">
+               <input colorpicker="hex" class="input-small span2" type="text" ng-model="txtColor">
             </div>
             <br>
             <label class="control-label" for="txtcolor">Client Site URL:</label>
@@ -41,9 +41,9 @@
          <label class="control-label"></label>
          <!-- Button -->
          <div class="controls">
-            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save(siteId)">Update Site Info</button>
-            <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew(siteId)">Create New Layout</button>
-            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load(siteId)">Load Existing Layout</button>
+            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save(bundleId)">Update Site Info</button>
+            <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew(bundleId)">Create New Layout</button>
+            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load(bundleId)">Load Existing Layout</button>
          </div>
          <section class="controls">
             <a href="#/upload">Upload Files</a>

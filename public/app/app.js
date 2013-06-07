@@ -3,7 +3,7 @@ var app = angular.module('LandingPage', ['ngDragDrop','ui.bootstrap','colorpicke
 app.config(['$routeProvider', '$httpProvider',
     function($routeProvider) {
 	  $routeProvider.
-	      when('/layout/:siteId', {templateUrl: 'assets/app/partials/layout.html', controller: this.containerCtrl}).
+	      when('/layout/:bundleId', {templateUrl: 'assets/app/partials/layout.html', controller: this.containerCtrl}).
 	      when('/info', {templateUrl: 'assets/app/partials/base-info.html', controller: this.BaseInfoCtrl}).
 	      when('/upload', {templateUrl: 'assets/app/partials/upload.html', controller: this.UploadCtrl}).
 	      when('/preview', {templateUrl: 'assets/app/partials/preview.html', controller: this.PreviewCtrl}).
