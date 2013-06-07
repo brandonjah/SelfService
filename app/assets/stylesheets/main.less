@@ -1,3 +1,4 @@
+body { background-color: #f2f2f2;}
 
 /* General */
 section {
@@ -38,7 +39,7 @@ section {
 	width: 75px !important;
 }
 .w100 {
-	width: 100px;
+	width: 80%;
 }
 .w120 {
 	width: 120px;
@@ -90,8 +91,8 @@ section {
 
 .dropzone {
 	height: 235px;
-	width: 900px;
-	margin: 10px;
+	width: 100%;
+
 	border: 1px dotted #aaaaaa !important;
 }
 
@@ -103,11 +104,7 @@ section {
 /* Fixed Sidebar */
 
 .sidebar-nav-fixed {
-    padding: 9px 0;
-    position:fixed;
-    left:20px;
-    top:60px;
-    width:175px;
+
 }
 
 .row-fluid > .span-fixed-sidebar {
@@ -143,3 +140,35 @@ section {
 .hotel5{background:url(../images/layout/tier5-hotels.png) no-repeat 0 0 !important;}
 .attraction5{background:url(../images/layout/tier5-tickets.png) no-repeat 0 0 !important;}
 .deal5{background:url(../images/layout/tier5-packages.png) no-repeat 0 0 !important;}
+
+
+/* hilding */
+#sswrap, div.container { width: 1024px; left: 390px; position: absolute;}
+section#products { width:350px; left:75px; top:60px; position: fixed; padding: 0; min-width: 300px;}
+.sidebar-nav-fixed { width: 100%; position: relative; left: auto; top: auto;}
+#layoutContainer { width: 1000px; background-color: #fff; float: right; box-shadow: 0 0 8px rgba(0,0,0,0.5); min-width: 900px;}
+#layoutContainer section { padding: 2em;}
+.row { margin: 0;}
+section#ssActions { clear: both; text-align: right;}
+.nav-list { padding-right: 20px;}
+.nav-list > .active > a, .nav-list > .active > a:hover { padding:0 1em; font-size: 1.2em; line-height: 30px; height: 30px; background: url(../images/arrow.png) no-repeat center right transparent;}
+.nav-list div li section { background-color: #666; padding: .5em; margin: .5em 0; border-radius: 20px; text-indent:10px;}
+.nav-list div li section a { color: #fff; cursor: pointer;}
+.nav-list li.dropdown { width: 90%;}
+a.ssClose { float: right;}
+.open > .dropdown-menu li a { color: #666;}
+.dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
+    -moz-text-blink: none;
+    -moz-text-decoration-color: -moz-use-text-color;
+    -moz-text-decoration-line: none;
+    -moz-text-decoration-style: solid;
+    background-color: #ccc;
+    color: #333;
+    cursor: pointer;
+}
+.ui-widget-content { background-position: center top !important;}
+.dropzone.hotel1, .dropzone.widget { height: 290px;}
+.dropzone.hotel3, .dropzone.hotel4 { height: 245px;}
+.dropzone.image { height: 250px;}
+.dropzone.hotel2 { height: 395px;}
+.dropzone.image_widgetleft12 { height:355px;}

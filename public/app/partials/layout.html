@@ -10,7 +10,7 @@
             <section ng-repeat="container in containers">
                <a class="dropdown-toggle w100 displayInlineBlock">
                {{container.component.text}}
-               </a><a href="javascript:void(0)" ng-click="$parent.delContainer(container)"><span class="icon-remove-sign"></span></a>
+               </a><a href="javascript:void(0)" ng-click="$parent.delContainer(container)" class="ssClose"><span class="icon-remove-sign"></span></a>
                <ul class="dropdown-menu">
                   <li ng-repeat="choice in items">
                      <a ng-click="selection(choice, container)">{{choice.text}}</a>					      
@@ -84,7 +84,7 @@
       <div ng-repeat='item in containers' ng-model='newObj[item.id]' class='dropzone ui-widget-content {{item.className}}'></div>
    </section>
 </div>
-<section ng-controller="submitCtrl">
+<section ng-controller="submitCtrl" id="ssActions">
    <a ng-click="saveLayout()" href="javascript:void(0)" class="btn btn-success m5">Save Layout</a>
    <a ng-click="previewLayout()" href="javascript:void(0)" class="btn btn-action m5">Preview</a>
    <a ng-click="generate()" href="javascript:void(0)" class="btn btn-info m5">Generate Page</a>
