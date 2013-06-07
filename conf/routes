@@ -45,5 +45,6 @@ GET		/site/:siteId				controllers.Template.siteSearch(siteId:String)
 GET		/load-layout/:siteId		controllers.Template.loadLayout(siteId:String)
 #File upload
 POST	/file-upload				controllers.Template.fileUpload()
+GET		/list-uploads				controllers.Template.listUploads()
 #Generate landing page
 POST	/generate					controllers.Template.generate()

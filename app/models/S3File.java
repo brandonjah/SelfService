@@ -4,12 +4,16 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import play.Logger;
 import play.db.ebean.Model;
+import play.modules.mongodb.jackson.MongoDB;
 import plugins.S3Plugin;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import net.vz.mongodb.jackson.JacksonDBCollection;
 import net.vz.mongodb.jackson.ObjectId;
 
 import java.io.File;
@@ -29,13 +33,15 @@ public class S3File extends Model {
 
     @Transient
     public File file;
+    
 
     public URL getUrl() throws MalformedURLException {
         return new URL("https://s3.amazonaws.com/" + bucket + "/" + getActualFileName());
     }
 
     private String getActualFileName() {
-        return id + "/" + name;
+    	this.id = UUID.randomUUID();
+        return this.id + "/" + name;
     }
 
     @Override
@@ -46,7 +52,6 @@ public class S3File extends Model {
         }
         else {
             this.bucket = S3Plugin.s3Bucket;
-            
 //            super.save(); // assigns an id
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, getActualFileName(), file);
             putObjectRequest.withCannedAcl(CannedAccessControlList.PublicRead); // public for all
