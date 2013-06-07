@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.UUID;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
@@ -18,6 +20,7 @@ import models.S3File;
 import play.Logger;
 import play.libs.Json;
 import play.data.DynamicForm;
+import play.db.ebean.Model;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -95,6 +98,13 @@ public class Template extends Controller {
 		    flash("error", "Missing file");
 		    return redirect(routes.Application.index());    
 		  }
+    }
+	
+    public static Result listUploads() {
+        List<S3File> uploads = new Model.Finder(UUID.class, S3File.class).all();
+        Logger.debug("in listUploads");
+        Logger.debug(uploads.toString());
+        return ok(Json.toJson(uploads));
     }
 	
 	public static Result generate() {

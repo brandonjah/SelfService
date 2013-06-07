@@ -1,6 +1,8 @@
 app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, saveObject) {
 	$scope.bundles = [
 	                  "convis",
+	                  "denver-org",
+	                  "discover-los-angeles",
 	                  "san-fran"
 	                  ];
 	$scope.url = '/info';

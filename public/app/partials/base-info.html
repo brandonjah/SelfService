@@ -45,9 +45,12 @@
             <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew(siteId)">Create New Layout</button>
             <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load(siteId)">Load Existing Layout</button>
          </div>
-         <div class="controls mt15px">
+         <section class="controls">
             <a href="#/upload">Upload Files</a>
-         </div>
+         </section>
+         <section style="display:none;" class="controls" ng-controller="ListUploadsCtrl">
+            <a href="javascript:void(0)" ng-click="listFiles()">List Uploaded Files</a>
+         </section>
 </div>
 </fieldset>
 </form>

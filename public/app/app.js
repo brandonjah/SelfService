@@ -25,3 +25,16 @@ app.controller('UploadCtrl', function($scope) {
 	      }
 	    }
 });
+
+app.controller('ListUploadsCtrl', function($scope,$http) {
+	$scope.listFiles = function() {
+		$http({method: 'GET', url: '/list-uploads'}).
+	    success(function(data, status, headers, config) {
+	    	console.log(data);
+	          $scope.success = true;
+	    }).
+	    error(function(data, status, headers, config) {
+	          $scope.success = false;
+	    });
+	};
+});
