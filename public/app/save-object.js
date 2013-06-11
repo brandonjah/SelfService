@@ -15,13 +15,9 @@ app.factory('saveObject', function($routeParams) {
 	    };
 	    
 	    sharedService.update = function(dbReturnObj) {
-	    	console.log("in shared service update");
-	    	console.log(dbReturnObj);
 	    	if(dbReturnObj.containers) {
-	    		console.log("not null");
 	    		dbLayoutObj = dbReturnObj;
 	    	} else {
-	    		console.log("null");
 	    		dbLayoutObj.containers = [];
 	    	}
 	    };
@@ -53,7 +49,10 @@ app.factory('saveObject', function($routeParams) {
 	    sharedService.sidebarUpdateContainer = function(container) {
 	    	for (var i=0;i<dbLayoutObj.containers.length;i++) {
 	    		if(container.id == dbLayoutObj.containers[i].id) {
-					dbLayoutObj.containers[i] = container;
+	    			dbLayoutObj.containers[i].component = {};
+	    			dbLayoutObj.containers[i].component.text = container.component.text;
+					dbLayoutObj.containers[i].component.width = container.component.width;
+					dbLayoutObj.containers[i].component.align = container.component.align;
 	    		}
 	    	}
 	    };

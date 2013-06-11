@@ -25,6 +25,16 @@ app.controller('productCtrl', function($scope, saveObject) {
 	
 	//start modal
 	$scope.openModal = function (openedContainer) {
+		//http://stackoverflow.com/questions/14549942/angular-sortable-orderby-object-property?lq=1
+		$scope.tabs = [{id:"hotel",order:"0"},{id:"deal",order:"1"},{id:"car",order:"2"},{id:"flight",order:"3"},{id:"ticket",order:"4"}];
+		  $scope.sortableOptions = {
+		    update: function(e, ui) { 
+		    	console.log("here");
+		    	console.log(ui.item.index());
+		    },
+		    	axis: 'y'
+		  };
+		
 		$scope.openedContainer = openedContainer;
 	    $scope.shouldBeOpen = true;
 	  };

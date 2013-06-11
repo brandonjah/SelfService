@@ -45,16 +45,30 @@ public class Base extends Model {
     	
 	    static class Containers  {  
 	    	public String id;
-	    	public Collection<Components> components;
-	    }  
-	      
-	    static class Components  {  
-	    	public Integer id;  
 	    	public String className;
+//	    	public Collection<Components> components;
+	    	public Component component;
+	    }  
+	    static class Component {
+	    	public String text;
+	    	public String type;
+	    	public String showImage;
+	    	public String showWidget;
+	    	public String showText;
+	    	public String showImageWidget;
+	    	public String showImageText;
+	    	public String showHotel;
+	    	public String showDeal;
+	    	public String showAttraction;
 	    	public String width;
-//	    	@ObjectId @Id
-//	        public String fileId;
-	    } 
+	    	public String align;
+	    }
+	      
+//	    static class Components  {  
+//	    	public Integer id;  
+//	    	public String className;
+//	    	public String width;
+//	    } 
 	    //used to prevent jackson error
 	    public LayoutJSON() {
 	    	

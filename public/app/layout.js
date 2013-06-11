@@ -7,18 +7,6 @@ app.controller('containerCtrl', function($scope, saveObject) {
 	};
 });
 
-app.controller('componentCtrl', function($scope, $dialog, saveObject) {
-	var componentWidth = "Third";
-	
-	$scope.delComponent = function(thing) {
-		saveObject.updateComponents('del', thing.className, thing.id, thing.container, null);
-	};
-	
-	$scope.dropCallback = function(event, ui) {
-		saveObject.updateComponents('add', ui.helper.context.className, $scope.item.id, null, componentWidth);
-	};
-});
-
 function CollapseCtrl($scope) {
 	  $scope.isCollapsed = true;
 	}
@@ -29,9 +17,6 @@ app.controller('submitCtrl', function($scope, $http, $location, saveObject) {
 		saveObject.logContents();
 		var containers = saveObject.getLayout();
 		var bundleId = saveObject.getbundleId();
-
-		console.log('containers');
-		console.log(containers);
 			$http.post($scope.url, {
 				"bundleId" : bundleId,
 				"containers" : containers
@@ -51,7 +36,6 @@ app.controller('submitCtrl', function($scope, $http, $location, saveObject) {
 	$scope.generate = function() {
 		$http.post('/generate', {}).
 	      success(function(data){
-	    	  console.log('in generate success');
 	          $scope.success = true;
 	        }).
 	        error(function(data){

@@ -27,7 +27,7 @@
                </div>
                <div class="modal-body">
                         <h3 class="m5">{{openedContainer.component.text}}</h3>
-                           <section ng-show="openedContainer.component.showText">
+                           <section ng-show="openedContainer.component.showText||openedContainer.component.showImageText">
 	                           <input type="text" placeholder="header" class="input-block-level" ng-model="openedContainer.component.header" required>
 	                           <textarea class="input-block-level" rows="3" placeholder="text content" ng-model="openedContainer.component.textArea" required></textarea>
                            </section>
@@ -56,6 +56,10 @@
                            </section>
                            <section class="tabs" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
                               <h5>Enabled Tabs</h5>
+                              <ul ui-sortable="sortableOptions" ng-model="tabs">
+                              	<li ng-repeat="item in tabs">{{item.id}}</li>
+                              </ul>
+                              <div ng-repeat="item in tabs">{{item}}</div>
                               <input type="text" placeholder="tab order" class="input w65">
                               <input type="text" placeholder="tab order" class="input w65">
                               <input type="text" placeholder="tab order" class="input w65">
