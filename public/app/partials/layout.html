@@ -34,6 +34,12 @@
                            <section ng-show="openedContainer.component.showHotel">
                            <input type="text" placeholder="hotel ids" class="input-block-level" ng-model="openedContainer.component.hotelIds" required>
                            </section>
+                           <section ng-show="openedContainer.component.showDeal">
+                           <input type="text" placeholder="deal ids" class="input-block-level" ng-model="openedContainer.component.dealIds" required>
+                           </section>
+                           <section ng-show="openedContainer.component.showAttraction">
+                           <input type="text" placeholder="attraction ids" class="input-block-level" ng-model="openedContainer.component.attractionIds" required>
+                           </section>                           
                            <section ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">
 	                           <label class="control-label displayInlineBlock w75">Image Width:</label>
 	                           <select class="input-small" ng-model="openedContainer.component.width" ng-options="width as width.text for width in widths">
@@ -56,20 +62,9 @@
                            </section>
                            <section class="tabs" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
                               <h5>Enabled Tabs</h5>
-                              <ul ui-sortable="sortableOptions" ng-model="tabs">
-                              	<li ng-repeat="item in tabs">{{item.id}}</li>
+                              <ul id="tabsSortable" ui-sortable="sortableOptions" ng-model="tabs">
+                              	<li ng-repeat="item in tabs"><span>{{item.id}}(order: {{item.order}})</span></li>
                               </ul>
-                              <div ng-repeat="item in tabs">{{item}}</div>
-                              <input type="text" placeholder="tab order" class="input w65">
-                              <input type="text" placeholder="tab order" class="input w65">
-                              <input type="text" placeholder="tab order" class="input w65">
-                              <input type="text" placeholder="tab order" class="input w65">
-                              <input type="text" placeholder="tab order" class="input w65"><br>
-                              <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.hotel" btn-checkbox>Hotel</button>
-                              <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.deal" btn-checkbox>Deal</button>
-                              <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.car" btn-checkbox>Car</button>
-                              <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.flight" btn-checkbox>Flight</button>
-                              <button type="button" class="btn-mini w75 btn-primary" ng-model="openedContainer.component.tabs.ticket" btn-checkbox>Ticket</button>
                            </section>
                      <section>
                      	<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(openedContainer)">Save</button>

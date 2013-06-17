@@ -26,12 +26,21 @@ app.controller('productCtrl', function($scope, saveObject) {
 	//start modal
 	$scope.openModal = function (openedContainer) {
 		//http://stackoverflow.com/questions/14549942/angular-sortable-orderby-object-property?lq=1
-		$scope.tabs = [{id:"hotel",order:"0"},{id:"deal",order:"1"},{id:"car",order:"2"},{id:"flight",order:"3"},{id:"ticket",order:"4"}];
+		//https://github.com/angular-ui/angular-ui/pull/119
+		//http://plnkr.co/edit/IcYTPU
+		$scope.tabs = [{id:"hotel",order:"1"},{id:"deal",order:"2"},{id:"car",order:"3"},{id:"flight",order:"4"},{id:"ticket",order:"5"}];
 		  $scope.sortableOptions = {
-		    update: function(e, ui) { 
-		    	console.log("here");
-		    	console.log(ui.item.index());
-		    },
+	          update: function( event, ui ) {
+	        	  $scope.tabs = ui.item.sortable.resort.$modelValue;
+	              for (var i = 0; i < $scope.tabs.length; i++) {
+	                  $scope.tabs[i] = ui.item.sortable.resort.$modelValue[i];
+	                  if($scope.tabs[i].order == ui.item.sortable.index) {
+	                	  console.log("moved item");
+	                	  console.log($scope.tabs[i]);
+	                  }
+	              }
+	              $scope.$apply();
+	          },
 		    	axis: 'y'
 		  };
 		
@@ -47,6 +56,17 @@ app.controller('productCtrl', function($scope, saveObject) {
 	    backdropFade: true,
 	    dialogFade:true
 	  };
+
+	  
+//      $("#tabsSortable").sortable({
+//          update: function( event, ui ) {
+//              var uiArray = $("#tabsSortable").sortable('toArray');
+//              for (var i = 0; i < $scope.tabs.length; i++) {
+//                  $scope.tabs[i].order = uiArray.indexOf($scope.tabs[i].id) + 1;
+//              }
+//              $scope.$apply();
+//          }
+//      });  
 	//end modal	
 	
 	$scope.setContainer = function(passedContainer) {

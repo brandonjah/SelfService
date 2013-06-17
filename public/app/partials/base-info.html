@@ -33,9 +33,14 @@
                <input colorpicker="hex" class="input-small span2" type="text" ng-model="txtColor">
             </div>
             <br>
-            <label class="control-label" for="txtcolor">Client Site URL:</label>
+            <label class="control-label" for="clientSite">Client Site URL:</label>
             <div class="controls">
-               <input type="text" placeholder="Ex: sandiego.org" class="input-xlarge" ng-model="clientSite" value="clientSite">
+               <input type="text" name="clientSite" placeholder="Ex: sandiego.org" class="input-xlarge" ng-model="clientSite" value="clientSite">
+            </div>
+            <br>
+            <label class="control-label" for="gaExperiment">Google Analytics:</label>
+            <div class="controls">
+               <input type="text" name="gaExperiment" placeholder="GA javascript" class="input-xlarge" ng-model="gaExperiment" value="gaExperiment">
             </div>
          </div>
          <label class="control-label"></label>
