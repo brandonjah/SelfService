@@ -37,6 +37,8 @@ public class Template extends Controller {
             base.templateName = form.get("templateName");
 			base.bgColor = form.get("bgColor");
 			base.txtColor = form.get("txtColor");
+			base.clientURL = form.get("clientURL");
+			base.googleAnalytics = form.get("googleAnalytics");
             Base.save(base);
         return ok();
     }
@@ -60,6 +62,8 @@ public class Template extends Controller {
 			result.put("templateName", siteInfo.templateName);
 			result.put("bgColor", siteInfo.bgColor);
 			result.put("txtColor", siteInfo.txtColor);
+			result.put("clientURL", siteInfo.clientURL);
+			result.put("googleAnalytics", siteInfo.googleAnalytics);
 			return ok(result);
 		}
         

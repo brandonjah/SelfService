@@ -138,6 +138,8 @@ public class Base extends Model {
 	    		returnSiteInfo.templateName = dbInsertObj.templateName;
 	    		returnSiteInfo.bgColor = dbInsertObj.bgColor;
 	    		returnSiteInfo.txtColor = dbInsertObj.txtColor;
+	    		returnSiteInfo.clientURL = dbInsertObj.clientURL;
+	    		returnSiteInfo.googleAnalytics = dbInsertObj.googleAnalytics;
 	        	Logger.debug("found site in sitesearch");
     		}
     		return returnSiteInfo;

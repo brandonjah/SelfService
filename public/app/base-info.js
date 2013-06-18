@@ -3,15 +3,17 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	                  "convis",
 	                  "denver-org",
 	                  "discover-los-angeles",
-	                  "san-fran"
+	                  "san-fran",
+	                  "podunkville"
 	                  ];
 	$scope.url = '/info';
 	$scope.save = function(bundleId) {
 		$http.post($scope.url, { 
 			"bundleId" : $scope.bundleId,
-			"templateName" : $scope.templateName,
 			"bgColor" : $scope.bgColor,
-			"txtColor" : $scope.txtColor
+			"txtColor" : $scope.txtColor,
+			"googleAnalytics" : $scope.googleAnalytics,
+			"clientURL" : $scope.clientURL
 			}).
 	      success(function(data){
 	    	  console.log('in success');
@@ -39,9 +41,11 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	          $scope.success = true;
 	    }).
 	    error(function(data, status, headers, config) {
-	    	$scope.templateName = "";
 	    	$scope.bgColor = "";
 	    	$scope.txtColor = "";
+	    	  $scope.bundleId = "";
+	    	  $scope.googleAnalytics = "";
+	    	  $scope.clientURL = "";	    
 	          $scope.success = false;
 	    });
 	}
