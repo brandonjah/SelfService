@@ -50,9 +50,11 @@ app.factory('saveObject', function($routeParams) {
 	    	for (var i=0;i<dbLayoutObj.containers.length;i++) {
 	    		if(container.id == dbLayoutObj.containers[i].id) {
 	    			dbLayoutObj.containers[i].component = {};
+	    			dbLayoutObj.containers[i].component.tabs = [];
 	    			dbLayoutObj.containers[i].component.text = container.component.text;
 					dbLayoutObj.containers[i].component.width = container.component.width;
 					dbLayoutObj.containers[i].component.align = container.component.align;
+					dbLayoutObj.containers[i].component.tabs = container.component.tabs;
 	    		}
 	    	}
 	    };

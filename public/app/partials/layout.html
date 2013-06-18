@@ -21,6 +21,8 @@
             <section>
             	<button type="button" class="btn displayBlock btn-success" ng-click="addContainer()">Add Container</button>
             </section>
+            
+            
             <div modal="shouldBeOpen" close="close()" options="opts">
                <div class="modal-header">
                   <h3>Set Component Properties</h3>
@@ -60,10 +62,13 @@
 	                              <option value="">-- tier --</option>
 	                           </select>
                            </section>
-                           <section class="tabs" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
-                              <h5>Enabled Tabs</h5>
-                              <ul id="tabsSortable" ui-sortable="sortableOptions" ng-model="tabs">
-                              	<li ng-repeat="item in tabs"><span>{{item.id}}(order: {{item.order}})</span></li>
+                           <section class="tabs ml5" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
+                           		<input class="ml5" type="checkbox" checked="checked"><h4 class="displayInlineBlock ml5"> Layered</h4>
+                           </section>
+                           <section class="tabs ml5" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
+                              <h4 class="ml5">Tabs</h4>
+                              <ul id="tabsSortable" class="ml5" ui-sortable="sortableOptions" ng-model="tabs">
+                              	<li ng-repeat="item in tabs" class="widgetTabs roundLineItem"><span>{{item.id}} enabled? {{item.active}} </span><span class="flR icon-retweet" ng-click="disable(item.id)"></span></li>
                               </ul>
                            </section>
                      <section>
@@ -71,6 +76,8 @@
                      </section>							
                </div><!-- end modal body -->
             </div><!-- end modal div -->
+            
+            
          </div><!-- end productCtrl -->
       </ul>
    </div>

@@ -64,13 +64,15 @@ public class Base extends Model {
 	    	public String showAttraction;
 	    	public String width;
 	    	public String align;
+	    	public Collection<Tabs> tabs;
+	    }
+	    
+	    static class Tabs {
+	    	public String id;
+	    	public String order;
+	    	public boolean active;
 	    }
 	      
-//	    static class Components  {  
-//	    	public Integer id;  
-//	    	public String className;
-//	    	public String width;
-//	    } 
 	    //used to prevent jackson error
 	    public LayoutJSON() {
 	    	
