@@ -10,6 +10,15 @@ app.controller('sidebarContainerCtrl', function($scope, saveObject) {
 });
 
 app.controller('productCtrl', function($scope, saveObject) {
+	/*FUNCTIONS*/
+	function arrayObjectIndexOf(myArray, searchTerm, property) {
+	    for(var i = 0, len = myArray.length; i < len; i++) {
+	        if (myArray[i][property] === searchTerm) return i;
+	    }
+	    return -1;
+	}
+	/*END FUNCTIONS*/
+	
 	$scope.isCollapsed = true;
 	$scope.containers = saveObject.getLayout();
 	$scope.addContainer = function() {
@@ -28,15 +37,18 @@ app.controller('productCtrl', function($scope, saveObject) {
 		//http://stackoverflow.com/questions/14549942/angular-sortable-orderby-object-property?lq=1
 		//https://github.com/angular-ui/angular-ui/pull/119
 		//http://plnkr.co/edit/IcYTPU
+		//http://stackoverflow.com/questions/8668174/indexof-method-in-an-object-array
 		$scope.tabs = [{id:"hotel",order:"1"},{id:"deal",order:"2"},{id:"car",order:"3"},{id:"flight",order:"4"},{id:"ticket",order:"5"}];
 		  $scope.sortableOptions = {
 	          update: function( event, ui ) {
+	        	  var first = arrayObjectIndexOf($scope.tabs, "hotel", "id");
+	        	  console.log("first");
+	        	  console.log(first);
 	        	  $scope.tabs = ui.item.sortable.resort.$modelValue;
 	              for (var i = 0; i < $scope.tabs.length; i++) {
 	                  $scope.tabs[i] = ui.item.sortable.resort.$modelValue[i];
 	                  if($scope.tabs[i].order == ui.item.sortable.index) {
-	                	  console.log("moved item");
-	                	  console.log($scope.tabs[i]);
+	                	  
 	                  }
 	              }
 	              $scope.$apply();

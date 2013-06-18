@@ -36,6 +36,8 @@ public class Base extends Model {
     
     public String bgColor;
     public String txtColor;
+    public String clientURL;
+    public String googleAnalytics;
     
     public LayoutJSON layout;
     
@@ -96,12 +98,11 @@ public class Base extends Model {
         	DBCursor<Base> cursor = coll.find().is("bundleId", base.bundleId);
         	if (cursor.hasNext()) {
         	    coll.update(cursor.next(), base);
-            	return true;
         	} else {
         		Logger.debug("no cursor next in base save model");
         		coll.save(base);
-        		return true;
         	}
+    		return true;
         }
     }
     

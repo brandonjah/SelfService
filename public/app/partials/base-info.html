@@ -2,7 +2,7 @@
    <form class="form-horizontal" name="siteInfo">
       <fieldset>
          <div id="legend" class="">
-            <legend class="">Base Site and Template Info</legend>
+            <legend>Base Site and Template Info</legend>
          </div>
          <div class="control-group">
             <!-- Text input-->
@@ -11,18 +11,9 @@
                <select class="input-xlarge" ng-model="bundleId" ng-options="bundle as bundle for bundle in bundles">
                     <option value="">-- bundle --</option>
                </select>
-<!--                <input type="text" placeholder="EX: 77" class="input-xlarge" ng-model="siteId" value="siteId" required>
-               <button class="btn btn-info" ng-disabled="!siteId" ng-click="search(siteId)">Search</button> -->
             </div>
          </div>
          <div class="control-group">
-            <!-- Text input-->
-<!--             <label class="control-label" for="input01">Template Name:</label>
-            <div class="controls">
-               <input type="text" placeholder="Ex: convis-1" class="input-xlarge" ng-model="templateName" value="templateName" required>
-               <p class="help-block">company name in 1 word, increment number after dash by 1</p>
-            </div>
-            <br> -->
             <label class="control-label" for="bgcolor">Background Color:</label>
             <div class="controls">
                <input colorpicker="hex" class="span2" type="text" ng-model="bgColor">
@@ -35,12 +26,12 @@
             <br>
             <label class="control-label" for="clientSite">Client Site URL:</label>
             <div class="controls">
-               <input type="text" name="clientSite" placeholder="Ex: sandiego.org" class="input-xlarge" ng-model="clientSite" value="clientSite">
+               <input type="text" name="clientSite" placeholder="Ex: sandiego.org" class="input-xlarge" ng-model="clientURL" value="clientSite">
             </div>
             <br>
             <label class="control-label" for="gaExperiment">Google Analytics:</label>
             <div class="controls">
-               <input type="text" name="gaExperiment" placeholder="GA javascript" class="input-xlarge" ng-model="gaExperiment" value="gaExperiment">
+               <input type="text" name="gaExperiment" placeholder="GA javascript" class="input-xlarge" ng-model="googleAnalytics" value="gaExperiment">
             </div>
          </div>
          <label class="control-label"></label>
@@ -56,7 +47,6 @@
          <section style="display:none;" class="controls" ng-controller="ListUploadsCtrl">
             <a href="javascript:void(0)" ng-click="listFiles()">List Uploaded Files</a>
          </section>
-</div>
-</fieldset>
-</form>
+		</fieldset>
+	</form>
 </div>

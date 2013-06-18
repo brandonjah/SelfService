@@ -33,7 +33,9 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
     		  $scope.templateName = data.templateName;
     		  $scope.bgColor = data.bgColor;
     		  $scope.txtColor = data.txtColor;
-	    	  $scope.bundleId = data.bundleId;	    	  
+	    	  $scope.bundleId = data.bundleId;
+	    	  $scope.googleAnalytics = data.googleAnalytics;
+	    	  $scope.clientURL = data.clientURL;	    	  
 	          $scope.success = true;
 	    }).
 	    error(function(data, status, headers, config) {

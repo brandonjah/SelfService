@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import models.Base.LayoutJSON;
 import net.vz.mongodb.jackson.JacksonDBCollection;
 import net.vz.mongodb.jackson.ObjectId;
 
@@ -24,7 +25,7 @@ import java.util.UUID;
 @Entity
 public class S3File extends Model {
 
-    @ObjectId @Id
+    @Id
     public UUID id;
 
     private String bucket;
@@ -34,7 +35,8 @@ public class S3File extends Model {
     @Transient
     public File file;
     
-
+    protected static JacksonDBCollection<S3File, Object> coll = MongoDB.getCollection("files", S3File.class, Object.class);
+    
     public URL getUrl() throws MalformedURLException {
         return new URL("https://s3.amazonaws.com/" + bucket + "/" + getActualFileName());
     }
@@ -56,6 +58,7 @@ public class S3File extends Model {
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, getActualFileName(), file);
             putObjectRequest.withCannedAcl(CannedAccessControlList.PublicRead); // public for all
             S3Plugin.amazonS3.putObject(putObjectRequest); // upload file
+            coll.save(this);
         }
     }
 
