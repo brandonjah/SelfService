@@ -64,6 +64,7 @@ public class Base extends Model {
 	    	public String showAttraction;
 	    	public String width;
 	    	public String align;
+	    	public Integer tier;
 	    	public boolean layered;
 	    	public Collection<Tabs> tabs;
 	    }

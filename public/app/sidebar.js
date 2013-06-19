@@ -86,7 +86,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 			if($scope.containers[i].id == passedContainer.id) {
 				$scope.containers[i].component = passedContainer.component;
 				$scope.containers[i].className = passedContainer.component.type+(passedContainer.component.align||"")+
-				((passedContainer.component.width) ? passedContainer.component.width.id : "")+((passedContainer.component.tier) ? passedContainer.component.tier.id : "");
+				((passedContainer.component.width) ? passedContainer.component.width.id : "")+((passedContainer.component.tier) ? passedContainer.component.tier : "");
 			}
 		}
 		saveObject.sidebarUpdateContainer($scope.containers);
@@ -99,13 +99,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 	                 {"text":"3/4","id":"34"},
 	                 {"text":"1/2","id":"12"}
 	                 ];
-	$scope.tiers = [
-	                {"id":"1"},
-	                {"id":"2"},
-	                {"id":"3"},
-	                {"id":"4"},
-	                {"id":"5"}
-	                ];
+	$scope.tiers = ["1","2","3","4","5"];
 	$scope.alignments = ["left","right"];
 	  $scope.items = [
 	                  {"text":"Widget","enabled":"w","className":"fw"},

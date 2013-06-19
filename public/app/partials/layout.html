@@ -61,7 +61,7 @@
                            </section>
 						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction">
 	                           <label class="control-label displayInlineBlock w75">Tier:</label>
-	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-options="tier as tier.id for tier in tiers">
+	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-options="tier as tier for tier in tiers">
 	                              <option value="">-- tier --</option>
 	                           </select>
                            </section>
