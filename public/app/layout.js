@@ -11,7 +11,7 @@ function CollapseCtrl($scope) {
 	  $scope.isCollapsed = true;
 	}
 
-app.controller('submitCtrl', function($scope, $http, $location, saveObject) {
+app.controller('submitCtrl', function($scope, $http, $routeParams, $location, saveObject) {
 	$scope.url = '/save-layout';
 	$scope.saveLayout = function() {
 		saveObject.logContents();
@@ -34,13 +34,10 @@ app.controller('submitCtrl', function($scope, $http, $location, saveObject) {
 		$location.path('/preview');
 	};
 	$scope.generate = function() {
-		$http.post('/generate', {}).
-	      success(function(data){
-	          $scope.success = true;
-	        }).
-	        error(function(data){
-	          $scope.httpError = true;
-	        });
+		var bundleId = $routeParams.bundleId;
+		console.log('bundleId');
+		console.log(bundleId);
+		$location.path('/generate/'+bundleId);
 	};
 });
 

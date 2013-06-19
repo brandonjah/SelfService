@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.UUID;
@@ -109,57 +108,5 @@ public class Template extends Controller {
         Logger.debug("in listUploads");
         Logger.debug(uploads.toString());
         return ok(Json.toJson(uploads));
-    }
-	
-	public static Result generate() {
-		Logger.debug("in generate");
-		PrintWriter writer;
-		
-		FileOutputStream fop = null;
-		File file;
-		String content = "This is the text content";
-		
-		try {
-			writer = new PrintWriter("landing-page.html", "UTF-8");
-			writer.println("The first line");
-			writer.println("The second line");
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			 
-			file = new File("Users/bjahner/Desktop/newfile.txt");
-			fop = new FileOutputStream(file);
- 
-			// if file doesnt exists, then create it
-				file.createNewFile();
- 
-			// get the content in bytes
-			byte[] contentInBytes = content.getBytes();
- 
-			fop.write(contentInBytes);
-			fop.flush();
-			fop.close();
- 
-			System.out.println("Done");
- 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fop != null) {
-					fop.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-        return ok();
     }
 }

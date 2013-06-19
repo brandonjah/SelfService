@@ -1,3 +1,6 @@
+<div class="container">
+<div class="row">   
+<div id="sswrap">
 <section class="row-fluid row" id="products">
    <!-- Start Sidebar -->
    <div class="sidebar-nav-fixed">
@@ -63,7 +66,7 @@
 	                           </select>
                            </section>
                            <section class="tabs ml5" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
-                           		<input class="ml5" type="checkbox" checked="checked"><h4 class="displayInlineBlock ml5"> Layered</h4>
+                           		<input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" checked="checked"><h4 class="displayInlineBlock ml5"> Layered</h4>
                            </section>
                            <section class="tabs ml5" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
                               <h4 class="ml5">Tabs</h4>
@@ -95,3 +98,6 @@
    <a ng-click="previewLayout()" href="javascript:void(0)" class="btn btn-action m5">Preview</a>
    <a ng-click="generate()" href="javascript:void(0)" class="btn btn-info m5">Generate Page</a>
 </section>
+</div>
+</div>
+</div>

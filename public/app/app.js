@@ -7,6 +7,7 @@ app.config(['$routeProvider', '$httpProvider',
 	      when('/info', {templateUrl: 'assets/app/partials/base-info.html', controller: this.BaseInfoCtrl}).
 	      when('/upload', {templateUrl: 'assets/app/partials/upload.html', controller: this.UploadCtrl}).
 	      when('/preview', {templateUrl: 'assets/app/partials/preview.html', controller: this.PreviewCtrl}).
+	      when('/generate/:bundleId', {templateUrl: 'assets/app/partials/generate.html', controller: this.GenerateCtrl}).
 	      otherwise({redirectTo: '/info'});
 	}
 ]);

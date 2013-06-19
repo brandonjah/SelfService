@@ -46,5 +46,3 @@ GET		/load-layout/:bundleId		controllers.Template.loadLayout(bundleId:String)
 #File upload
 POST	/file-upload				controllers.Template.fileUpload()
 GET		/list-uploads				controllers.Template.listUploads()
-#Generate landing page
-POST	/generate					controllers.Template.generate()
