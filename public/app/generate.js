@@ -9,8 +9,6 @@ app.controller('GenerateCtrl', function($scope, saveObject) {
 		} else if(_component.type == "widget") {
 			return "aresBotContainer";
 		}
-		console.log("containerClass:");
-		console.log(_component);
 	};
 	
 	$scope.componentClass = function(_component) {
@@ -21,7 +19,7 @@ app.controller('GenerateCtrl', function($scope, saveObject) {
 	
 	$scope.url = function(_component) {
 		
-		if(_component.type == "image_widget") {
+		if(_component.type == "image_text") {
 			if(_component.align == "left") {
 				//left
 			} else {
@@ -32,5 +30,39 @@ app.controller('GenerateCtrl', function($scope, saveObject) {
 		} else {
 			return "assets/app/partials/preview.html";
 		}
+	};
+});
+
+app.directive('imageDir',function() {
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: "assets/app/components/image.html",
+        link: function (scope, attr) {
+        	if(scope.$parent.container.component.align) {
+        		attr.context.className+=(" "+scope.$parent.container.component.align);
+        	} else {
+        		attr.context.className+=" alignLeft";
+        	}
+        	
+        	if(scope.$parent.container.component.width) {
+        		attr.context.className+=(" "+scope.$parent.container.component.width.id);
+        	} else {
+        		attr.context.className+=" halfWidth";
+        	}
+        }
+	};
+});
+
+app.directive('widgetDir',function() {
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: "assets/app/components/widget.html",
+        link: function (scope, attr) {
+        	for (var i=0;i<scope.$parent.container.component.tabs.length;i++) {
+        		attr.append("<span class='widgetTab p5'>"+scope.$parent.container.component.tabs[i].id+" "+scope.$parent.container.component.tabs[i].order+" "+scope.$parent.container.component.tabs[i].active+"</span>");
+        	}
+        }
 	};
 });
