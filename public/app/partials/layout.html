@@ -59,7 +59,7 @@
                            <section ng-show="openedContainer.component.showImage">
                            		<input class="input-file" type="file" name="picture"></input>
                            </section>
-						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction">
+						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction||openedContainer.component.showDeal">
 	                           <label class="control-label displayInlineBlock w75">Tier:</label>
 	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-change="setTiers(openedContainer.component.tier)" ng-options="tier as tier for tier in tiers">
 	                              <option value="">-- tier --</option>

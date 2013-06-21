@@ -78,6 +78,18 @@ app.factory('saveObject', function($routeParams) {
 	    	console.log('dbLayoutObj');
 	    	console.log(dbLayoutObj);
 	    };
+	    
+	    sharedService.rowCounter = function() {
+	    	for (var i=0;i<dbLayoutObj.containers.length;i++) {
+	    		var rows = [];
+	    		if(dbLayoutObj.containers[i].component.showHotel == true) {
+	    			console.log("hotel row: " + i);
+	    			rows.push(i);
+	    		}
+	    	}
+	    	//make rows an array
+	    	return rows;
+	    };
 
 	    return sharedService;
 	});

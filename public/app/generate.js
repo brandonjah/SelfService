@@ -19,11 +19,7 @@ app.controller('GenerateCtrl', function($scope, saveObject) {
 	
 	$scope.url = function(_component) {
 		if(_component.type) {
-			if(_component.type == "hotel"||_component.type == "attraction"||_component.type == "deal") {
-				  return "assets/app/components/"+_component.type+_component.tier+".html";
-			} else {
-				return "assets/app/components/"+_component.type+".html";
-			}
+			return "assets/app/components/"+_component.type+".html";
 		} else {
 			return "assets/app/partials/preview.html";
 		}
@@ -88,4 +84,70 @@ app.directive('contentText',function() {
         	elem.append("<p>"+scope.$parent.container.component.textArea+"</p>");
         }
 	};
+});
+
+app.directive('hotelDir',function(saveObject) {
+	return {
+		restrict: 'E',
+		replace: true,
+        link: function (scope, elem, attr) {
+        	var contID = "."+scope.$parent.container.id;
+        	var parentDiv = elem.parent();
+        		for(var x=0;x<scope.$parent.container.component.tier;x++) {
+        			console.log("iterating tiers");
+        			console.log(scope.$parent.container.component.tier);
+		        		var ul = jQuery(".cloneElement").clone();
+		        		ul.removeClass("cloneElement");
+		        		ul.addClass("aresTier"+scope.$parent.container.component.tier);
+		        		parentDiv.append(ul);
+	        		}
+        	
+        	jQuery(".cloneElement").remove();
+        }
+	};
+});
+app.directive('attractionDir',function(rowCounter) {
+	return {
+		restrict: 'E',
+        link: function (scope, elem) {
+        	jQuery(".aresProductTicket").addClass("aresTier"+scope.$parent.container.component.tier);
+        	var ul = jQuery(".aresProductItemsList").clone();        	
+        	elem = ul;
+        	var parentDiv = jQuery(".aresProductItemsListWrap");
+        	for(var i=1;i<scope.$parent.container.component.tier;i++) {
+        		var iUl = elem.clone();
+        		parentDiv.append(iUl);
+        	}
+        }
+	};
+});
+app.directive('dealsDir',function(rowCounter) {
+	return {
+		restrict: 'E',
+        link: function (scope, elem) {
+        	jQuery(".aresProductPackage").addClass("aresTier"+scope.$parent.container.component.tier);
+        	var ul = jQuery(".aresProductItemsList").clone();        	
+        	elem = ul;
+        	var parentDiv = jQuery(".aresProductItemsListWrap");
+        	for(var i=1;i<scope.$parent.container.component.tier;i++) {
+        		var iUl = elem.clone();
+        		parentDiv.append(iUl);
+        	}
+        }
+	};
+});
+
+app.factory('rowCounter', function() {
+	var rows = {};
+	var hotelRows = 0;
+	var attractionRows = 0;
+	var dealsRows = 0;
+	rows.increase = function() {
+		hotelRows++;
+	}
+	
+	rows.getHotelRows = function() {
+		return hotelRows;
+	} 
+	return rows;
 });
