@@ -94,8 +94,6 @@ app.directive('hotelDir',function(saveObject) {
         	var contID = "."+scope.$parent.container.id;
         	var parentDiv = elem.parent();
         		for(var x=0;x<scope.$parent.container.component.tier;x++) {
-        			console.log("iterating tiers");
-        			console.log(scope.$parent.container.component.tier);
 		        		var ul = jQuery(".cloneElement").clone();
 		        		ul.removeClass("cloneElement");
 		        		ul.addClass("aresTier"+scope.$parent.container.component.tier);
@@ -109,30 +107,36 @@ app.directive('hotelDir',function(saveObject) {
 app.directive('attractionDir',function(rowCounter) {
 	return {
 		restrict: 'E',
-        link: function (scope, elem) {
-        	jQuery(".aresProductTicket").addClass("aresTier"+scope.$parent.container.component.tier);
-        	var ul = jQuery(".aresProductItemsList").clone();        	
-        	elem = ul;
-        	var parentDiv = jQuery(".aresProductItemsListWrap");
-        	for(var i=1;i<scope.$parent.container.component.tier;i++) {
-        		var iUl = elem.clone();
-        		parentDiv.append(iUl);
-        	}
+		replace: true,
+        link: function (scope, elem, attr) {
+        	var contID = "."+scope.$parent.container.id;
+        	var parentDiv = elem.parent();
+        		for(var x=0;x<scope.$parent.container.component.tier;x++) {
+		        		var ul = jQuery(".cloneElement").clone();
+		        		ul.removeClass("cloneElement");
+		        		ul.addClass("aresTier"+scope.$parent.container.component.tier);
+		        		parentDiv.append(ul);
+	        		}
+        	
+        	jQuery(".cloneElement").remove();
         }
 	};
 });
 app.directive('dealsDir',function(rowCounter) {
 	return {
 		restrict: 'E',
-        link: function (scope, elem) {
-        	jQuery(".aresProductPackage").addClass("aresTier"+scope.$parent.container.component.tier);
-        	var ul = jQuery(".aresProductItemsList").clone();        	
-        	elem = ul;
-        	var parentDiv = jQuery(".aresProductItemsListWrap");
-        	for(var i=1;i<scope.$parent.container.component.tier;i++) {
-        		var iUl = elem.clone();
-        		parentDiv.append(iUl);
-        	}
+		replace: true,
+        link: function (scope, elem, attr) {
+        	var contID = "."+scope.$parent.container.id;
+        	var parentDiv = elem.parent();
+        		for(var x=0;x<scope.$parent.container.component.tier;x++) {
+		        		var ul = jQuery(".cloneElement").clone();
+		        		ul.removeClass("cloneElement");
+		        		ul.addClass("aresTier"+scope.$parent.container.component.tier);
+		        		parentDiv.append(ul);
+	        		}
+        	
+        	jQuery(".cloneElement").remove();
         }
 	};
 });

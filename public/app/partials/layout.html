@@ -57,7 +57,8 @@
 	                           </select>
                            </section>
                            <section ng-show="openedContainer.component.showImage">
-                           		<input class="input-file" type="file" name="picture"></input>
+                           		<span>List the names of the uploaded image for use here (upload images on Bundle Info page)</span>
+                           		<input type="text" placeholder="names of uploaded image" class="input-block-level" ng-model="openedContainer.component.fileIds" required>
                            </section>
 						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction||openedContainer.component.showDeal">
 	                           <label class="control-label displayInlineBlock w75">Tier:</label>
@@ -95,7 +96,6 @@
 </div>
 <section ng-controller="submitCtrl" id="ssActions">
    <a ng-click="saveLayout()" href="javascript:void(0)" class="btn btn-success m5">Save Layout</a>
-   <a ng-click="previewLayout()" href="javascript:void(0)" class="btn btn-action m5">Preview</a>
    <a ng-click="generate()" href="javascript:void(0)" class="btn btn-info m5">Generate Page</a>
 </section>
 </div>
