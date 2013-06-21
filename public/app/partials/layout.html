@@ -47,12 +47,12 @@
                            </section>                           
                            <section ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">
 	                           <label class="control-label displayInlineBlock w75">Image Width:</label>
-	                           <select class="input-small" ng-model="openedContainer.component.width" ng-options="width as width.text for width in widths">
+	                           <select class="input-small" ng-model="openedContainer.component.width" ng-options="width as width.text for width in widths" required>
 	                              <option value="">-- width --</option>
 	                           </select>
 	                           <br>
 	                           <label class="control-label displayInlineBlock w75">Image Alignment:</label>
-	                           <select class="input-small" ng-model="openedContainer.component.align" ng-options="align as align for align in alignments">
+	                           <select class="input-small" ng-model="openedContainer.component.align" ng-options="align as align for align in alignments" required>
 	                              <option value="">-- align --</option>
 	                           </select>
                            </section>
@@ -61,12 +61,12 @@
                            </section>
 						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction">
 	                           <label class="control-label displayInlineBlock w75">Tier:</label>
-	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-options="tier as tier for tier in tiers">
+	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-change="setTiers(openedContainer.component.tier)" ng-options="tier as tier for tier in tiers">
 	                              <option value="">-- tier --</option>
 	                           </select>
                            </section>
                            <section class="tabs ml5" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
-                           		<input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" checked="checked"><h4 class="displayInlineBlock ml5"> Layered</h4>
+                           		<input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" ng-checked="openedContainer.component.layered"><h4 class="displayInlineBlock ml5"> Layered</h4>
                            </section>
                            <section class="tabs ml5" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
                               <h4 class="ml5">Tabs</h4>

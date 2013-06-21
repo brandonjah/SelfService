@@ -24,9 +24,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 	};	
 	
 	//start modal
-	$scope.openModal = function (openedContainer) {
-
-			
+	$scope.openModal = function (openedContainer) {			
 			  $scope.sortableOptions = {
 		          update: function( event, ui ) {
 		        	  $scope.tabs = ui.item.sortable.resort.$modelValue;
@@ -34,8 +32,8 @@ app.controller('productCtrl', function($scope, saveObject) {
 		          },
 			    	axis: 'y'
 			  };
-			
 			$scope.openedContainer = openedContainer;
+			$scope.openedContainer.component.layered = true;
 		    $scope.shouldBeOpen = true;
 	  };
 
@@ -95,11 +93,16 @@ app.controller('productCtrl', function($scope, saveObject) {
 	$scope.classname;
 	$scope.tabs = [{id:"hotel",order:"0",active:true},{id:"deal",order:"1",active:true},{id:"car",order:"2",active:true},{id:"flight",order:"3",active:true},{id:"ticket",order:"4",active:true}];
 	$scope.widths = [
-	                 {"text":"1/4","id":"14"},
-	                 {"text":"3/4","id":"34"},
-	                 {"text":"1/2","id":"12"}
-	                 ];
+	                 {"text":"3/4","id":"ThreeQtr"},
+	                 {"text":"1/2","id":"Half"}
+	                 ];	
 	$scope.tiers = ["1","2","3","4","5"];
+	$scope.selectedTiers = [];
+	$scope.setTiers = function(_tiers) {
+		for (var i=0;i<_tiers;i++) {
+			$scope.selectedTiers.push(i);
+		}
+	}
 	$scope.alignments = ["left","right"];
 	  $scope.items = [
 	                  {"text":"Widget","enabled":"w","className":"fw"},
