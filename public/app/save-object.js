@@ -40,10 +40,6 @@ app.factory('saveObject', function($routeParams) {
     					}
     				}
     			}
-    		
-    		sharedService.updateComponentProperties = function(newComponent) {
-    			//@TODO find component by id then replace it newComponent
-    		}
 	    };
 	    
 	    sharedService.sidebarUpdateContainer = function(container) {
@@ -51,17 +47,13 @@ app.factory('saveObject', function($routeParams) {
 	    		if(container.id == dbLayoutObj.containers[i].id) {
 	    			dbLayoutObj.containers[i].component = {};
 	    			dbLayoutObj.containers[i].component.tabs = [];
-	    			dbLayoutObj.containers[i].component.text = container.component.text;
-					dbLayoutObj.containers[i].component.width = container.component.width;
-					dbLayoutObj.containers[i].component.align = container.component.align;
-					dbLayoutObj.containers[i].component.tabs = container.component.tabs;
+	    			dbLayoutObj.containers[i].component = container.component;
 	    		}
 	    	}
 	    };
 
 	    sharedService.updateContainers = function(id, oper) {
 	    	if(oper == 'add') {
-//	    		dbLayoutObj.containers.push({'id':(id+containerCount),'components':[]});
 	    		dbLayoutObj.containers.push({id:(id+containerCount),component:{text:'Choose Content'}});
 	    		containerCount++;
 	    	} else if (oper == 'del') {

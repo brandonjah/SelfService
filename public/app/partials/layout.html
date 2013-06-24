@@ -56,8 +56,8 @@
 	                              <option value="">-- align --</option>
 	                           </select>
                            </section>
-                           <section ng-show="openedContainer.component.showImage">
-                           		<span>List the names of the uploaded image for use here (upload images on Bundle Info page)</span>
+                           <section ng-show="openedContainer.component.showImage||openedContainer.component.showImageWidget||openedContainer.component.showImageText">
+                           		<span>Enter the name of the uploaded image for use here (upload images on Bundle Info page)</span>
                            		<input type="text" placeholder="names of uploaded image" class="input-block-level" ng-model="openedContainer.component.fileIds" required>
                            </section>
 						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction||openedContainer.component.showDeal">

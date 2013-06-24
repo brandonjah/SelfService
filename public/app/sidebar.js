@@ -93,6 +93,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 			}
 		}
 		saveObject.sidebarUpdateContainer($scope.containers);
+		saveObject.logContents();
 	};
 
 	$scope.classname;
