@@ -82,18 +82,17 @@ app.controller('productCtrl', function($scope, saveObject) {
 		
 		for (var i=0;i<$scope.containers.length;i++) {
 			if($scope.containers[i].id == passedContainer.id) {
-				$scope.containers[i].component = passedContainer.component;
 				if (passedContainer.component.type == "attraction"||passedContainer.component.type == "hotel"||passedContainer.component.type == "deals") {
 					if(!passedContainer.component.tier) {
 						passedContainer.component.tier = "1";
 					}
 				}
+				$scope.containers[i].component = passedContainer.component;
 				$scope.containers[i].className = passedContainer.component.type+(passedContainer.component.align||"")+
 				((passedContainer.component.width) ? passedContainer.component.width.id : "")+((passedContainer.component.tier) ? passedContainer.component.tier : "");
 			}
 		}
 		saveObject.sidebarUpdateContainer($scope.containers);
-		saveObject.logContents();
 	};
 
 	$scope.classname;
@@ -102,9 +101,15 @@ app.controller('productCtrl', function($scope, saveObject) {
                  	 {"text":"1/2","id":"Half"},
 	                 {"text":"3/4","id":"ThreeQtr"}	                 
 	                 ];	
-	$scope.tiers = ["1","2","3","4","5"];
+	$scope.hotelTiers = ["1","2","3","4","5"];
+	$scope.tiers = ["1","2","3"];
 	$scope.selectedTiers = [];
 	$scope.setTiers = function(_tiers) {
+		for (var i=0;i<_tiers;i++) {
+			$scope.selectedTiers.push(i);
+		}
+	}
+	$scope.setHotelTiers = function(_tiers) {
 		for (var i=0;i<_tiers;i++) {
 			$scope.selectedTiers.push(i);
 		}

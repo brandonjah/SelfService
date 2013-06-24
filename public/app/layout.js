@@ -35,8 +35,6 @@ app.controller('submitCtrl', function($scope, $http, $routeParams, $location, sa
 	};
 	$scope.generate = function() {
 		var bundleId = $routeParams.bundleId;
-		console.log('bundleId');
-		console.log(bundleId);
 		$location.path('/generate/'+bundleId);
 	};
 });

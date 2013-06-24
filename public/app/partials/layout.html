@@ -60,7 +60,13 @@
                            		<span>Enter the name of the uploaded image for use here (upload images on Bundle Info page)</span>
                            		<input type="text" placeholder="names of uploaded image" class="input-block-level" ng-model="openedContainer.component.fileIds" required>
                            </section>
-						   <section ng-show="openedContainer.component.showHotel||openedContainer.component.showAttraction||openedContainer.component.showDeal">
+                    	   <section ng-show="openedContainer.component.showHotel">
+	                           <label class="control-label displayInlineBlock w75">Tier:</label>
+	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-change="setHotelTiers(openedContainer.component.tier)" ng-options="tier as tier for tier in hotelTiers">
+	                              <option value="">-- tier --</option>
+	                           </select>
+                           </section>
+						   <section ng-show="openedContainer.component.showAttraction||openedContainer.component.showDeal">
 	                           <label class="control-label displayInlineBlock w75">Tier:</label>
 	                           <select class="input-small" ng-model="openedContainer.component.tier" ng-change="setTiers(openedContainer.component.tier)" ng-options="tier as tier for tier in tiers">
 	                              <option value="">-- tier --</option>

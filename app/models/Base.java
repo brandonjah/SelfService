@@ -60,11 +60,15 @@ public class Base extends Model {
 	    	public String showImageWidget;
 	    	public String showImageText;
 	    	public String showHotel;
+	    	public String hotelIds;
 	    	public String showDeal;
+	    	public String dealIds;
 	    	public String showAttraction;
+	    	public String attractionIds;
 	    	public String width;
 	    	public String align;
 	    	public Integer tier;
+	    	public String fileIds;
 	    	public boolean layered;
 	    	public Collection<Tabs> tabs;
 	    }
