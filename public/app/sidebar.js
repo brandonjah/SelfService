@@ -101,7 +101,7 @@ app.controller('productCtrl', function($scope, saveObject) {
                  	 {"text":"1/2","id":"Half"},
 	                 {"text":"3/4","id":"ThreeQtr"}	                 
 	                 ];	
-	$scope.hotelTiers = ["1","2","3","4","5"];
+	$scope.hotelTiers = ["1","2","3","4"];
 	$scope.tiers = ["1","2","3"];
 	$scope.selectedTiers = [];
 	$scope.setTiers = function(_tiers) {
