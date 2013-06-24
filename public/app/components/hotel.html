@@ -1,7 +1,7 @@
 <div class="aresProductItemsListWrap {{container.id}}"> <!-- this needs a dynamic class added to it based off of the number of containers -->
 Hotel IDs: {{container.component.hotelIds}}
-<ul class="aresProductItemsList aresProductHotel cloneElement">
-	<li class="aresProductItem">
+<ul class="aresProductItemsList aresProductHotel">
+	<li class="aresProductItem cloneElement">
 		<div class="aresProductItemInner">
 			<div class="aresProductImage">
 				<div class="aresProductImageInner">
@@ -25,6 +25,6 @@ Hotel IDs: {{container.component.hotelIds}}
 			</div>
 		</div>
 	</li>
+	<component-dir></component-dir>
 </ul>
-<hotel-dir></hotel-dir>
 </div>

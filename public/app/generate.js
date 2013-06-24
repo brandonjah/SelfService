@@ -32,13 +32,14 @@ app.directive('imageDir',function() {
 		replace: true,
 		templateUrl: "assets/app/components/image.html",
         link: function (scope, elem) {
+        	var parent = elem.parent();
         	if(scope.$parent.container.component.align == "right") {
-        		scope.$parent.container.className+=(" aresHeaderReversed");
+        		parent.addClass(" aresHeaderReversed");
         	}
         	if(scope.$parent.container.component.width) {
-        		elem.context.className+=(" aresHeader"+scope.$parent.container.component.width.id);
+        		parent.addClass("aresHeader"+scope.$parent.container.component.width.id);
         	} else {
-        		scope.$parent.container.className+=(" aresHeaderHalf");
+        		parent.addClass("aresHeaderHalf");
         	}
         }
 	};
@@ -62,7 +63,13 @@ app.directive('textDir',function() {
 	return {
 		restrict: 'E',
 		replace: true,
-		templateUrl: "assets/app/components/text_directive.html"
+		templateUrl: "assets/app/components/text_directive.html",
+        link: function (scope, elem) {
+        	if(scope.$parent.container.component.type == "image_text") {
+        		var parent = elem.parent();
+        		parent.addClass("aresheaderTextContainer");
+        	}
+        }
 	};
 });
 
@@ -71,7 +78,13 @@ app.directive('headlineText',function() {
 		restrict: 'E',
 		replace: true,
         link: function (scope, elem) {
-        	elem.append("<h1>"+scope.$parent.container.component.header+"</h1>");
+        	var parent = elem.parent();
+        	if(scope.$parent.container.component.header){
+        		parent.append("<h1>"+scope.$parent.container.component.header+"</h1>");
+        	} else {
+        		parent.append("<h1>No header input</h1>");
+        	}
+        	elem.remove();
         }
 	};
 });
@@ -81,12 +94,18 @@ app.directive('contentText',function() {
 		restrict: 'E',
 		replace: true,
         link: function (scope, elem) {
-        	elem.append("<p>"+scope.$parent.container.component.textArea+"</p>");
+        	var parent = elem.parent();
+        	if(scope.$parent.container.component.textArea){
+        		parent.append("<p>"+scope.$parent.container.component.textArea+"</p>");
+        	} else {
+        		parent.append("<p>No content input</p>");
+        	}
+        	elem.remove();
         }
 	};
 });
 
-app.directive('hotelDir',function(saveObject) {
+app.directive('componentDir',function(saveObject) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -94,64 +113,13 @@ app.directive('hotelDir',function(saveObject) {
         	var contID = "."+scope.$parent.container.id;
         	var parentDiv = elem.parent();
         		for(var x=0;x<scope.$parent.container.component.tier;x++) {
-		        		var ul = jQuery(".cloneElement").clone();
-		        		ul.removeClass("cloneElement");
-		        		ul.addClass("aresTier"+scope.$parent.container.component.tier);
-		        		parentDiv.append(ul);
+		        		var li = jQuery(".cloneElement").clone();
+		        		li.removeClass("cloneElement");
+		        		parentDiv.append(li);
 	        		}
-        	
+        		parentDiv.addClass("aresTier"+scope.$parent.container.component.tier);
         	jQuery(".cloneElement").remove();
+        	elem.remove();
         }
 	};
-});
-app.directive('attractionDir',function(rowCounter) {
-	return {
-		restrict: 'E',
-		replace: true,
-        link: function (scope, elem, attr) {
-        	var contID = "."+scope.$parent.container.id;
-        	var parentDiv = elem.parent();
-        		for(var x=0;x<scope.$parent.container.component.tier;x++) {
-		        		var ul = jQuery(".cloneElement").clone();
-		        		ul.removeClass("cloneElement");
-		        		ul.addClass("aresTier"+scope.$parent.container.component.tier);
-		        		parentDiv.append(ul);
-	        		}
-        	
-        	jQuery(".cloneElement").remove();
-        }
-	};
-});
-app.directive('dealsDir',function(rowCounter) {
-	return {
-		restrict: 'E',
-		replace: true,
-        link: function (scope, elem, attr) {
-        	var contID = "."+scope.$parent.container.id;
-        	var parentDiv = elem.parent();
-        		for(var x=0;x<scope.$parent.container.component.tier;x++) {
-		        		var ul = jQuery(".cloneElement").clone();
-		        		ul.removeClass("cloneElement");
-		        		ul.addClass("aresTier"+scope.$parent.container.component.tier);
-		        		parentDiv.append(ul);
-	        		}
-        	
-        	jQuery(".cloneElement").remove();
-        }
-	};
-});
-
-app.factory('rowCounter', function() {
-	var rows = {};
-	var hotelRows = 0;
-	var attractionRows = 0;
-	var dealsRows = 0;
-	rows.increase = function() {
-		hotelRows++;
-	}
-	
-	rows.getHotelRows = function() {
-		return hotelRows;
-	} 
-	return rows;
 });
