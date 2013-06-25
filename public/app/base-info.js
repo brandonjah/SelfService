@@ -9,16 +9,15 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	$scope.url = '/info';
 	$scope.save = function(bundleId) {
 		$http.post($scope.url, { 
-			"bundleId" : $scope.bundleId,
-			"bgColor" : $scope.bgColor,
-			"txtColor" : $scope.txtColor,
-			"googleAnalytics" : $scope.googleAnalytics,
-			"clientURL" : $scope.clientURL
+			"bundleId" : $scope.bundle.bundleId,
+			"bgColor" : $scope.bundle.bgColor,
+			"txtColor" : $scope.bundle.txtColor,
+			"googleAnalytics" : $scope.bundle.googleAnalytics,
+			"clientURL" : $scope.bundle.clientURL
 			}).
 	      success(function(data){
-	    	  console.log('in success');
-	    	  console.log(data);
 	          $scope.success = true;
+	          saveObject.saveBundleInfo($scope.bundle);
 	        }).
 	        error(function(data){
 	          $scope.httpError = true;
@@ -32,41 +31,33 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	$scope.search = function(bundleId) {
 	    $http({method: 'GET', url: '/site/'+bundleId}).
 	    success(function(data, status, headers, config) {
-    		  $scope.templateName = data.templateName;
-    		  $scope.bgColor = data.bgColor;
-    		  $scope.txtColor = data.txtColor;
-	    	  $scope.bundleId = data.bundleId;
-	    	  $scope.googleAnalytics = data.googleAnalytics;
-	    	  $scope.clientURL = data.clientURL;	    	  
+    		  $scope.bundle.bgColor = data.bgColor;
+    		  $scope.bundle.txtColor = data.txtColor;
+	    	  $scope.bundle.bundleId = data.bundleId;
+	    	  $scope.bundle.googleAnalytics = data.googleAnalytics;
+	    	  $scope.bundle.clientURL = data.clientURL;	    	  
 	          $scope.success = true;
 	    }).
 	    error(function(data, status, headers, config) {
-	    	$scope.bgColor = "";
-	    	$scope.txtColor = "";
-	    	  $scope.bundleId = "";
-	    	  $scope.googleAnalytics = "";
-	    	  $scope.clientURL = "";	    
+	    	  $scope.bundle = {};
 	          $scope.success = false;
 	    });
 	}
-	$scope.load = function(bundleId) {
-	    $http({method: 'GET', url: '/load-layout/'+bundleId}).
+	$scope.load = function(_bundleId) {
+	    $http({method: 'GET', url: '/load-layout/'+_bundleId}).
 	    success(function(data, status, headers, config) {
-	    	console.log(data);
-	    	console.log("data layout in base-info");
-	    	console.log(data.layout);
 	    	if(data.layout) {
 	    		saveObject.update(data.layout);
 	    	}
 	          $scope.success = true;
-	          layoutPage($scope.bundleId);
+	          layoutPage($scope.bundle.bundleId);
 	    }).
 	    error(function(data, status, headers, config) {
-	    	alert("no layout found for bundle ID " + bundleId);
+	    	alert("no layout found for bundle ID " + _bundleId);
 	          $scope.success = false;
 	    });
 	}
-	var layoutPage = function(bundleId) {
-		$location.path('/layout/'+bundleId);
+	var layoutPage = function(_bundleId) {
+		$location.path('/layout/'+_bundleId);
 	}
 });

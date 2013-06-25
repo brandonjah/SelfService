@@ -37,6 +37,10 @@ app.controller('submitCtrl', function($scope, $http, $routeParams, $location, sa
 		var bundleId = $routeParams.bundleId;
 		$location.path('/generate/'+bundleId);
 	};
+	$scope.raw = function() {
+		var bundleId = $routeParams.bundleId;
+		$location.path('/raw/'+bundleId);
+	};
 });
 
 app.controller('PreviewCtrl', function($scope, saveObject) {

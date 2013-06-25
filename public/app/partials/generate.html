@@ -120,7 +120,7 @@ body { background-color: #ccc; font-family: arial;}
 
 </style>
 <!-- headers -->
-<div ng-controller="GenerateCtrl">
+<div id="generatedDiv" ng-controller="GenerateCtrl">
 <pre>
 <h4>Site Info: </h4>
 Bundle: {{bundleId}}
@@ -139,5 +139,5 @@ Text Color: {{txtColor}}
 	
 	<!-- end -->
 	</div>
-
+<a ng-click="raw(bundleId)" href="javascript:void(0)" class="btn btn-info m5">View Code</a>
 </div> <!-- end GenerateCtrl -->

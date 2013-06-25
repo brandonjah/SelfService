@@ -1,4 +1,4 @@
-app.controller('GenerateCtrl', function($scope, saveObject) {
+app.controller('GenerateCtrl', function($scope, $location, saveObject) {
 	var dbObj = {};
 	dbObj = saveObject.get();
 	$scope.containers = dbObj.containers;
@@ -7,7 +7,7 @@ app.controller('GenerateCtrl', function($scope, saveObject) {
 	$scope.txtColor = dbObj.txtColor;
 	$scope.clientURL = dbObj.clientURL;
 	$scope.googleAnalytics = dbObj.googleAnalytics;
-	
+
 	$scope.containerClass = function(_component) {
 		if(_component.type == "text") {
 			return "aresheaderTextContainer";
@@ -20,8 +20,6 @@ app.controller('GenerateCtrl', function($scope, saveObject) {
 	
 	$scope.componentClass = function(_component) {
 		return _component.type+"ComponentClass aresHeaderImage";
-		console.log("componentClass:");
-		console.log(_component);
 	};
 	
 	$scope.url = function(_component) {
@@ -30,6 +28,17 @@ app.controller('GenerateCtrl', function($scope, saveObject) {
 		} else {
 			return "assets/app/partials/preview.html";
 		}
+	};
+	
+	$scope.raw = function(_bundleId) {
+		console.log("in raw");
+		var page = jQuery("#generatedDiv");
+//		jQuery("#generatedDiv").remove();
+//		jQuery("#LandingPage").append("<pre id='preWrap'></pre>");
+//		jQuery("#preWrap").append(page);
+		saveObject.updateRaw(page);
+		console.log(page);
+		$location.path('/raw/'+_bundleId);
 	};
 });
 
@@ -112,7 +121,7 @@ app.directive('contentText',function() {
 	};
 });
 
-app.directive('componentDir',function(saveObject) {
+app.directive('componentDir',function() {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -130,3 +139,13 @@ app.directive('componentDir',function(saveObject) {
         }
 	};
 });
+
+/*****************
+ * RAW CONTROLLER
+ */
+
+app.controller('RawCtrl', function($scope, saveObject) {
+	var page = saveObject.getRaw();
+	jQuery("#textareaWrap").append(page);
+});
+

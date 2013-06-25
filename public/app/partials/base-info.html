@@ -10,7 +10,7 @@
             <!-- Text input-->
             <label class="control-label" for="input01">Bundle</label>
             <div class="controls">
-               <select class="input-xlarge" ng-model="bundleId" ng-change="search(bundleId)" ng-options="bundle as bundle for bundle in bundles">
+               <select class="input-xlarge" ng-model="bundle.bundleId" ng-change="search(bundle.bundleId)" ng-options="bundle as bundle for bundle in bundles">
                     <option value="">-- bundle --</option>
                </select>
             </div>
@@ -18,30 +18,30 @@
          <div class="control-group">
             <label class="control-label" for="bgcolor">Background Color:</label>
             <div class="controls">
-               <input colorpicker="hex" class="span2" type="text" ng-model="bgColor">
+               <input colorpicker="hex" class="span2" type="text" ng-model="bundle.bgColor">
             </div>
             <br>
             <label class="control-label" for="txtcolor">Text Color:</label>
             <div class="controls">
-               <input colorpicker="hex" class="input-small span2" type="text" ng-model="txtColor">
+               <input colorpicker="hex" class="input-small span2" type="text" ng-model="bundle.txtColor">
             </div>
             <br>
             <label class="control-label" for="clientURL">Client Site URL:</label>
             <div class="controls">
-               <input type="text" name="clientURL" placeholder="Ex: sandiego.org" class="input-xlarge" ng-model="clientURL" value="clientURL">
+               <input type="text" name="clientURL" placeholder="Ex: sandiego.org" class="input-xlarge" ng-model="bundle.clientURL" value="clientURL">
             </div>
             <br>
             <label class="control-label" for="googleAnalytics">Google Analytics:</label>
             <div class="controls">
-               <input type="text" name="googleAnalytics" placeholder="GA javascript" class="input-xlarge" ng-model="googleAnalytics" value="googleAnalytics">
+               <input type="text" name="googleAnalytics" placeholder="GA javascript" class="input-xlarge" ng-model="bundle.googleAnalytics" value="googleAnalytics">
             </div>
          </div>
          <label class="control-label"></label>
          <!-- Button -->
          <div class="controls">
-            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save(bundleId)">Update Site Info</button>
-            <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew(bundleId)">Create New Layout</button>
-            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load(bundleId)">Load Existing Layout</button>
+            <button class="btn btn-success" ng-disabled="siteInfo.$invalid" ng-click="save(bundle.bundleId)">Update Site Info</button>
+            <button class="btn btn-info" ng-disabled="siteInfo.$invalid" ng-click="createNew(bundle.bundleId)">Create New Layout</button>
+            <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load(bundle.bundleId)">Load Existing Layout</button>
          </div>
          <section class="controls">
             <a href="#/upload">Upload Files</a>

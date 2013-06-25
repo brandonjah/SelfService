@@ -18,6 +18,14 @@ app.factory('saveObject', function($routeParams) {
 	    	return dbLayoutObj.bundleId;
 	    };
 	    
+	    sharedService.saveBundleInfo = function(_bundle) {
+	    	dbLayoutObj.bundleId = _bundle.bundleId;
+	    	dbLayoutObj.bgColor = _bundle.bgColor;
+	    	dbLayoutObj.txtColor = _bundle.txtColor;
+	    	dbLayoutObj.googleAnalytics = _bundle.googleAnalytics;
+	    	dbLayoutObj.clientURL = _bundle.clientURL;
+	    };
+	    
 	    sharedService.update = function(dbReturnObj) {
 	    	if(dbReturnObj.containers) {
 	    		dbLayoutObj = dbReturnObj;
@@ -73,6 +81,18 @@ app.factory('saveObject', function($routeParams) {
 	    sharedService.logContents = function() {
 	    	console.log('dbLayoutObj');
 	    	console.log(dbLayoutObj);
+	    };
+	    
+	    /*****************
+	     *  RAW PAGE
+	     * ***************
+	     */
+	    var rawPage;
+	    sharedService.updateRaw = function(_page) {
+	    	rawPage = _page;
+	    };
+	    sharedService.getRaw = function() {
+	    	return rawPage;
 	    };
 
 	    return sharedService;

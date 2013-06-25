@@ -48,7 +48,6 @@ public class Base extends Model {
 	    static class Containers  {  
 	    	public String id;
 	    	public String className;
-//	    	public Collection<Components> components;
 	    	public Component component;
 	    }  
 	    static class Component {
@@ -69,6 +68,8 @@ public class Base extends Model {
 	    	public String align;
 	    	public Integer tier;
 	    	public String fileIds;
+	    	public String header;
+	    	public String textArea;
 	    	public boolean layered;
 	    	public Collection<Tabs> tabs;
 	    }
