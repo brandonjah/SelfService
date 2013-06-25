@@ -121,7 +121,14 @@ body { background-color: #ccc; font-family: arial;}
 </style>
 <!-- headers -->
 <div ng-controller="GenerateCtrl">
-
+<pre>
+<h4>Site Info: </h4>
+Bundle: {{bundleId}}
+URL: {{clientURL}}
+Background Color: {{bgColor}}
+Text Color: {{txtColor}}
+<section><u>Google Analytics code:</u><br>{{googleAnalytics}}</section>
+</pre>
 	<div class="aresLandingWrap">
 	
 		<div ng-repeat='container in containers'>

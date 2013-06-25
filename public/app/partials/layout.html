@@ -28,10 +28,9 @@
             
             <div modal="shouldBeOpen" close="close()" options="opts">
                <div class="modal-header">
-                  <h3>Set Component Properties</h3>
+                  <h3>{{openedContainer.component.text}}</h3>
                </div>
                <div class="modal-body">
-                        <h3 class="m5">{{openedContainer.component.text}}</h3>
                            <section ng-show="openedContainer.component.showText||openedContainer.component.showImageText">
 	                           <input type="text" placeholder="header" class="input-block-level" ng-model="openedContainer.component.header" required>
 	                           <textarea class="input-block-level" rows="3" placeholder="text content" ng-model="openedContainer.component.textArea" required></textarea>
@@ -45,7 +44,7 @@
                            <section ng-show="openedContainer.component.showAttraction">
                            <input type="text" placeholder="attraction ids" class="input-block-level" ng-model="openedContainer.component.attractionIds" required>
                            </section>                           
-                           <section ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText">
+                           <section ng-show="openedContainer.component.showImageWidget||openedContainer.component.showImageText" class="span3">
 	                           <label class="control-label displayInlineBlock w75">Image Width:</label>
 	                           <select class="input-small" ng-model="openedContainer.component.width" ng-options="width as width.text for width in widths" required>
 	                              <option value="">-- width --</option>
@@ -56,7 +55,7 @@
 	                              <option value="">-- align --</option>
 	                           </select>
                            </section>
-                           <section ng-show="openedContainer.component.showImage||openedContainer.component.showImageWidget||openedContainer.component.showImageText">
+                           <section class="span3" ng-show="openedContainer.component.showImage||openedContainer.component.showImageWidget||openedContainer.component.showImageText">
                            		<span>Enter the name of the uploaded image for use here (upload images on Bundle Info page)</span>
                            		<input type="text" placeholder="names of uploaded image" class="input-block-level" ng-model="openedContainer.component.fileIds" required>
                            </section>
@@ -72,16 +71,14 @@
 	                              <option value="">-- tier --</option>
 	                           </select>
                            </section>
-                           <section class="tabs ml5" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
-                           		<input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" ng-checked="openedContainer.component.layered"><h4 class="displayInlineBlock ml5"> Layered</h4>
-                           </section>
-                           <section class="tabs ml5" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
-                              <h4 class="ml5">Tabs</h4>
+                           <section class="tabs ml5 row-fluid span3" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
+                           	  <input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" ng-checked="openedContainer.component.layered"><h4 class="displayInlineBlock ml5"> Layered</h4>
+                              <h4 class="ml5"><u>TABS</u></h4>
                               <ul id="tabsSortable" class="ml5" ui-sortable="sortableOptions" ng-model="tabs">
                               	<li ng-repeat="item in tabs" class="widgetTabs roundLineItem"><span>{{item.id}} enabled? {{item.active}} </span><span class="flR icon-retweet" ng-click="disable(item.id)"></span></li>
                               </ul>
                            </section>
-                     <section>
+                     <section class="span4">
                      	<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(openedContainer)">Save</button>
                      </section>							
                </div><!-- end modal body -->

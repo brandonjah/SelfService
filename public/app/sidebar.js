@@ -24,7 +24,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 	};	
 	
 	//start modal
-	$scope.openModal = function (openedContainer) {			
+	$scope.openModal = function (openedContainer) {
 			  $scope.sortableOptions = {
 		          update: function( event, ui ) {
 		        	  $scope.tabs = ui.item.sortable.resort.$modelValue;
@@ -63,9 +63,9 @@ app.controller('productCtrl', function($scope, saveObject) {
 	
 	$scope.setContainer = function(passedContainer) {
 		/*FUNCTIONS*/
-		function arrayObjectIndexOf(myArray, searchTerm, property) {
-		    for(var i = 0, len = myArray.length; i < len; i++) {
-		        if (myArray[i][property] === searchTerm) return i;
+		function arrayObjectIndexOf(_array, searchTerm, property) {
+		    for(var i = 0, len = _array.length; i < len; i++) {
+		        if (_array[i][property] === searchTerm) return i;
 		    }
 		    return -1;
 		}

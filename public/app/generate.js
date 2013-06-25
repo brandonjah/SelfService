@@ -1,5 +1,12 @@
 app.controller('GenerateCtrl', function($scope, saveObject) {
-	$scope.containers = saveObject.getLayout();
+	var dbObj = {};
+	dbObj = saveObject.get();
+	$scope.containers = dbObj.containers;
+	$scope.bundleId = dbObj.bundleId;
+	$scope.bgColor = dbObj.bgColor;
+	$scope.txtColor = dbObj.txtColor;
+	$scope.clientURL = dbObj.clientURL;
+	$scope.googleAnalytics = dbObj.googleAnalytics;
 	
 	$scope.containerClass = function(_component) {
 		if(_component.type == "text") {

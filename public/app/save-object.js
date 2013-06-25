@@ -6,7 +6,11 @@ app.factory('saveObject', function($routeParams) {
     	var componentCount = 0;
     	dbLayoutObj.bundleId = $routeParams.bundleId;
 	    
-	    sharedService.getLayout = function() {
+	    sharedService.get = function() {
+	    	return dbLayoutObj;
+	    };
+    	
+    	sharedService.getLayout = function() {
 	    	return dbLayoutObj.containers;
 	    };
 	    
@@ -69,18 +73,6 @@ app.factory('saveObject', function($routeParams) {
 	    sharedService.logContents = function() {
 	    	console.log('dbLayoutObj');
 	    	console.log(dbLayoutObj);
-	    };
-	    
-	    sharedService.rowCounter = function() {
-	    	for (var i=0;i<dbLayoutObj.containers.length;i++) {
-	    		var rows = [];
-	    		if(dbLayoutObj.containers[i].component.showHotel == true) {
-	    			console.log("hotel row: " + i);
-	    			rows.push(i);
-	    		}
-	    	}
-	    	//make rows an array
-	    	return rows;
 	    };
 
 	    return sharedService;
