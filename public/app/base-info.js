@@ -3,6 +3,7 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	                  "convis",
 	                  "denver-org",
 	                  "discover-los-angeles",
+	                  "legoland",
 	                  "san-fran",
 	                  "podunkville"
 	                  ];
