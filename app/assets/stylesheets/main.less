@@ -211,6 +211,13 @@ a.ssClose { float: right;}
 .dropzone.image_widgetleft12 { height:355px;}
 
 .modal { width: 680px;}
-ul li.widgetTabs { display: inline-block; width: 15%; border: none; border-radius: 8px 8px 0 0; background-color: #f2f2f2; margin: 0 5px 0 0; padding: 2%;}
-ul li.widgetTabs:hover { cursor:move; cursor: -webkit-grab; box-shadow: 0 0 2px #ff0000;}
-.modal section h4 { margin-bottom: 10px;}
+ul li.widgetTabs { display: inline-block; width: 15%; border: none; border-radius: 8px 8px 0 0; margin: 0 3px 0 3px; padding: 2%;}
+ul li.widgetTabs:hover { cursor:move; cursor: -webkit-grab; box-shadow: 0 0 2px #333;}
+ul li.widgetTabs.tabDisabled { color: #999; background: url(../images/no.png) #f2f2f2 no-repeat top right;}
+ul li.widgetTabs.tabEnabled { background: url(../images/ok.png) #5abf5b no-repeat top right; color: #fff; text-shadow: 0 0 3px rgba(0,0,0,0.5);}
+ul li.widgetTabs span { text-align: center; display: block;}
+ul li.widgetTabs .tabName { font-weight: bold;}
+ul li.widgetTabs.tabDisabled .tabName {}
+.modal section h4 { margin-bottom: 5px;}
+ul.widgetTabsWrap { width: 100%; margin: 0 !important;}
+section.modalActions button { float: right;}

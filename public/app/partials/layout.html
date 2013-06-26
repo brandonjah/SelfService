@@ -58,7 +58,7 @@
 	                              <option value="">-- align --</option>
 	                           </select>
                            </section>
-                           <section class="span3" ng-show="openedContainer.component.showImage||openedContainer.component.showImageWidget||openedContainer.component.showImageText">
+                           <section class="uploadImageSection" ng-show="openedContainer.component.showImage||openedContainer.component.showImageWidget||openedContainer.component.showImageText">
                            		<span>Enter the name of the uploaded image for use here (upload images on Bundle Info page)</span>
                            		<input type="text" placeholder="names of uploaded image" class="input-block-level" ng-model="openedContainer.component.fileIds" required>
                            </section>
@@ -74,16 +74,17 @@
 	                              <option value="">-- tier --</option>
 	                           </select>
                            </section>
-                           <section class="tabs ml5 row-fluid span3" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
-                           	  <h4 class="displayInlineBlock ml5">Layered Widget <input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" ng-checked="openedContainer.component.layered"></h4>
-                              
-                              
-                              <h4 class="ml5"><u>TABS</u></h4>
-                              <ul id="tabsSortable" class="ml5" ui-sortable="sortableOptions" ng-model="tabs">
-                              	<li ng-repeat="item in tabs" class="widgetTabs {{item.active}}"><span>{{item.id}} enabled? {{item.active}} </span><span class="flR icon-retweet" ng-click="disable(item.id)"></span></li>
+                           <section class="tabs row-fluid" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
+							   <h4 class="displayInlineBlock">Layered Widget <input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" ng-checked="openedContainer.component.layered"></h4>
+							   <p></p>
+							   <h4>Tabs</h4>
+                              <p>Select which tabs you want enabled</p>
+                              <ul id="tabsSortable" class="ml5 widgetTabsWrap" ui-sortable="sortableOptions" ng-model="tabs">
+                              	<li ng-repeat="item in tabs" class="widgetTabs {{item.active}}" ng-click="disable(item.id)"><span class="tabName">{{item.id}}</span>
+                              	<span>{{item.active}}</span></li>
                               </ul>
                            </section>
-                     <section class="span4">
+                     <section class="modalActions">
                      	<button type="button" class="btn displayBlock btn-success" ng-click="setContainer(openedContainer)">Save</button>
                      </section>							
                </div><!-- end modal body -->
