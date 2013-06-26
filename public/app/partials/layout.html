@@ -13,7 +13,7 @@
             <section ng-repeat="container in containers">
                <a class="dropdown-toggle w100 displayInlineBlock">
                {{container.component.text}}
-               </a><a href="javascript:void(0)" ng-click="$parent.delContainer(container)" class="ssClose"><span class="icon-remove-sign"></span></a>
+               </a><a href="javascript:void(0)" ng-click="$parent.delContainer(container)" class="ssClose"><span class="icon-remove-sign icon-white"></span></a>
                <ul class="dropdown-menu">
                   <li ng-repeat="choice in items">
                      <a ng-click="$parent.selection(choice, container)">{{choice.text}}</a>					      
@@ -21,9 +21,12 @@
                </ul>
                </section>
             </li>
-            <section>
-            	<button type="button" class="btn displayBlock btn-success" ng-click="addContainer()">Add Container</button>
-            </section>
+			<li class="dropdown">
+            	<section class="addContainerSection">
+            		<a class="addContainerButton dropdown-toggle displayInlineBlock" ng-click="addContainer()">Add Container</a>
+            		<a ng-click="addContainer()"><span class="icon-plus-sign icon-white" style="float:right;"></span></a>
+				</section>
+			</li>
             
             
             <div modal="shouldBeOpen" close="close()" options="opts">
@@ -72,10 +75,12 @@
 	                           </select>
                            </section>
                            <section class="tabs ml5 row-fluid span3" ng-show="openedContainer.component.showImageWidget||openedContainer.component.showWidget">
-                           	  <input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" ng-checked="openedContainer.component.layered"><h4 class="displayInlineBlock ml5"> Layered</h4>
+                           	  <h4 class="displayInlineBlock ml5">Layered Widget <input class="ml5" ng-model="openedContainer.component.layered" type="checkbox" ng-checked="openedContainer.component.layered"></h4>
+                              
+                              
                               <h4 class="ml5"><u>TABS</u></h4>
                               <ul id="tabsSortable" class="ml5" ui-sortable="sortableOptions" ng-model="tabs">
-                              	<li ng-repeat="item in tabs" class="widgetTabs roundLineItem"><span>{{item.id}} enabled? {{item.active}} </span><span class="flR icon-retweet" ng-click="disable(item.id)"></span></li>
+                              	<li ng-repeat="item in tabs" class="widgetTabs"><span>{{item.id}} enabled? {{item.active}} </span><span class="flR icon-retweet" ng-click="disable(item.id)"></span></li>
                               </ul>
                            </section>
                      <section class="span4">
