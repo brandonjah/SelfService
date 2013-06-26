@@ -80,7 +80,7 @@
                               
                               <h4 class="ml5"><u>TABS</u></h4>
                               <ul id="tabsSortable" class="ml5" ui-sortable="sortableOptions" ng-model="tabs">
-                              	<li ng-repeat="item in tabs" class="widgetTabs"><span>{{item.id}} enabled? {{item.active}} </span><span class="flR icon-retweet" ng-click="disable(item.id)"></span></li>
+                              	<li ng-repeat="item in tabs" class="widgetTabs {{item.active}}"><span>{{item.id}} enabled? {{item.active}} </span><span class="flR icon-retweet" ng-click="disable(item.id)"></span></li>
                               </ul>
                            </section>
                      <section class="span4">

@@ -49,10 +49,10 @@ app.controller('productCtrl', function($scope, saveObject) {
 	  $scope.disable = function(_id) {
 		  for (var i = 0; i < $scope.tabs.length; i++) {
 			  if($scope.tabs[i].id == _id) {
-				  if($scope.tabs[i].active == true) {
-					  $scope.tabs[i].active = false;
+				  if($scope.tabs[i].active == "tabEnabled") {
+					  $scope.tabs[i].active = "tabDisabled";
 				  } else {
-					  $scope.tabs[i].active = true;
+					  $scope.tabs[i].active = "tabEnabled";
 				  }
 			  }
 		  }
@@ -96,7 +96,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 	};
 
 	$scope.classname;
-	$scope.tabs = [{id:"hotel",order:"0",active:true},{id:"deal",order:"1",active:true},{id:"car",order:"2",active:true},{id:"flight",order:"3",active:true},{id:"ticket",order:"4",active:true}];
+	$scope.tabs = [{id:"hotel",order:"0",active:"tabEnabled"},{id:"deal",order:"1",active:"tabEnabled"},{id:"car",order:"2",active:"tabEnabled"},{id:"flight",order:"3",active:"tabEnabled"},{id:"ticket",order:"4",active:"tabEnabled"}];
 	$scope.widths = [
                  	 {"text":"1/2","id":"Half"},
 	                 {"text":"3/4","id":"ThreeQtr"}	                 

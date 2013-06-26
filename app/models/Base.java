@@ -77,7 +77,7 @@ public class Base extends Model {
 	    static class Tabs {
 	    	public String id;
 	    	public String order;
-	    	public boolean active;
+	    	public String active;
 	    }
 	      
 	    //used to prevent jackson error
