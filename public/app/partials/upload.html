@@ -1,10 +1,13 @@
-  <div ng-controller="UploadCtrl">
-   <form action="/file-upload" ng-upload> 
+  <div class="container" ng-controller="UploadCtrl">
+   <form action="/file-upload" ng-upload>
+   <fieldset> 
+   <legend>File Upload</legend>
      <input type="file" name="picture"></input>
      <section>
      <a href='javascript:void(0)' 
-       class="upload-submit: results(contents, completed)" >
-         Upload</a>
+       class="upload-submit: results(contents, completed)" ><span class="btn btn-file">
+         Upload</span></a>
          </section>
    </form>
+   </fieldset>
  </div>
