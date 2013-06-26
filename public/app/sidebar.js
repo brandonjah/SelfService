@@ -30,7 +30,7 @@ app.controller('productCtrl', function($scope, saveObject) {
 		        	  $scope.tabs = ui.item.sortable.resort.$modelValue;
 		              $scope.$apply();
 		          },
-			    	axis: 'y'
+			    	axis: 'x'
 			  };
 			$scope.openedContainer = openedContainer;
 			$scope.openedContainer.component.layered = true;
