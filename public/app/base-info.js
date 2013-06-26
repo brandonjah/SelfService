@@ -5,7 +5,8 @@ app.controller('BaseInfoCtrl', function($scope, $timeout, $http, $location, save
 	                  "discover-los-angeles",
 	                  "legoland",
 	                  "san-fran",
-	                  "podunkville"
+	                  "podunkville",
+	                  "courtney"
 	                  ];
 	$scope.url = '/info';
 	$scope.save = function(bundleId) {

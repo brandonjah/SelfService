@@ -21,7 +21,6 @@ app.controller('UploadCtrl', function($scope) {
 	    	  console.log(content); // process content
 	      } else {
 	    	  console.log('failed check in file upload');
-	    	  alert("File upload failed, it may be that your file is too large");
 	        // 1. ignore content and adjust your model to show/hide UI snippets; or
 	        // 2. show content as an _operation progress_ information
 	      }
