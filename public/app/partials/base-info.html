@@ -44,7 +44,7 @@
             <button class="btn btn-action" ng-disabled="siteInfo.$invalid" ng-click="load(bundle.bundleId)">Load Existing Layout</button>
          </div>
          <section class="controls">
-            <a href="#/upload">Upload Files</a>
+            <a href="#/upload" ng-disabled="siteInfo.$invalid">Upload Files</a>
          </section>
          <section style="display:none;" class="controls" ng-controller="ListUploadsCtrl">
             <a href="javascript:void(0)" ng-click="listFiles()">List Uploaded Files</a>

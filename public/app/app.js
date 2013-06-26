@@ -16,7 +16,7 @@ app.config(['$routeProvider', '$httpProvider',
 app.controller('UploadCtrl', function($scope) {
 	//File Uploader
 	$scope.results = function(content, completed) {
-	      if (completed/* && content.length > 0*/) {
+	      if (completed) {
 	    	  console.log('completed and content on file upload');
 	    	  console.log(content); // process content
 	      } else {
