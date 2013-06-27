@@ -1,6 +1,7 @@
 package models;
 
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import play.Logger;
 import play.db.ebean.Model;
@@ -17,7 +18,9 @@ import models.Base.LayoutJSON;
 import net.vz.mongodb.jackson.JacksonDBCollection;
 import net.vz.mongodb.jackson.ObjectId;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
@@ -55,9 +58,29 @@ public class S3File extends Model {
         else {
             this.bucket = S3Plugin.s3Bucket;
 //            super.save(); // assigns an id
+            Logger.debug("here");
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, getActualFileName(), file);
             putObjectRequest.withCannedAcl(CannedAccessControlList.PublicRead); // public for all
             S3Plugin.amazonS3.putObject(putObjectRequest); // upload file
+            coll.save(this);
+        }
+    }
+    
+    public void saveFileObject() {
+        if (S3Plugin.amazonS3 == null) {
+            Logger.error("Could not save because amazonS3 was null");
+            throw new RuntimeException("Could not save");
+        }
+        else {
+            this.bucket = S3Plugin.s3Bucket;
+            String myString = "test";
+            InputStream is = new ByteArrayInputStream( myString.getBytes() );
+            ObjectMetadata newObjectMetadata = new ObjectMetadata();
+//            newObjectMetadata.setHeader(name, "PublicRead");
+//            newObjectMetadata.setHeader("cannedAclHeader", "public-read");
+            S3Plugin.amazonS3.putObject(this.bucket,"TEST",is, newObjectMetadata); // upload file
+//            cannedAclHeader = "public-read"
+//            name = "PublicRead"
             coll.save(this);
         }
     }

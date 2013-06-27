@@ -1,4 +1,4 @@
-app.controller('GenerateCtrl', function($scope, $location, saveObject) {
+app.controller('GenerateCtrl', function($scope, $http, saveObject) {
 	var dbObj = {};
 	dbObj = saveObject.get();
 	$scope.containers = dbObj.containers;
@@ -30,15 +30,25 @@ app.controller('GenerateCtrl', function($scope, $location, saveObject) {
 		}
 	};
 	
-	$scope.raw = function(_bundleId) {
-		console.log("in raw");
-		var page = jQuery("#generatedDiv");
+	$scope.writeFile = function(_bundleId) {
+//		console.log("in raw");
+//		var page = jQuery("#generatedDiv");
 //		jQuery("#generatedDiv").remove();
 //		jQuery("#LandingPage").append("<pre id='preWrap'></pre>");
 //		jQuery("#preWrap").append(page);
-		saveObject.updateRaw(page);
-		console.log(page);
-		$location.path('/raw/'+_bundleId);
+//		saveObject.updateRaw(page);
+//		console.log(page);
+//		$location.path('/raw/'+_bundleId);
+
+				$http.post('/write-file', {}).
+			      success(function(data){
+			    	  console.log('in submitCtrl success');
+			          $scope.success = true;
+			        }).
+			        error(function(data){
+			          $scope.httpError = true;
+			        });
+				
 	};
 });
 

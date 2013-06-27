@@ -3,10 +3,6 @@ package controllers;
 import static play.data.Form.form;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +11,7 @@ import org.codehaus.jackson.node.ObjectNode;
 
 import models.Base;
 import models.Base.LayoutJSON;
+import models.Generate;
 import models.S3File;
 import play.Logger;
 import play.libs.Json;
@@ -108,5 +105,13 @@ public class Template extends Controller {
         Logger.debug("in listUploads");
         Logger.debug(uploads.toString());
         return ok(Json.toJson(uploads));
+    }
+    
+    public static Result writeFile() {
+    	String test = "test";
+        S3File s3File = new S3File();
+        s3File.saveFileObject();
+//    	Generate.writeFile("test.txt",test);
+    	return ok();
     }
 }

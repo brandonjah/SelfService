@@ -50,7 +50,7 @@ section {
 .w75 {
 	width: 75px !important;
 }
-.w100 {
+.w100, .addContainerButton {
 	width: 80%;
 }
 .w120 {
@@ -147,14 +147,16 @@ section {
 .text{background:url(../images/layout/full_text.png) no-repeat 0 0 !important;}
 
 /* class name = component type + image alignment + image width */
-.image_widgetleft34{background:url(../images/layout/3-4_image_bot_right_tabbed.png) no-repeat 0 0 !important;}
-.image_widgetright34{background:url(../images/layout/3-4_image_bot_left_tabbed.png) no-repeat 0 0 !important;}
-.image_widgetright12{background:url(../images/layout/1-2_image_bot_left.png) no-repeat 0 0 !important;}
-.image_widgetleft12{background:url(../images/layout/1-2_image_bot_right.png) no-repeat 0 0 !important;}
-.image_textleft34{background:url(../images/layout/3-4_image_text_right.png) no-repeat 0 0 !important;}
-.image_textright34{background:url(../images/layout/3-4_image_text_left.png) no-repeat 0 0 !important;}
-.image_textright12{background:url(../images/layout/1-2_image_text_left.png) no-repeat 0 0 !important;}
-.image_textleft12{background:url(../images/layout/1-2_image_text_right.png) no-repeat 0 0 !important;}
+.image_widgetleftThreeQtr{background:url(../images/layout/3-4_image_bot_right_tabbed.png) no-repeat 0 0 !important;}
+.image_widgetrightThreeQtr{background:url(../images/layout/3-4_image_bot_left_tabbed.png) no-repeat 0 0 !important;}
+.image_widgetrightHalf{background:url(../images/layout/1-2_image_bot_left.png) no-repeat 0 0 !important;}
+.image_widgetleftHalf{background:url(../images/layout/1-2_image_bot_right.png) no-repeat 0 0 !important;}
+.image_widget{background:url(../images/layout/1-2_image_bot_right.png) no-repeat 0 0 !important;}
+.image_textleftThreeQtr{background:url(../images/layout/3-4_image_text_right.png) no-repeat 0 0 !important;}
+.image_textrightThreeQtr{background:url(../images/layout/3-4_image_text_left.png) no-repeat 0 0 !important;}
+.image_textrightHalf{background:url(../images/layout/1-2_image_text_left.png) no-repeat 0 0 !important;}
+.image_text{background:url(../images/layout/1-2_image_text_right.png) no-repeat 0 0 !important;}
+.image_textleftHalf{background:url(../images/layout/1-2_image_text_right.png) no-repeat 0 0 !important;}
 
 .hotel1{background:url(../images/layout/tier1-hotels.png) no-repeat 0 0 !important;}
 .attraction1{background:url(../images/layout/tier1-tickets.png) no-repeat 0 0 !important;}
@@ -183,9 +185,13 @@ section#products { width:300px; left:45px; top:60px; position: fixed; padding: 0
 section#ssActions { clear: both; text-align: right;}
 .nav-list { padding-right: 20px;}
 .nav-list > .active > a, .nav-list > .active > a:hover { padding:0 1em; font-size: 1.2em; line-height: 30px; height: 30px; background: url(../images/arrow.png) no-repeat center right transparent;}
-.nav-list div li section { background-color: #666; padding: .5em; margin: .5em 0; border-radius: 20px; text-indent:10px; position:relative;}
-.nav-list div li section a { color: #fff; cursor: pointer;}
-.nav-list li.dropdown { width: 90%;}
+.nav-list div li section { background-color: #666; padding: .5em; margin: .5em 0; border-radius: 20px; text-indent:10px; position:relative; border: none;}
+.nav-list div li section a { color: #fff; cursor: pointer; text-decoration: none;}
+.nav-list div li section:hover { background-color: #888;}
+.nav-list li.dropdown { width: 230px;}
+.nav-list div li section.addContainerSection { background-color: #0099cc;}
+.nav-list div li section.addContainerSection:hover { background-color: #00bfff;}
+.nav-list div li section span { margin-top: 2px;}
 a.ssClose { float: right;}
 .open > .dropdown-menu li a { color: #666;}
 .dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
@@ -203,3 +209,16 @@ a.ssClose { float: right;}
 .dropzone.image { height: 250px;}
 .dropzone.hotel2 { height: 395px;}
 .dropzone.image_widgetleft12 { height:355px;}
+
+.modal { width: 680px;}
+ul li.widgetTabs { display: inline-block; width: 15%; border: none; border-radius: 8px 8px 0 0; margin: 0 3px 0 3px; padding: 2%;}
+ul li.widgetTabs:hover { cursor:move; cursor: -webkit-grab; box-shadow: 0 0 2px #333;}
+ul li.widgetTabs.tabDisabled { color: #999; background: url(../images/no.png) #f2f2f2 no-repeat top right;}
+ul li.widgetTabs.tabEnabled { background: url(../images/ok.png) #5abf5b no-repeat top right; color: #fff; text-shadow: 0 0 3px rgba(0,0,0,0.5);}
+ul li.widgetTabs span { text-align: center; display: block;}
+ul li.widgetTabs .tabName { font-weight: bold;}
+ul li.widgetTabs.tabDisabled .tabName {}
+.modal section h4 { margin-bottom: 5px;}
+.modal-body { max-height: 430px;}
+ul.widgetTabsWrap { width: 100%; margin: 0 !important;}
+section.modalActions button { float: right;}

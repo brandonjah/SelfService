@@ -46,3 +46,4 @@ GET		/load-layout/:bundleId		controllers.Template.loadLayout(bundleId:String)
 #File upload
 POST	/file-upload				controllers.Template.fileUpload()
 GET		/list-uploads				controllers.Template.listUploads()
+POST	/write-file					controllers.Template.writeFile()
